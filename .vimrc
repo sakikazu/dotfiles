@@ -22,6 +22,138 @@ set textwidth=70
 set visualbell
 
 
+"------------------------------------
+" pathogen.vim
+"------------------------------------
+" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
+filetype off
+" pathogen.vimによってbundle配下のpluginをpathに加える
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+set helpfile=$VIMRUNTIME/doc/help.txt
+" ファイルタイプ判定をon
+filetype plugin on
+
+
+"------------------------------------
+" NERD_commenter.vim
+"------------------------------------
+" コメントの間にスペースを空ける
+let NERDSpaceDelims = 1
+"<Leader>xでコメントをトグル(NERD_commenter.vim)
+map <Leader>x, c<space>
+"未対応ファイルタイプのエラーメッセージを表示しない
+let NERDShutUp=1
+
+
+"------------------------------------
+" unite.vim
+"------------------------------------
+" The prefix key.
+nnoremap    [unite]   <Nop>
+nmap    f [unite]
+
+nnoremap [unite]u  :<C-u>Unite<Space>
+nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
+nnoremap <silent> [unite]f  :<C-u>Unite -buffer-name=files file<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite buffer<CR>
+nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
+
+" nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  " Overwrite settings.
+  imap <buffer> jj      <Plug>(unite_insert_leave)
+  nnoremap <silent><buffer> <C-k> :<C-u>call unite#mappings#do_action('preview')<CR>
+  imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
+  " Start insert.
+  let g:unite_enable_start_insert = 1
+endfunction"}}}
+
+let g:unite_source_file_mru_limit = 200
+
+
+"------------------------------------
+" surround.vim
+"------------------------------------
+" s, ssで選択範囲を指定文字でくくる
+nmap s <Plug>Ysurround
+nmap ss <Plug>Yssurround
+
+
+" ------------------------------------
+" grep.vim
+"------------------------------------
+" 検索外のディレクトリ、ファイルパターン
+let Grep_Skip_Dirs = '.svn .git .hg'
+let Grep_Skip_Files = '*.bak *~'
+
+" :Gb <args> でGrepBufferする
+command! -nargs=1 Gb :GrepBuffer <args>
+" カーソル下の単語をGrepBufferする
+nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
+
+
+
+"------------------------------------
+" vimshell
+"------------------------------------
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+let g:vimshell_enable_smart_case = 1
+
+if has('win32') || has('win64')
+  " Display user name on Windows.
+  let g:vimshell_prompt = $USERNAME."% "
+else
+  " Display user name on Linux.
+  let g:vimshell_prompt = $USER."% "
+
+  call vimshell#set_execute_file('bmp,jpg,png,gif', 'gexe eog')
+  call vimshell#set_execute_file('mp3,m4a,ogg', 'gexe amarok')
+  let g:vimshell_execute_file_list['zip'] = 'zipinfo'
+  call vimshell#set_execute_file('tgz,gz', 'gzcat')
+  call vimshell#set_execute_file('tbz,bz2', 'bzcat')
+endif
+
+function! g:my_chpwd(args, context)
+  call vimshell#execute('echo "chpwd"')
+endfunction
+function! g:my_emptycmd(cmdline, context)
+  call vimshell#execute('echo "emptycmd"')
+  return a:cmdline
+endfunction
+function! g:my_preprompt(args, context)
+  call vimshell#execute('echo "preprompt"')
+endfunction
+function! g:my_preexec(cmdline, context)
+  call vimshell#execute('echo "preexec"')
+
+  if a:cmdline =~# '^\s*diff\>'
+    call vimshell#set_syntax('diff')
+  endif
+  return a:cmdline
+endfunction
+
+autocmd FileType vimshell
+\ call vimshell#altercmd#define('g', 'git')
+\| call vimshell#altercmd#define('i', 'iexe')
+\| call vimshell#altercmd#define('l', 'll')
+\| call vimshell#altercmd#define('ll', 'ls -l')
+\| call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+\| call vimshell#hook#set('emptycmd', ['g:my_emptycmd'])
+\| call vimshell#hook#set('preprompt', ['g:my_preprompt'])
+\| call vimshell#hook#set('preexec', ['g:my_preexec'])
+
+command! Vs :VimShell
+
+
+
+
+
+
+
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 " こっから関口さんの設定と同じ
 

@@ -22,3 +22,30 @@
 [submodule "bundle/align.git"]
 	path = bundle/align.git
 	url = git://github.com/tsaleh/vim-align.git
+[submodule "bundle/NERD-Commenter.git"]
+	path = bundle/NERD-Commenter.git
+	url = git://github.com/vim-scripts/The-NERD-Commenter.git
+[submodule "bundle/unite.git"]
+	path = bundle/unite.git
+	url = git://github.com/Shougo/unite.vim.git
+[submodule "bundle/surround.git"]
+	path = bundle/surround.git
+	url = git://github.com/vim-scripts/surround.vim.git
+[submodule "bundle/project.git"]
+	path = bundle/project.git
+	url = git://github.com/rickard/project.vim.git
+[submodule "bundle/myprojects.git"]
+	path = bundle/myprojects.git
+	url = git://github.com/vim-scripts/myprojects.git
+[submodule "bundle/yankring.git"]
+	path = bundle/yankring.git
+	url = git://github.com/chrismetcalf/vim-yankring.git
+[submodule "bundle/vimshell"]
+	path = bundle/vimshell
+	url = git://github.com/Shougo/vimshell.git
+[submodule "bundle/grep.vim"]
+	path = bundle/grep.vim
+	url = git://github.com/vim-scripts/grep.vim.git
+[submodule "bundle/vimproc.git"]
+	path = bundle/vimproc.git
+	url = git://github.com/Shougo/vimproc.git

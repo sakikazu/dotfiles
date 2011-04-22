@@ -1,0 +1,15 @@
+# 全ファイルを一度無視
+/*
+# さらにdotfileを無視
+/.*
+
+# 無視したくないファイルを![filename]で指定
+!/.zsh_aliases
+!/.zsh_profile
+!/.zshrc
+!/.vimrc
+!/.vim
+!/.screenrc
+!/.gitignore
+!/.gitconfig
+!/.gitmodules

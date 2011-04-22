@@ -1,3 +1,24 @@
 [submodule "bundle/vim-pathogen"]
 	path = bundle/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+[submodule "bundle/neocomplcache.git"]
+	path = bundle/neocomplcache.git
+	url = git://github.com/Shougo/neocomplcache.git
+[submodule "bundle/EnhancedCommentify.git"]
+	path = bundle/EnhancedCommentify.git
+	url = git://github.com/hrp/EnhancedCommentify.git
+[submodule "bundle/yanktmp.git"]
+	path = bundle/yanktmp.git
+	url = git://github.com/vim-scripts/yanktmp.vim.git
+[submodule "bundle/matchit.git"]
+	path = bundle/matchit.git
+	url = git://github.com/tsaleh/vim-matchit.git
+[submodule "bundle/rails.git"]
+	path = bundle/rails.git
+	url = git://github.com/tpope/vim-rails.git
+[submodule "bundle/rubytest.git"]
+	path = bundle/rubytest.git
+	url = git://github.com/janx/vim-rubytest.git
+[submodule "bundle/align.git"]
+	path = bundle/align.git
+	url = git://github.com/tsaleh/vim-align.git

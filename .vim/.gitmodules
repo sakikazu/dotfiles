@@ -49,3 +49,9 @@
 [submodule "bundle/vimproc.git"]
 	path = bundle/vimproc.git
 	url = git://github.com/Shougo/vimproc.git
+[submodule "bundle/vim-quickrun.git"]
+	path = bundle/vim-quickrun.git
+	url = git://github.com/thinca/vim-quickrun.git
+[submodule "bundle/matrix.git"]
+	path = bundle/matrix.git
+	url = git://github.com/vim-scripts/matrix.vim.git

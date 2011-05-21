@@ -4,6 +4,7 @@
 autocmd BufNewFile,BufRead *.ctp set filetype=php
 
 
+set hidden  " バッファを切替えてもundoの効力を失わない
 "set autoindent "これがあったからインデントされてたのか?
 set paste
 set autowrite
@@ -12,7 +13,8 @@ ab #i #include
 ab #b /********************************************************
 ab #e ********************************************************/
 ab #l /*------------------------------------------------------*/
-set sw=4
+set sw=2        "shiftwidth(インデントのスペース数)の略記
+set tabstop=2   " ファイル内の <Tab> が対応する空白の数
 set notextmode
 set notextauto
 set incsearch
@@ -162,7 +164,7 @@ set number      " 行番号
 set ruler       " ルーラー
 set hlsearch    " サーチハイライト
 set showmatch   " 入力時の括弧で対応する括弧をハイライト
-set expandtab
+set expandtab   " Insertモードで: <Tab> を挿入するのに、適切な数の空白を使う。（タブをスペースに展開する）
 
 " 文字コードをデフォルトUTF-8に
 " --------------------------------------------------------------
@@ -231,8 +233,8 @@ map nt :NERDTree
 let g:NERDTreeShowHidden=1
 
 " neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-"" →動いてない？？
+" let g:neocomplcache_enable_at_startup = 1
+"" →動いてない？？vim7.3にしたらエラーが出るのでコメントアウト
 
 
 " 論理移動と物理移動を交換
@@ -390,4 +392,4 @@ function PHPLint()
   echo result
 endfunction
 
-set tabstop=2
+

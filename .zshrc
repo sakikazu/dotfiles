@@ -119,6 +119,7 @@ zstyle ':predict' verbose true
 #
 setopt complete_aliases     # aliased ls needs if file/dir completions work
 
+alias vi=/usr/local/vim-7.3/bin/vim
 alias where="command -v"
 alias j="jobs -l"
 

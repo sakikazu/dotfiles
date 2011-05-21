@@ -48,7 +48,7 @@ shell -$SHELL
 # set every new windows hardstatus line to somenthing descriptive
 # defhstatus "screen: ^E (^Et)"
 
-defscrollback 1000
+defscrollback 5000
 
 # don't kill window after the process died
 # zombie "^["

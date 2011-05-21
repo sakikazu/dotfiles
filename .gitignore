@@ -13,3 +13,6 @@
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
+
+# 再び無視
+/.vim/.netrwhist

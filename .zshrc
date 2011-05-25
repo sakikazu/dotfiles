@@ -119,7 +119,8 @@ zstyle ':predict' verbose true
 #
 setopt complete_aliases     # aliased ls needs if file/dir completions work
 
-alias vi=/usr/local/vim-7.3/bin/vim
+alias cd_www="cd /var/www/html/"
+alias vi="vim"
 alias where="command -v"
 alias j="jobs -l"
 
@@ -254,7 +255,8 @@ export JAVA_HOME=/usr/local/jdk1.6.0_11/
 export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
 
 export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
-export GEM_HOME=/usr/local/lib/ruby/gems/1.8
+export GEM_HOME=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
+export GEM_PATH=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
 
 export EDITOR=vi
 export SVN_EDITOR=vi

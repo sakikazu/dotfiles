@@ -1,6 +1,8 @@
 "syntax on
 "autocmd FileType *      set formatoptions=tcql nocindent comments&
 "autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
+
+" cakePHP setting
 autocmd BufNewFile,BufRead *.ctp set filetype=php
 
 
@@ -23,6 +25,13 @@ set textwidth=70
 "set clipboard+=unnamed "これで”p”でペーストした時にクリップボードの中身が貼れます。 gvimのみ???
 set visualbell
 
+" オムニ補完
+setlocal omnifunc=syntaxcomplete#Complete
+" Ctrl-o でオムニ補完
+imap <C-o> <C-x><C-o>
+" sakikazu ↑効いてないぞ
+
+
 
 "------------------------------------
 " pathogen.vim
@@ -35,6 +44,21 @@ call pathogen#helptags()
 set helpfile=$VIMRUNTIME/doc/help.txt
 " ファイルタイプ判定をon
 filetype plugin on
+
+
+" エラーになる
+" --------------------------------------------------------------
+" rubycomplete.vim
+" --------------------------------------------------------------
+" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
+" 不明 参照＞http://vim-users.jp/2010/01/hack119/
+" inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
+
+
 
 
 "------------------------------------
@@ -184,6 +208,14 @@ let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 
 
+" --------------------------------------------------------------
+" rails.vim configuration
+" --------------------------------------------------------------
+let g:rails_level=4
+let g:rails_default_file="app/controllers/application.rb"
+let g:rails_default_database="mysql"
+"let g:rails_default_database="sqlite3"
+
 
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -221,46 +253,10 @@ syntax on
 filetype on
 filetype indent on
 filetype plugin on
+let g:rubycomplete_buffer_loading = 1
+let g:rubycomplete_classes_in_global = 1
+let g:rubycomplete_rails = 1
 
-" rails.vim configuration
-" --------------------------------------------------------------
-let g:rails_level=4
-let g:rails_default_file="app/controllers/application.rb"
-let g:rails_default_database="mysql"
-"let g:rails_default_database="sqlite3"
-
-
-" rubycomplete.vim
-" --------------------------------------------------------------
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
-
-" mru.vim
-" --------------------------------------------------------------
-:let MRU_Max_Entries=20 "MRUのファイルリストに記録しておく最大ファイル数です。
-:let MRU_Exclude_Files="^/tmp/.*\|^/var/tmp/.*" 
-"指定の正規表現にマッチするファイル名のファイルをMRUのファイルリストに記録しないようにします。デフォルトでは、全てのファイルを記録します。
-
-:let MRU_Window_Height=15 "MRUのファイルリストのウィンドウの高さの設定です。
-:let MRU_Use_Current_Windo=0
-"MRUのファイルリストを開く時に、新規のウィンドウに表示するか、カレントのウィンドウに表示するかの設定です。デフォルトでは、新規のウィンドウに表示します。
-
-:let MRU_Auto_Close=1
-"MRUのファイルリストからファイルをEnterキーで選択した時に、ファイルリストのウィンドウを閉じるかどうかの設定です。デフォルトではファイル選択時にウィンドウを閉じます。
-
-
-" configuration for lusty-explorer.vim
-" -------------------------------------------------------------
-nmap   we :BufferExplorer
-nmap   wf :FilesystemExplorer
-
-" NERDTree.vim configuration - http://vimwiki.net/?scripts%2F18 参照
-" -------------------------------------------------------------
-map nt :NERDTree
-let g:NERDTreeShowHidden=1
 
 
 

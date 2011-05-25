@@ -55,3 +55,6 @@
 [submodule "bundle/matrix.git"]
 	path = bundle/matrix.git
 	url = git://github.com/vim-scripts/matrix.vim.git
+[submodule "bundle/matrix-yang.git"]
+	path = bundle/matrix-yang.git
+	url = git://github.com/vim-scripts/matrix.vim--Yang.git

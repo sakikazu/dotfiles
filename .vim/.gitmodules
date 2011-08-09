@@ -4,9 +4,6 @@
 [submodule "bundle/neocomplcache.git"]
 	path = bundle/neocomplcache.git
 	url = git://github.com/Shougo/neocomplcache.git
-[submodule "bundle/EnhancedCommentify.git"]
-	path = bundle/EnhancedCommentify.git
-	url = git://github.com/hrp/EnhancedCommentify.git
 [submodule "bundle/yanktmp.git"]
 	path = bundle/yanktmp.git
 	url = git://github.com/vim-scripts/yanktmp.vim.git
@@ -58,3 +55,9 @@
 [submodule "bundle/matrix-yang.git"]
 	path = bundle/matrix-yang.git
 	url = git://github.com/vim-scripts/matrix.vim--Yang.git
+[submodule "bundle/project.vim"]
+	path = bundle/project.vim
+	url = git://github.com/rickard/project.vim.git
+[submodule "bundle/EnhancedCommentify.git"]
+	path = bundle/EnhancedCommentify.git
+	url = git://github.com/hrp/EnhancedCommentify.git

@@ -29,8 +29,20 @@ set visualbell
 setlocal omnifunc=syntaxcomplete#Complete
 " Ctrl-o でオムニ補完
 imap <C-o> <C-x><C-o>
-" sakikazu ↑効いてないぞ
+" sakikazu ↑効いてないぞ →C-oはマークの移動に割り当てられてるから他のにしてみて！
 
+" ステータスライン表示
+" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+" デフォルトのファイル名のみでいい
+set laststatus=2
+hi StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
+
+" ノーマルモードでIMEをOFF http://blog.blueblack.net/item_393 ★できてる？
+augroup InsModeAu
+  autocmd!
+  autocmd InsertEnter,CmdwinEnter * set noimdisable
+  autocmd InsertLeave,CmdwinLeave * set imdisable
+augroup END
 
 
 "------------------------------------
@@ -46,6 +58,7 @@ set helpfile=$VIMRUNTIME/doc/help.txt
 filetype plugin on
 
 
+
 " エラーになる
 " --------------------------------------------------------------
 " rubycomplete.vim
@@ -59,6 +72,20 @@ filetype plugin on
 " inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
 
 
+
+" --------------------------------------------------------------
+" quickrun.vim
+" --------------------------------------------------------------
+" let g:loaded_quicklaunch = 1
+" let g:quickrun_config = {
+" \ 'cpp': {
+" \ 'cmdopt': '-std=c++0x -Wall -I "D:\Library\Boost\boost_1_46_1"'
+" \ },
+" \ '*': {
+" \ 'split': '{"rightbelow 10sp"}'
+" \ }
+" \}
+" sakikazu ↑これってcppの設定だよな。。
 
 
 "------------------------------------
@@ -179,32 +206,35 @@ command! Vs :VimShell
 " -------------------------------------------------------------
 " neocomplcache
 " -------------------------------------------------------------
-  " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"  " Disable AutoComplPop.
+"let g:acp_enableAtStartup = 0
+"" Use neocomplcache.
+"let g:neocomplcache_enable_at_startup = 1
+"" Use smartcase.
+"let g:neocomplcache_enable_smart_case = 1
+"" Use camel case completion.
+"let g:neocomplcache_enable_camel_case_completion = 1
+"" Use underbar completion.
+"let g:neocomplcache_enable_underbar_completion = 1
+"" Set minimum syntax keyword length.
+"let g:neocomplcache_min_syntax_length = 3
+"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+"
+"" Define dictionary.
+"let g:neocomplcache_dictionary_filetype_lists = {
+"    \ 'default' : '',
+"    \ 'vimshell' : $HOME.'/.vimshell_hist',
+"    \ 'scheme' : $HOME.'/.gosh_completions'
+"        \ }
+"
+"" Define keyword.
+"if !exists('g:neocomplcache_keyword_patterns')
+"    let g:neocomplcache_keyword_patterns = {}
+"endif
+"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
 
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+
 
 
 
@@ -286,6 +316,17 @@ map t7 :tabn 7<cr>
 map t8 :tabn 8<cr>
 map t9 :tabn 9<cr>
 map t0 :tabn 10<cr>
+
+
+" バッファ関係
+" --------------------------------------------------------------
+nmap \b :ls<CR>:buffer
+nmap \f :edit .<CR>
+nmap \v :vsplit<CR><C-w><C-w>:ls<CR>:buffer
+nmap \V :Vexplore!<CR><CR>
+nmap bp :bp<CR>
+nmap bn :bn<CR>
+
 
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
 hi TabLineSel  term=bold cterm=bold,underline ctermfg=5
@@ -395,24 +436,5 @@ fun! s:ShowStatus()
   echo status
 endfun
 
-
-
-" --------------------------------------------------------------
-" PHP
-" --------------------------------------------------------------
-" ★できてねええ。。
-""
-" PHP Lint
-nmap ,l :call PHPLint()<CR>
-
-""
-" PHPLint
-"
-" @author halt feits <halt.feits at gmail.com>
-"
-function PHPLint()
-  let result = system( &ft . ' -l ' . bufname(""))
-  echo result
-endfunction
 
 

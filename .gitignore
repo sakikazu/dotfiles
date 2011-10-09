@@ -8,7 +8,7 @@
 !/.zsh_profile
 !/.zshrc
 !/.vimrc
-!/.vim
+#!/.vim
 !/.bashrc
 !/.gemrc
 !/.rvmrc
@@ -16,6 +16,7 @@
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
+!/readme.txt
 
 # 再び無視
 /.vim/.netrwhist

@@ -27,9 +27,9 @@ set visualbell
 
 " オムニ補完
 setlocal omnifunc=syntaxcomplete#Complete
-" Ctrl-o でオムニ補完
-imap <C-o> <C-x><C-o>
-" sakikazu ↑効いてないぞ →C-oはマークの移動に割り当てられてるから他のにしてみて！
+"" Ctrl-o でオムニ補完
+"imap <C-o> <C-x><C-o>
+"" sakikazu ↑効いてないぞ →C-oはマークの移動に割り当てられてるから他のにしてみて！
 
 " ステータスライン表示
 " set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
@@ -45,17 +45,42 @@ augroup InsModeAu
 augroup END
 
 
-"------------------------------------
-" pathogen.vim
-"------------------------------------
-" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
+
+
+set nocompatible
 filetype off
-" pathogen.vimによってbundle配下のpluginをpathに加える
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-set helpfile=$VIMRUNTIME/doc/help.txt
-" ファイルタイプ判定をon
-filetype plugin on
+ 
+set rtp+=~/.vim/vundle.git/
+call vundle#rc()
+ 
+Bundle "git://github.com/tpope/vim-rails.git"
+Bundle "git://github.com/vim-scripts/yanktmp.vim.git"
+"Bundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
+Bundle "git://github.com/scrooloose/nerdcommenter.git"
+Bundle "git://github.com/Shougo/unite.vim.git"
+Bundle "git://github.com/vim-scripts/surround.vim.git"
+Bundle "git://github.com/chrismetcalf/vim-yankring.git"
+Bundle "git://github.com/Shougo/vimshell.git"
+Bundle "git://github.com/vim-scripts/grep.vim.git"
+Bundle "git://github.com/thinca/vim-quickrun.git"
+Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
+"Bundle "git://github.com/hrp/EnhancedCommentify.git"
+ 
+ 
+filetype plugin indent on
+
+
+""------------------------------------
+"" pathogen.vim
+""------------------------------------
+"" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
+"filetype off
+"" pathogen.vimによってbundle配下のpluginをpathに加える
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#helptags()
+"set helpfile=$VIMRUNTIME/doc/help.txt
+"" ファイルタイプ判定をon
+"filetype plugin on
 
 
 
@@ -149,91 +174,89 @@ nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
 
 
 
-"------------------------------------
-" vimshell
-"------------------------------------
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-let g:vimshell_enable_smart_case = 1
-
-if has('win32') || has('win64')
-  " Display user name on Windows.
-  let g:vimshell_prompt = $USERNAME."% "
-else
-  " Display user name on Linux.
-  let g:vimshell_prompt = $USER."% "
-
-  call vimshell#set_execute_file('bmp,jpg,png,gif', 'gexe eog')
-  call vimshell#set_execute_file('mp3,m4a,ogg', 'gexe amarok')
-  let g:vimshell_execute_file_list['zip'] = 'zipinfo'
-  call vimshell#set_execute_file('tgz,gz', 'gzcat')
-  call vimshell#set_execute_file('tbz,bz2', 'bzcat')
-endif
-
-function! g:my_chpwd(args, context)
-  call vimshell#execute('echo "chpwd"')
-endfunction
-function! g:my_emptycmd(cmdline, context)
-  call vimshell#execute('echo "emptycmd"')
-  return a:cmdline
-endfunction
-function! g:my_preprompt(args, context)
-  call vimshell#execute('echo "preprompt"')
-endfunction
-function! g:my_preexec(cmdline, context)
-  call vimshell#execute('echo "preexec"')
-
-  if a:cmdline =~# '^\s*diff\>'
-    call vimshell#set_syntax('diff')
-  endif
-  return a:cmdline
-endfunction
-
-autocmd FileType vimshell
-\ call vimshell#altercmd#define('g', 'git')
-\| call vimshell#altercmd#define('i', 'iexe')
-\| call vimshell#altercmd#define('l', 'll')
-\| call vimshell#altercmd#define('ll', 'ls -l')
-\| call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-\| call vimshell#hook#set('emptycmd', ['g:my_emptycmd'])
-\| call vimshell#hook#set('preprompt', ['g:my_preprompt'])
-\| call vimshell#hook#set('preexec', ['g:my_preexec'])
-
-command! Vs :VimShell
+""------------------------------------
+"" vimshell
+""------------------------------------
+"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
+"let g:vimshell_enable_smart_case = 1
+"
+"if has('win32') || has('win64')
+"  " Display user name on Windows.
+"  let g:vimshell_prompt = $USERNAME."% "
+"else
+"  " Display user name on Linux.
+"  let g:vimshell_prompt = $USER."% "
+"
+"  call vimshell#set_execute_file('bmp,jpg,png,gif', 'gexe eog')
+"  call vimshell#set_execute_file('mp3,m4a,ogg', 'gexe amarok')
+"  let g:vimshell_execute_file_list['zip'] = 'zipinfo'
+"  call vimshell#set_execute_file('tgz,gz', 'gzcat')
+"  call vimshell#set_execute_file('tbz,bz2', 'bzcat')
+"endif
+"
+"function! g:my_chpwd(args, context)
+"  call vimshell#execute('echo "chpwd"')
+"endfunction
+"function! g:my_emptycmd(cmdline, context)
+"  call vimshell#execute('echo "emptycmd"')
+"  return a:cmdline
+"endfunction
+"function! g:my_preprompt(args, context)
+"  call vimshell#execute('echo "preprompt"')
+"endfunction
+"function! g:my_preexec(cmdline, context)
+"  call vimshell#execute('echo "preexec"')
+"
+"  if a:cmdline =~# '^\s*diff\>'
+"    call vimshell#set_syntax('diff')
+"  endif
+"  return a:cmdline
+"endfunction
+"
+"autocmd FileType vimshell
+"\ call vimshell#altercmd#define('g', 'git')
+"\| call vimshell#altercmd#define('i', 'iexe')
+"\| call vimshell#altercmd#define('l', 'll')
+"\| call vimshell#altercmd#define('ll', 'ls -l')
+"\| call vimshell#hook#set('chpwd', ['g:my_chpwd'])
+"\| call vimshell#hook#set('emptycmd', ['g:my_emptycmd'])
+"\| call vimshell#hook#set('preprompt', ['g:my_preprompt'])
+"\| call vimshell#hook#set('preexec', ['g:my_preexec'])
+"
+"command! Vs :VimShell
 
 
 
 " -------------------------------------------------------------
 " neocomplcache
 " -------------------------------------------------------------
-"  " Disable AutoComplPop.
-"let g:acp_enableAtStartup = 0
-"" Use neocomplcache.
-"let g:neocomplcache_enable_at_startup = 1
-"" Use smartcase.
-"let g:neocomplcache_enable_smart_case = 1
-"" Use camel case completion.
-"let g:neocomplcache_enable_camel_case_completion = 1
-"" Use underbar completion.
-"let g:neocomplcache_enable_underbar_completion = 1
-"" Set minimum syntax keyword length.
-"let g:neocomplcache_min_syntax_length = 3
-"let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-"
-"" Define dictionary.
-"let g:neocomplcache_dictionary_filetype_lists = {
-"    \ 'default' : '',
-"    \ 'vimshell' : $HOME.'/.vimshell_hist',
-"    \ 'scheme' : $HOME.'/.gosh_completions'
-"        \ }
-"
-"" Define keyword.
-"if !exists('g:neocomplcache_keyword_patterns')
-"    let g:neocomplcache_keyword_patterns = {}
-"endif
-"let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
+  " Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Use camel case completion.
+let g:neocomplcache_enable_camel_case_completion = 1
+" Use underbar completion.
+let g:neocomplcache_enable_underbar_completion = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
 
+" Define keyword.
+if !exists('g:neocomplcache_keyword_patterns')
+    let g:neocomplcache_keyword_patterns = {}
+endif
+let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 
 
@@ -246,6 +269,16 @@ let g:rails_default_file="app/controllers/application.rb"
 let g:rails_default_database="mysql"
 "let g:rails_default_database="sqlite3"
 
+
+" ---------------------------------------
+" 大仲さんのを一部
+" ---------------------------------------
+
+" window resize
+nnoremap + 4<C-w>+
+nnoremap - 4<C-w>-
+nnoremap { 4<C-w><
+nnoremap } 4<C-w>>
 
 
 " ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -326,6 +359,9 @@ nmap \v :vsplit<CR><C-w><C-w>:ls<CR>:buffer
 nmap \V :Vexplore!<CR><CR>
 nmap bp :bp<CR>
 nmap bn :bn<CR>
+ 
+"ビジュアルモード時vで行末まで選択
+vnoremap v $h
 
 
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black

@@ -9,6 +9,9 @@
 !/.zshrc
 !/.vimrc
 !/.vim
+!/.bashrc
+!/.gemrc
+!/.rvmrc
 !/.screenrc
 !/.gitignore
 !/.gitconfig

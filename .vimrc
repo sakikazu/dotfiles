@@ -1,58 +1,11 @@
-"syntax on
-"autocmd FileType *      set formatoptions=tcql nocindent comments&
-"autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
-
-" cakePHP setting
-autocmd BufNewFile,BufRead *.ctp set filetype=php
-
-
-set hidden  " バッファを切替えてもundoの効力を失わない
-"set autoindent "これがあったからインデントされてたのか?
-set paste
-set autowrite
-ab #d #define
-ab #i #include
-ab #b /********************************************************
-ab #e ********************************************************/
-ab #l /*------------------------------------------------------*/
-set sw=2        "shiftwidth(インデントのスペース数)の略記
-set tabstop=2   " ファイル内の <Tab> が対応する空白の数
-set notextmode
-set notextauto
-set incsearch
-set textwidth=70
-"set guioptions+=a "これで”y”でコピった時にクリップボードに入ります。gvimのみ????
-"set clipboard+=unnamed "これで”p”でペーストした時にクリップボードの中身が貼れます。 gvimのみ???
-set visualbell
-
-" オムニ補完
-setlocal omnifunc=syntaxcomplete#Complete
-"" Ctrl-o でオムニ補完
-"imap <C-o> <C-x><C-o>
-"" sakikazu ↑効いてないぞ →C-oはマークの移動に割り当てられてるから他のにしてみて！
-
-" ステータスライン表示
-" set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-" デフォルトのファイル名のみでいい
-set laststatus=2
-hi StatusLine term=NONE cterm=NONE ctermfg=black ctermbg=white
-
-" ノーマルモードでIMEをOFF http://blog.blueblack.net/item_393 ★できてる？
-augroup InsModeAu
-  autocmd!
-  autocmd InsertEnter,CmdwinEnter * set noimdisable
-  autocmd InsertLeave,CmdwinLeave * set imdisable
-augroup END
-
-
-
-
+" --------------------------------------------------------------
+" 参考）https://github.com/kenchan/dotfiles/blob/master/dot.vimrc
+" --------------------------------------------------------------
 set nocompatible
 filetype off
- 
-set rtp+=~/.vim/vundle.git/
+set rtp+=~/.vim/vundle.git
 call vundle#rc()
- 
+
 Bundle "git://github.com/tpope/vim-rails.git"
 Bundle "git://github.com/vim-scripts/yanktmp.vim.git"
 "Bundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
@@ -65,53 +18,159 @@ Bundle "git://github.com/vim-scripts/grep.vim.git"
 Bundle "git://github.com/thinca/vim-quickrun.git"
 Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "Bundle "git://github.com/hrp/EnhancedCommentify.git"
- 
- 
+
+
+" まだ使いこなせないうちはコメントアウトにしとく
+"Bundle 'haml.zip'
+"Bundle 'git-commit'
+"Bundle 'YankRing.vim'
+"Bundle 'EasyMotion'
+"Bundle 'vimwiki'
+"Bundle 'Rename'
+"Bundle 'wincent/Command-T'
+"Bundle 'jade.vim'
+"
+"Bundle 'newspaper.vim'
+Bundle 'git://github.com/vim-scripts/xoria256.vim.git'
+"
+"Bundle 'vim-ruby/vim-ruby'
+"
+"Bundle 'tsukkee/unite-help'
+"
+"Bundle 'kana/vim-textobj-user'
+"Bundle 'kana/vim-textobj-fold'
+"Bundle 'kana/vim-textobj-indent'
+"Bundle 'kana/vim-textobj-lastpat'
+"
+Bundle 'git://github.com/Shougo/neocomplcache.git'
+"Bundle 'Shougo/vimshell'
+"Bundle 'Shougo/vimfiler'
+"Bundle 'Shougo/vimproc'
+"Bundle 'Shougo/unite.vim'
+"
+"Bundle 'h1mesuke/vim-alignta'
+"Bundle 'h1mesuke/unite-outline'
+"
+"Bundle 'thinca/vim-quickrun'
+"
+"Bundle 'tpope/vim-rails'
+"Bundle 'tpope/vim-cucumber'
+"Bundle 'tpope/vim-endwise'
+"Bundle 'tpope/vim-surround'
+"Bundle 'tpope/vim-fugitive'
+"
+"Bundle 'kenchan/vim-ruby-refactoring'
+"Bundle 'nelstrom/vim-textobj-rubyblock'
+
 filetype plugin indent on
+syntax enable
 
+set t_Co=256
+set background=dark
+colorscheme xoria256
+hi Pmenu ctermbg=4
 
-""------------------------------------
-"" pathogen.vim
-""------------------------------------
-"" pathogenでftdetectなどをloadさせるために一度ファイルタイプ判定をoff
-"filetype off
-"" pathogen.vimによってbundle配下のpluginをpathに加える
-"call pathogen#runtime_append_all_bundles()
-"call pathogen#helptags()
-"set helpfile=$VIMRUNTIME/doc/help.txt
-"" ファイルタイプ判定をon
-"filetype plugin on
+set ambiwidth=double
+set autoread
+set hidden  " バッファを切替えてもundoの効力を失わない
+set number
+set showmatch " 入力時の括弧で対応する括弧をハイライト
+set ttymouse=xterm2
+set wildmode=longest:list
+set nocompatible
 
+set directory-=.
 
+"backup
+set nobackup
 
-" エラーになる
+"encoding
+set enc=utf-8
+set fenc=utf-8
+set fencs=utf-8,iso-2022-jp,euc-jp,cp932
+set fileformats=unix,dos
+
+"Tab
+set expandtab
+set smartindent
+set ts=2 sw=2 sts=2
+
+"search
+set nohlsearch
+set ignorecase
+set smartcase
+set incsearch
+
+"statusline
+set laststatus=2
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%l,%c%v%8p
+
+" keymap
+nnoremap j gj
+nnoremap k gk
+
+nnoremap wh <C-w>h
+nnoremap wj <C-w>j
+nnoremap wk <C-w>k
+nnoremap wl <C-w>l
+
+nnoremap Y y$
+
+nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
+nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
+
+cnoremap <C-a> <Home>
+cnoremap <C-x> <C-r>=expand('%:p:h')<CR>/
+cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
+
+" 全角空白と行末の空白の色を変える
+highlight WideSpace ctermbg=blue guibg=blue
+highlight EOLSpace ctermbg=red guibg=red
+
+function! s:HighlightSpaces()
+  match WideSpace /　/
+  match EOLSpace /\s\+$/
+endf
+
+" clipboard
+set clipboard+=unnamed
+
+" <Leader>
+inoremap <Leader>date <C-R>=strftime('%Y/%m/%d(%a)')<CR>
+inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
+
+" git-commit.vim
+let git_diff_spawn_mode = 1
+
+" neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_enable_camel_case_completion = 0
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_min_syntax_length = 3
+
+" unite.vim
+nnoremap <silent> ,uf :<C-u>Unite file<CR>
+nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
+nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
+nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,uo :<C-u>Unite outline<CR>
+nnoremap <silent> ,uh :<C-u>Unite help<CR>
+
 " --------------------------------------------------------------
-" rubycomplete.vim
+" rails.vim configuration
 " --------------------------------------------------------------
-" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+let g:rails_level=4
+let g:rails_default_file="app/controllers/application.rb"
+let g:rails_default_database="mysql"
+"let g:rails_default_database="sqlite3"
 
-" 不明 参照＞http://vim-users.jp/2010/01/hack119/
-" inoremap <expr><C-x><C-o> &filetype == 'vim' ? "\<C-x><C-v><C-p>" : neocomplcache#manual_omni_complete()
-
-
-
-" --------------------------------------------------------------
-" quickrun.vim
-" --------------------------------------------------------------
-" let g:loaded_quicklaunch = 1
-" let g:quickrun_config = {
-" \ 'cpp': {
-" \ 'cmdopt': '-std=c++0x -Wall -I "D:\Library\Boost\boost_1_46_1"'
-" \ },
-" \ '*': {
-" \ 'split': '{"rightbelow 10sp"}'
-" \ }
-" \}
-" sakikazu ↑これってcppの設定だよな。。
-
+"------------------------------------
+" surround.vim
+"------------------------------------
+" s, ssで選択範囲を指定文字でくくる
+nmap s <Plug>Ysurround
+nmap ss <Plug>Yssurround
 
 "------------------------------------
 " NERD_commenter.vim
@@ -124,190 +183,65 @@ map <Leader>x, c<space>
 let NERDShutUp=1
 
 
-"------------------------------------
-" unite.vim
-"------------------------------------
-" The prefix key.
-nnoremap    [unite]   <Nop>
-nmap    f [unite]
+" vimwiki
+let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 
-nnoremap [unite]u  :<C-u>Unite<Space>
-nnoremap <silent> [unite]a  :<C-u>UniteWithCurrentDir -buffer-name=files buffer file_mru bookmark file<CR>
-nnoremap <silent> [unite]f  :<C-u>Unite -buffer-name=files file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite buffer<CR>
-nnoremap <silent> [unite]m  :<C-u>Unite file_mru<CR>
+let g:EasyMotion_leader_key = '<Leader>m'
 
-" nnoremap <silent> [unite]b  :<C-u>UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" vimfiler
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
 
-autocmd FileType unite call s:unite_my_settings()
-function! s:unite_my_settings()"{{{
-  " Overwrite settings.
-  imap <buffer> jj      <Plug>(unite_insert_leave)
-  nnoremap <silent><buffer> <C-k> :<C-u>call unite#mappings#do_action('preview')<CR>
-  imap <buffer> <C-w>     <Plug>(unite_delete_backward_path)
-  " Start insert.
-  let g:unite_enable_start_insert = 1
-endfunction"}}}
+" quickrun
+let g:quickrun_config = {}
+let g:quickrun_config = {
+\  'ruby.rspec': {
+\    'outputter/buffer/append' : 1,
+\    'outputter/buffer/split' : 'below 10',
+\    'runner' : 'remote',
+\    'runner/remote/vimproc' : 1,
+\    'command' : 'script/spec',
+\    'cmdopt' : "-cfn"
+\  },
+\  'cucumber' : {
+\    'outputter/buffer/append' : 1,
+\    'outputter/buffer/split' : 'below 10',
+\    'runner' : 'remote',
+\    'runner/remote/vimproc' : 1,
+\    'command' : 'cucumber',
+\  }
+\}
 
-let g:unite_source_file_mru_limit = 200
+augroup MyAutoCmd
+  autocmd!
 
+  autocmd BufRead * call s:HighlightSpaces()
+  autocmd WinEnter * call s:HighlightSpaces()
 
-"------------------------------------
-" surround.vim
-"------------------------------------
-" s, ssで選択範囲を指定文字でくくる
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
+  autocmd InsertEnter * highlight StatusLine ctermfg=red guifg=red
+  autocmd InsertLeave * highlight StatusLine ctermfg=white guifg=white
 
+  "自動的に QuickFix リストを表示する
+  autocmd QuickfixCmdPost make,grep,grepadd,vimgrep,vimgrepadd cwin
+  autocmd QuickfixCmdPost lmake,lgrep,lgrepadd,lvimgrep,lvimgrepadd lwin
 
-" ------------------------------------
-" grep.vim
-"------------------------------------
-" 検索外のディレクトリ、ファイルパターン
-let Grep_Skip_Dirs = '.svn .git .hg'
-let Grep_Skip_Files = '*.bak *~'
+  autocmd BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 
-" :Gb <args> でGrepBufferする
-command! -nargs=1 Gb :GrepBuffer <args>
-" カーソル下の単語をGrepBufferする
-nnoremap <C-g><C-b> :<C-u>GrepBuffer<Space><C-r><C-w><Enter>
+  autocmd FileType ruby.rspec nnoremap <silent> <space>rc :QuickRun -cmdopt "-cfn -l %{line('.')}"<CR>
+  autocmd FileType cucumber nnoremap <silent> <space>rc :QuickRun -cmdopt "-f pretty -l %{line('.')}"<CR>
+  autocmd FileType ruby.rspec,cucumber nnoremap <silent> <space>rf :QuickRun<CR>
 
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC | if has('gui_running') | source $MYGVIMRC
+  autocmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC
 
+augroup END
 
-""------------------------------------
-"" vimshell
-""------------------------------------
-"let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-"let g:vimshell_right_prompt = 'vimshell#vcs#info("(%s)-[%b]", "(%s)-[%b|%a]")'
-"let g:vimshell_enable_smart_case = 1
-"
-"if has('win32') || has('win64')
-"  " Display user name on Windows.
-"  let g:vimshell_prompt = $USERNAME."% "
-"else
-"  " Display user name on Linux.
-"  let g:vimshell_prompt = $USER."% "
-"
-"  call vimshell#set_execute_file('bmp,jpg,png,gif', 'gexe eog')
-"  call vimshell#set_execute_file('mp3,m4a,ogg', 'gexe amarok')
-"  let g:vimshell_execute_file_list['zip'] = 'zipinfo'
-"  call vimshell#set_execute_file('tgz,gz', 'gzcat')
-"  call vimshell#set_execute_file('tbz,bz2', 'bzcat')
-"endif
-"
-"function! g:my_chpwd(args, context)
-"  call vimshell#execute('echo "chpwd"')
-"endfunction
-"function! g:my_emptycmd(cmdline, context)
-"  call vimshell#execute('echo "emptycmd"')
-"  return a:cmdline
-"endfunction
-"function! g:my_preprompt(args, context)
-"  call vimshell#execute('echo "preprompt"')
-"endfunction
-"function! g:my_preexec(cmdline, context)
-"  call vimshell#execute('echo "preexec"')
-"
-"  if a:cmdline =~# '^\s*diff\>'
-"    call vimshell#set_syntax('diff')
-"  endif
-"  return a:cmdline
-"endfunction
-"
-"autocmd FileType vimshell
-"\ call vimshell#altercmd#define('g', 'git')
-"\| call vimshell#altercmd#define('i', 'iexe')
-"\| call vimshell#altercmd#define('l', 'll')
-"\| call vimshell#altercmd#define('ll', 'ls -l')
-"\| call vimshell#hook#set('chpwd', ['g:my_chpwd'])
-"\| call vimshell#hook#set('emptycmd', ['g:my_emptycmd'])
-"\| call vimshell#hook#set('preprompt', ['g:my_preprompt'])
-"\| call vimshell#hook#set('preexec', ['g:my_preexec'])
-"
-"command! Vs :VimShell
-
-
-
-" -------------------------------------------------------------
-" neocomplcache
-" -------------------------------------------------------------
-  " Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Use camel case completion.
-let g:neocomplcache_enable_camel_case_completion = 1
-" Use underbar completion.
-let g:neocomplcache_enable_underbar_completion = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplcache_keyword_patterns')
-    let g:neocomplcache_keyword_patterns = {}
-endif
-let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
-
-
-
-
-" --------------------------------------------------------------
-" rails.vim configuration
-" --------------------------------------------------------------
-let g:rails_level=4
-let g:rails_default_file="app/controllers/application.rb"
-let g:rails_default_database="mysql"
-"let g:rails_default_database="sqlite3"
 
 
 " ---------------------------------------
-" 大仲さんのを一部
+" sakikazu setting
 " ---------------------------------------
-
-" window resize
-nnoremap + 4<C-w>+
-nnoremap - 4<C-w>-
-nnoremap { 4<C-w><
-nnoremap } 4<C-w>>
-
-
-" ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-" こっから関口さんの設定と同じ
-
-set nowrap      " ワードラップ
-set number      " 行番号
-set ruler       " ルーラー
-set hlsearch    " サーチハイライト
-set showmatch   " 入力時の括弧で対応する括弧をハイライト
-set expandtab   " Insertモードで: <Tab> を挿入するのに、適切な数の空白を使う。（タブをスペースに展開する）
-
-" 文字コードをデフォルトUTF-8に
-" --------------------------------------------------------------
-set enc=utf-8
-set fenc=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,euc-jp,ucs-2le,ucs-2,cp932,iso-2022-jp
-
-" 改行コードの自動認識
-" --------------------------------------------------------------
-set fileformats=unix,dos,mac
-
-" UTF-8の□や○でカーソル位置がずれないようにする
-" --------------------------------------------------------------
-if exists("&ambiwidth")
-  set ambiwidth=double
-endif
+set paste
 
 " coniguration for vim-ruby auto ditect .rb file syntax
 " --------------------------------------------------------------
@@ -319,7 +253,6 @@ filetype plugin on
 let g:rubycomplete_buffer_loading = 1
 let g:rubycomplete_classes_in_global = 1
 let g:rubycomplete_rails = 1
-
 
 
 
@@ -336,7 +269,7 @@ map tn :tabnext<cr>
 map tp :tabprev<cr>
 
 map ts :tabs<cr>
-map tt :tabnew 
+map tt :tabnew
 map tm :tabm
 
 map t1 :tabn 1<cr>
@@ -359,118 +292,19 @@ nmap \v :vsplit<CR><C-w><C-w>:ls<CR>:buffer
 nmap \V :Vexplore!<CR><CR>
 nmap bp :bp<CR>
 nmap bn :bn<CR>
- 
+
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
 
+" ---------------------------------------
+" 大仲さんのを一部
+" ---------------------------------------
 
-hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
-hi TabLineSel  term=bold cterm=bold,underline ctermfg=5
-hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
-
-" 下記の[tabline]の設定をすると、a/b/c/dd.htmlのような表記がされなくなってしまったので無効
-"　→でもタブ番号が表示されるな。理想は、番号表示で↑の表記
-"set showtabline=2
-"set tabline=%!MyTabLine()
-function MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-      let s .= '%' . (i+1) . 'T'
-      let s .= ' ' . (i+1) . (1==getwinvar(i+1,'&modified')?'[+]':'') . ' %{MyTabLabelSel(' . (i+1) . ')} '
-    else
-      let s .= '%#TabLine#'
-      let s .= '%' . (i+1) . 'T'
-      let s .= ' ' . (i+1) . (1==getwinvar(i+1,'&modified')?'[+]':'') . ' %{MyTabLabel(' . (i+1) . ')} '
-    endif
-  endfor
-  let s .= '%#TabLineFill#%T'
-  if tabpagenr('$') > 1
-    let s .= '%=%#TabLine#%999Xclose'
-  endif
-  return s
-endfunction
-
-function MyTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let src_str = '/'. bufname(buflist[winnr - 1])
-  let last_slash = strridx(src_str, '/')
-  let len_str = strlen(src_str)
-  let only_file_name = strpart(src_str, last_slash + 1, len_str - last_slash)
-  return only_file_name
-endfunction
-
-function MyTabLabelSel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  return bufname(buflist[winnr - 1])
-endfunction
-
-" で表示されるステータスを置き換える
-"---------------------------------------------------------------
-silent! map  :call <SID>ShowStatus()
-fun! s:ShowStatus()
-  let file = expand("%")
-  if file == ''
-    let file = '[No Name]'
-  endif
-  let row  = line(".")
-  let rows = line("$")
-  let col  = col(".")
-  let cols = col("$")
-  let filesize   = getfsize(file)
-  if filesize >= 0
-    if filesize >= 10000
-      let filesize = filesize / 1000 . 'KB '
-    else
-      let filesize = filesize . 'B '
-    endif
-  else
-    let filesize = ''
-  endif
-
-  let tw = 'tw=' . &tw . ':'
-  let ts = 'ts=' . &ts . ':'
-  let sw = 'sw=' . &sw . ''
-
-  let modified = &modified
-  if modified
-    let modified = '+ '
-  else
-    let modified = ''
-  endif
-
-  let modifiable = &modifiable
-  if modifiable
-    let modifiable = ''
-  else
-    let modifiable = '- '
-  endif
-
-  let readonly = &readonly
-  if readonly
-    let readonly = 'RO '
-  else
-    let readonly = ''
-  endif
-
-  let filetype = &filetype
-  if filetype == ''
-    let filetype = ''
-  else
-    let filetype = filetype . ','
-  endif
-  let fileformat = &fileformat . ','
-  let encoding   = &enc
-
-  let status = file . '  ' . row . '/' . rows . 'L(' . row * 100 / rows . '%) ' . col . '/' . cols . 'C ' . filesize
-  let status = status . '[' . modified  . readonly . modifiable . filetype . fileformat . encoding . '] '
-  let status = status . '[' . tw . ts . sw . ']'
-
-  echo status
-endfun
+" window resize
+nnoremap + 4<C-w>+
+nnoremap - 4<C-w>-
+nnoremap { 4<C-w><
+nnoremap } 4<C-w>>
 
 
 

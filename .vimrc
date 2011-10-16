@@ -96,7 +96,7 @@ set smartindent
 set ts=2 sw=2 sts=2
 
 "search
-set nohlsearch
+set hlsearch
 set ignorecase
 set smartcase
 set incsearch
@@ -116,8 +116,9 @@ nnoremap wl <C-w>l
 
 nnoremap Y y$
 
-nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
-nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
+"sakikazu これが有効だとビジュアルモードでカーソル移動がおかしくなってしまった
+"nnoremap <Space>. :<C-u>edit $MYVIMRC<CR>
+"nnoremap <Space>s. :<C-u>source $MYVIMRC<CR>
 
 cnoremap <C-a> <Home>
 cnoremap <C-x> <C-r>=expand('%:p:h')<CR>/
@@ -243,6 +244,11 @@ augroup END
 " ---------------------------------------
 set paste
 
+hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
+hi TabLineSel  term=bold cterm=bold,underline ctermfg=5
+hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
+
+
 " coniguration for vim-ruby auto ditect .rb file syntax
 " --------------------------------------------------------------
 set nocompatible
@@ -269,7 +275,7 @@ map tn :tabnext<cr>
 map tp :tabprev<cr>
 
 map ts :tabs<cr>
-map tt :tabnew
+map tt :tabnew<space>
 map tm :tabm
 
 map t1 :tabn 1<cr>

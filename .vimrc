@@ -313,4 +313,13 @@ nnoremap { 4<C-w><
 nnoremap } 4<C-w>>
 
 
+" --------------------------------------------------------------
+" PHP用オプション
+" --------------------------------------------------------------
+let php_sql_query=1
+let php_htmlInStrings=1
+let php_noShortTags = 1
 
+autocmd BufNewFile,BufRead *.ctp set filetype=php
+autocmd BufNewFile,BufRead *.cls set filetype=php
+autocmd BufNewFile,BufRead *.tpl set filetype=php

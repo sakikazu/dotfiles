@@ -31,7 +31,7 @@ Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "Bundle 'jade.vim'
 "
 "Bundle 'newspaper.vim'
-Bundle 'git://github.com/vim-scripts/xoria256.vim.git'
+"Bundle 'git://github.com/vim-scripts/xoria256.vim.git'
 "
 "Bundle 'vim-ruby/vim-ruby'
 "
@@ -65,10 +65,10 @@ Bundle 'git://github.com/Shougo/neocomplcache.git'
 filetype plugin indent on
 syntax enable
 
-set t_Co=256
-set background=dark
-colorscheme xoria256
-hi Pmenu ctermbg=4
+" set t_Co=256
+" set background=dark
+" colorscheme xoria256
+" hi Pmenu ctermbg=4
 
 set ambiwidth=double
 set autoread

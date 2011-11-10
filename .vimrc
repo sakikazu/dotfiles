@@ -228,9 +228,10 @@ augroup MyAutoCmd
 
   autocmd BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 
-  autocmd FileType ruby.rspec nnoremap <silent> <space>rc :QuickRun -cmdopt "-cfn -l %{line('.')}"<CR>
-  autocmd FileType cucumber nnoremap <silent> <space>rc :QuickRun -cmdopt "-f pretty -l %{line('.')}"<CR>
-  autocmd FileType ruby.rspec,cucumber nnoremap <silent> <space>rf :QuickRun<CR>
+" memo ここが有効だと、カッコにカーソルが乗ると勝手に移動してしまってた
+  " autocmd FileType ruby.rspec nnoremap <silent> <space>rc :QuickRun -cmdopt "-cfn -l %{line('.')}"<CR>
+  " autocmd FileType cucumber nnoremap <silent> <space>rc :QuickRun -cmdopt "-f pretty -l %{line('.')}"<CR>
+  " autocmd FileType ruby.rspec,cucumber nnoremap <silent> <space>rf :QuickRun<CR>
 
   autocmd BufWritePost $MYVIMRC source $MYVIMRC | if has('gui_running') | source $MYGVIMRC
   autocmd BufWritePost $MYGVIMRC if has('gui_running') | source $MYGVIMRC

@@ -19,6 +19,7 @@ Bundle "git://github.com/thinca/vim-quickrun.git"
 Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "Bundle "git://github.com/hrp/EnhancedCommentify.git"
 
+Bundle "git://github.com/thinca/vim-ref.git"
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
@@ -43,10 +44,8 @@ Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "Bundle 'kana/vim-textobj-lastpat'
 "
 Bundle 'git://github.com/Shougo/neocomplcache.git'
-"Bundle 'Shougo/vimshell'
 "Bundle 'Shougo/vimfiler'
 "Bundle 'Shougo/vimproc'
-"Bundle 'Shougo/unite.vim'
 "
 "Bundle 'h1mesuke/vim-alignta'
 "Bundle 'h1mesuke/unite-outline'
@@ -243,7 +242,8 @@ augroup END
 " ---------------------------------------
 " sakikazu setting
 " ---------------------------------------
-set paste
+" memo set pasteがあると、NeoCompleteCacheが動作しなかった。しかも、これあると自動インデントされるようになるけど、逆にその方がいいことに気づいた…。
+" set paste
 
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
 hi TabLineSel  term=bold cterm=bold,underline ctermfg=5

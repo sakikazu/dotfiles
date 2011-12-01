@@ -20,6 +20,7 @@ Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "Bundle "git://github.com/hrp/EnhancedCommentify.git"
 
 Bundle "git://github.com/thinca/vim-ref.git"
+Bundle "git://github.com/kchmck/vim-coffee-script.git"
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
@@ -324,3 +325,20 @@ let php_noShortTags = 1
 autocmd BufNewFile,BufRead *.ctp set filetype=php
 autocmd BufNewFile,BufRead *.cls set filetype=php
 autocmd BufNewFile,BufRead *.tpl set filetype=php
+
+
+"----------------------------------------------------
+"" バックアップ関係
+"----------------------------------------------------
+"" バックアップをとらない
+" set nobackup
+" ファイルの上書きの前にバックアップを作る
+" " (ただし、backup
+" がオンでない限り、バックアップは上書きに成功した後削除される)
+" set writebackup
+" " バックアップをとる場合
+" "set backup
+" " バックアップファイルを作るディレクトリ
+" "set backupdir=~/backup
+" " スワップファイルを作るディレクトリ
+" "set directory=~/swap

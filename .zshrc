@@ -263,6 +263,7 @@ export GEM_PATH=/usr/lib/ruby/gems/1.8
 export EDITOR=vi
 export SVN_EDITOR=vi
 
+export LD_LIBRARY_PATH=/usr/local/lib
 
 
 #---------------------------

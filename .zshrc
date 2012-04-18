@@ -136,6 +136,7 @@ esac
 alias la="ls -a"
 alias lf="ls -F"
 alias ll="ls -l"
+alias lla="ls -al"
 
 alias du="du -h"
 alias df="df -h"
@@ -318,3 +319,15 @@ alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
 
 ### RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+### rbenv
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+
+
+### for CakePHP
+export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
+

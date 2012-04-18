@@ -22,6 +22,8 @@ Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 Bundle "git://github.com/thinca/vim-ref.git"
 Bundle "git://github.com/kchmck/vim-coffee-script.git"
 
+Bundle "git://github.com/violetyk/cake.vim.git"
+
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
 "Bundle 'git-commit'
@@ -342,3 +344,22 @@ autocmd BufNewFile,BufRead *.tpl set filetype=php
 " "set backupdir=~/backup
 " " スワップファイルを作るディレクトリ
 " "set directory=~/swap
+"
+
+"------------------------------------
+" cake.vim
+"------------------------------------
+let g:cakephp_enable_auto_mode = 1
+
+nnoremap <Space>cc :<C-u>Ccontrollertab
+nnoremap <Space>cm :<C-u>Cmodeltab
+nnoremap <Space>cv :<C-u>Cviewtab
+nnoremap <Space>cl :<C-u>Clog
+nnoremap <Space>ccv :<C-u>Ccontrollerviewtab
+nnoremap <Space>ccm :<C-u>Ccomponenttab
+nnoremap <Space>ccf :<C-u>Cconfigtab
+nnoremap <Space>cb :<C-u>Cbehaviortab
+nnoremap <Space>ch :<C-u>Chelpertab
+nnoremap <Space>ct :<C-u>Ctesttab
+nnoremap <Space>cf :<C-u>Cfixturetab
+nnoremap <Space>cs :<C-u>Cshelltab

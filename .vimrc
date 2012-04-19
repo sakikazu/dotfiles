@@ -231,6 +231,7 @@ augroup MyAutoCmd
   autocmd BufRead,BufNewFile *_spec.rb set filetype=ruby.rspec
 
 " memo ここが有効だと、カッコにカーソルが乗ると勝手に移動してしまってた
+" ★ これ、<space>をマッピングしてるからや！！右移動をスペースでなく、lにすれば解決する
   " autocmd FileType ruby.rspec nnoremap <silent> <space>rc :QuickRun -cmdopt "-cfn -l %{line('.')}"<CR>
   " autocmd FileType cucumber nnoremap <silent> <space>rc :QuickRun -cmdopt "-f pretty -l %{line('.')}"<CR>
   " autocmd FileType ruby.rspec,cucumber nnoremap <silent> <space>rf :QuickRun<CR>

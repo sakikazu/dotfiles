@@ -160,6 +160,9 @@ nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
 
+" vim-ref
+nnoremap <Leader>a :Ref alc<space>
+
 " --------------------------------------------------------------
 " rails.vim configuration
 " --------------------------------------------------------------
@@ -352,15 +355,15 @@ autocmd BufNewFile,BufRead *.tpl set filetype=php
 "------------------------------------
 let g:cakephp_enable_auto_mode = 1
 
-nnoremap <Space>cc :<C-u>Ccontrollertab
-nnoremap <Space>cm :<C-u>Cmodeltab
-nnoremap <Space>cv :<C-u>Cviewtab
-nnoremap <Space>cl :<C-u>Clog
-nnoremap <Space>ccv :<C-u>Ccontrollerviewtab
-nnoremap <Space>ccm :<C-u>Ccomponenttab
-nnoremap <Space>ccf :<C-u>Cconfigtab
-nnoremap <Space>cb :<C-u>Cbehaviortab
-nnoremap <Space>ch :<C-u>Chelpertab
-nnoremap <Space>ct :<C-u>Ctesttab
-nnoremap <Space>cf :<C-u>Cfixturetab
-nnoremap <Space>cs :<C-u>Cshelltab
+nnoremap <Space>cc :<C-u>Ccontrollertab<space>
+nnoremap <Space>cm :<C-u>Cmodeltab<space>
+nnoremap <Space>cv :<C-u>Cviewtab<space>
+nnoremap <Space>cl :<C-u>Clog<space>
+nnoremap <Space>ccv :<C-u>Ccontrollerviewtab<space>
+nnoremap <Space>ccm :<C-u>Ccomponenttab<space>
+nnoremap <Space>ccf :<C-u>Cconfigtab<space>
+nnoremap <Space>cb :<C-u>Cbehaviortab<space>
+nnoremap <Space>ch :<C-u>Chelpertab<space>
+nnoremap <Space>ct :<C-u>Ctesttab<space>
+nnoremap <Space>cf :<C-u>Cfixturetab<space>
+nnoremap <Space>cs :<C-u>Cshelltab<space>

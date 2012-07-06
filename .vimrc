@@ -23,6 +23,8 @@ Bundle "git://github.com/thinca/vim-ref.git"
 Bundle "git://github.com/kchmck/vim-coffee-script.git"
 
 Bundle "git://github.com/violetyk/cake.vim.git"
+" Bundle "git://github.com/jpo/vim-railscasts-theme.git"
+Bundle "git://github.com/scrooloose/nerdtree.git"
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
@@ -72,14 +74,27 @@ syntax enable
 " colorscheme xoria256
 " hi Pmenu ctermbg=4
 
+" バックグラウンドカラーが黒いままだからか見づらい。
+" colorscheme railscasts
+
 set ambiwidth=double
 set autoread
 set hidden  " バッファを切替えてもundoの効力を失わない
+
+" コマンドライン補完を便利に
+set wildmenu
+
+" タイプ途中のコマンドを画面最下行に表示
+set showcmd
+
+
 set number
 set showmatch " 入力時の括弧で対応する括弧をハイライト
 set ttymouse=xterm2
 set wildmode=longest:list
 set nocompatible
+" 無効にする）マウス選択でコピーできていたのができなくなってしまったので
+"set mouse=a " 全モードでマウスを有効化
 
 set directory-=.
 
@@ -99,12 +114,13 @@ set ts=2 sw=2 sts=2
 
 "search
 set hlsearch
+" 検索時に大文字・小文字を区別しない。ただし、検索語に大文字小文字が混在しているときは区別する
 set ignorecase
 set smartcase
 set incsearch
 
 "statusline
-set laststatus=2
+set laststatus=2 " ステータスラインを常に表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%l,%c%v%8p
 
 " keymap
@@ -134,6 +150,8 @@ function! s:HighlightSpaces()
   match WideSpace /　/
   match EOLSpace /\s\+$/
 endf
+
+
 
 " clipboard
 set clipboard+=unnamed
@@ -255,6 +273,9 @@ augroup END
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
 hi TabLineSel  term=bold cterm=bold,underline ctermfg=5
 hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
+
+" ペースト時に前行のコメントアウトが引き継がれてしまう件の対処
+autocmd FileType * set formatoptions-=ro
 
 
 " coniguration for vim-ruby auto ditect .rb file syntax

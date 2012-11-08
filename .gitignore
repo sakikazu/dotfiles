@@ -23,3 +23,6 @@
 
 # 再び無視
 /.vim/.netrwhist
+
+# ServersmanでのNginxのConfigファイル（Unicorn使用）
+!/nginx.conf

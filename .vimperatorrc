@@ -1,0 +1,22 @@
+"3.5 (created: 2012/08/04 00:41:20)
+
+source! /home/sakikazu/.vimperatorrc.local
+
+" vim: set ft=vimperator:
+
+"はてなブックマークの plugin を使う設定(はてブアドオンに同梱) ★これを先に実行しないと、「gui」や「complete」のはてなオプションが使えない
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+
+set gui=addons,bookmarks,nomenu,navigation,tabs,nohatehaBookmarks
+set complete=sltH
+
+
+cmap <C-j> <Tab>
+cmap <C-k> <S-Tab>
+map j 5<C-e>
+map k 5<C-y>
+
+set titlestring=Firefox
+
+" コマンドモードでIMEをOFFにする
+let g:imeoff='cmd'

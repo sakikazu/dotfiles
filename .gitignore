@@ -18,5 +18,8 @@
 !/.gitmodules
 !/readme.txt
 
+!/.vimperatorrc
+!/.vimperator
+
 # 再び無視
 /.vim/.netrwhist

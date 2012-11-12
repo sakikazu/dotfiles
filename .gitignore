@@ -20,6 +20,9 @@
 
 !/.vimperatorrc
 !/.vimperator
+/.vimperator/info
+
+!/tools
 
 # 再び無視
 /.vim/.netrwhist

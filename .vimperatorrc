@@ -7,6 +7,22 @@ source! /home/sakikazu/.vimperatorrc.local
 "はてなブックマークの plugin を使う設定(はてブアドオンに同梱) ★これを先に実行しないと、「gui」や「complete」のはてなオプションが使えない
 javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 
+
+"-------------------------------------------
+" 操作メモ
+"-------------------------------------------
+" ### bしてTab/C-Tabで移動してEnterの操作がやりやすいな
+" ### Bして番号を確認、{count}bで移動もいい
+
+" :buffer! # 前に選択していたタブに切り替え
+" :buffer! vimp 現在のタブから順に"vmip"を検索してマッチしたらそのタブに切替
+" g^ 左端に切り替え
+" g$ 右端に切り替え
+" C-n/C-p 左/右のタブに切替
+" C-^ 前に選択していたタブに切替
+
+
+
 set gui=addons,bookmarks,nomenu,navigation,tabs,nohatehaBookmarks
 set complete=sltH
 
@@ -20,3 +36,7 @@ set titlestring=Firefox
 
 " コマンドモードでIMEをOFFにする
 let g:imeoff='cmd'
+
+" はてなブックマーク拡張との連携
+javascript if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+

@@ -1,30 +1,41 @@
 " --------------------------------------------------------------
 " 参考）https://github.com/kenchan/dotfiles/blob/master/dot.vimrc
 " --------------------------------------------------------------
+
 set nocompatible
 filetype off
-set rtp+=~/.vim/vundle.git
-call vundle#rc()
 
-Bundle "git://github.com/tpope/vim-rails.git"
-Bundle "git://github.com/vim-scripts/yanktmp.vim.git"
-"Bundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
-Bundle "git://github.com/scrooloose/nerdcommenter.git"
-Bundle "git://github.com/Shougo/unite.vim.git"
-Bundle "git://github.com/vim-scripts/surround.vim.git"
-Bundle "git://github.com/chrismetcalf/vim-yankring.git"
-Bundle "git://github.com/Shougo/vimshell.git"
-Bundle "git://github.com/vim-scripts/grep.vim.git"
-Bundle "git://github.com/thinca/vim-quickrun.git"
-Bundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
-"Bundle "git://github.com/hrp/EnhancedCommentify.git"
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+  call neobundle#rc(expand('~/.vim/bundle'))
+endif
 
-Bundle "git://github.com/thinca/vim-ref.git"
-Bundle "git://github.com/kchmck/vim-coffee-script.git"
+NeoBundle "Shougo/neobundle.vim"
+NeoBundle 'Shougo/unite.vim'
+NeoBundle "Shougo/vimshell.vim"
+NeoBundle "Shougo/neocomplcache.vim"
+NeoBundle 'Shougo/vimfiler.vim'
+NeoBundle 'Shougo/vimproc.vim'
 
-Bundle "git://github.com/violetyk/cake.vim.git"
-" Bundle "git://github.com/jpo/vim-railscasts-theme.git"
-Bundle "git://github.com/scrooloose/nerdtree.git"
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'tpope/vim-rails'
+
+NeoBundle "scrooloose/nerdcommenter"
+NeoBundle "vim-scripts/surround.vim"
+NeoBundle "vim-scripts/yanktmp.vim"
+NeoBundle "vim-scripts/grep.vim"
+"NeoBundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
+" NeoBundle "git://github.com/tpope/vim-surround.git"
+NeoBundle "git://github.com/chrismetcalf/vim-yankring.git"
+NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
+"NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
+
+NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
+
+NeoBundle "git://github.com/violetyk/cake.vim.git"
+" NeoBundle "git://github.com/jpo/vim-railscasts-theme.git"
+NeoBundle "git://github.com/scrooloose/nerdtree.git"
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
@@ -48,7 +59,6 @@ Bundle "git://github.com/scrooloose/nerdtree.git"
 "Bundle 'kana/vim-textobj-indent'
 "Bundle 'kana/vim-textobj-lastpat'
 "
-Bundle 'git://github.com/Shougo/neocomplcache.git'
 "Bundle 'Shougo/vimfiler'
 "Bundle 'Shougo/vimproc'
 "

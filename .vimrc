@@ -20,27 +20,28 @@ NeoBundle 'Shougo/vimproc.vim'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'tpope/vim-rails'
+NeoBundle "vim-scripts/ruby-matchit"
 
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "vim-scripts/surround.vim"
-NeoBundle "vim-scripts/yanktmp.vim"
+" NeoBundle "vim-scripts/yanktmp.vim"
 NeoBundle "vim-scripts/grep.vim"
 "NeoBundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
 " NeoBundle "git://github.com/tpope/vim-surround.git"
-NeoBundle "git://github.com/chrismetcalf/vim-yankring.git"
+" NeoBundle "git://github.com/chrismetcalf/vim-yankring.git"
 NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
 NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 
-NeoBundle "git://github.com/violetyk/cake.vim.git"
+" NeoBundle "git://github.com/violetyk/cake.vim.git"
 " NeoBundle "git://github.com/jpo/vim-railscasts-theme.git"
 NeoBundle "git://github.com/scrooloose/nerdtree.git"
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
 "Bundle 'git-commit'
-"Bundle 'YankRing.vim'
+NeoBundle 'YankRing.vim'
 "Bundle 'EasyMotion'
 "Bundle 'vimwiki'
 "Bundle 'Rename'

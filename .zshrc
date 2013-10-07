@@ -251,6 +251,7 @@ alias ssh_sp2='ssh -p 10022 192.168.105.12 -l kazutaka_sakimura'
 alias ssh_ads_xen='ssh drecom-adfit@192.168.10.198'
 alias s='source'
 alias adserv='ruby ~/ad4u/adfit/script/server'
+alias llr='ls -ltr'
 
 export JAVA_HOME=/usr/local/jdk1.6.0_11/
 export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin

@@ -326,7 +326,9 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 
 ### for CakePHP
-export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
+#export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
+## ★ 見せしめに残しておくか。↑はSM以外のサーバーの設定だったが、SMでこれが効くと、ログインできなくなってしまってた。suになって、su -f sakikazuとすることでログインできた・・
+## telnetでもConnection Refusedとかなってたしなぁ
 
 ### RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

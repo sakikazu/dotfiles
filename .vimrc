@@ -18,9 +18,6 @@ NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc.vim'
 
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'tpope/vim-rails'
-NeoBundle "vim-scripts/ruby-matchit"
 
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "vim-scripts/surround.vim"
@@ -37,11 +34,41 @@ NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
 " NeoBundle "git://github.com/jpo/vim-railscasts-theme.git"
 NeoBundle "git://github.com/scrooloose/nerdtree.git"
+NeoBundle 'YankRing.vim'
+
+
+" --------------------------------------------------------------
+" 2013-10-07 add
+" via: http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
+" --------------------------------------------------------------
+
+" ### alpaca_tags　　　ctagsの非同期生成
+NeoBundleLazy 'alpaca-tc/alpaca_tags', {
+      \ 'depends': 'Shougo/vimproc',
+      \ 'autoload' : {
+      \   'commands': ['TagsUpdate', 'TagsSet', 'TagsBundle']
+      \ }}
+" ### neosnippet　　　Rails/sinatra/rspec等の補完
+NeoBundle 'Shougo/neosnippet'
+" ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
+NeoBundle 'AndrewRadev/switch.vim'
+" ### rubocop　　　　文法エラー、スタイルチェック
+" ### vim-rails　　　　Railsプロジェクト用プラグイン
+NeoBundle 'tpope/vim-rails'
+" ### unite-rails　　　　Railsプロジェクト用Unite-source
+NeoBundle 'basyura/unite-rails'
+" ### vim-endwise　　　if...endなど対応するキーワードの自動補完
+NeoBundle 'tpope/vim-endwise'
+" ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
+NeoBundle "vim-scripts/ruby-matchit"
+" ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'taka84u9/vim-ref-ri'
+
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
 "Bundle 'git-commit'
-NeoBundle 'YankRing.vim'
 "Bundle 'EasyMotion'
 "Bundle 'vimwiki'
 "Bundle 'Rename'
@@ -61,21 +88,19 @@ NeoBundle 'YankRing.vim'
 "Bundle 'kana/vim-textobj-lastpat'
 "
 "Bundle 'Shougo/vimfiler'
-"Bundle 'Shougo/vimproc'
 "
 "Bundle 'h1mesuke/vim-alignta'
 "Bundle 'h1mesuke/unite-outline'
 "
 "Bundle 'thinca/vim-quickrun'
 "
-"Bundle 'tpope/vim-rails'
 "Bundle 'tpope/vim-cucumber'
-"Bundle 'tpope/vim-endwise'
 "Bundle 'tpope/vim-surround'
 "Bundle 'tpope/vim-fugitive'
 "
 "Bundle 'kenchan/vim-ruby-refactoring'
 "Bundle 'nelstrom/vim-textobj-rubyblock'
+
 
 filetype plugin indent on
 syntax enable

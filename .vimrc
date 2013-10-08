@@ -15,7 +15,13 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle "Shougo/vimshell.vim"
 NeoBundle "Shougo/neocomplcache.vim"
 NeoBundle 'Shougo/vimfiler.vim'
-NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
+
 
 NeoBundle 'thinca/vim-quickrun'
 
@@ -48,6 +54,17 @@ NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ 'autoload' : {
       \   'commands': ['TagsUpdate', 'TagsSet', 'TagsBundle']
       \ }}
+NeoBundleLazy 'tsukkee/unite-tag', {
+      \ 'depends' : ['Shougo/unite.vim'],
+      \ 'autoload' : {
+      \   'unite_sources' : ['tag', 'tag/file', 'tag/include']
+      \ }}
+NeoBundleLazy 'alpaca-tc/neorspec.vim', {
+      \ 'depends' : ['alpaca-tc/vim-rails', 'tpope/vim-dispatch'],
+      \ 'autoload' : {
+      \   'commands' : ['RSpec', 'RSpecAll', 'RSpecCurrent', 'RSpecNearest', 'RSpecRetry']
+      \ }}
+
 " ### neosnippet　　　Rails/sinatra/rspec等の補完
 NeoBundle 'Shougo/neosnippet'
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
@@ -213,6 +230,7 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
+nnoremap <silent> ,ut :<C-u>Unite tag<CR>
 
 " vim-ref
 nnoremap <Leader>a :Ref alc<space>
@@ -242,6 +260,15 @@ map <Leader>x, c<space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
 
+augroup AlpacaTags
+  autocmd!
+  if exists(':Tags')
+    autocmd BufWritePost Gemfile TagsBundle
+    autocmd BufEnter * TagsSet
+    " 毎回保存と同時更新する場合はコメントを外す
+    " autocmd BufWritePost * TagsUpdate
+  endif
+augroup END
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
@@ -424,3 +451,12 @@ nnoremap <Space>ch :<C-u>Chelpertab<space>
 nnoremap <Space>ct :<C-u>Ctesttab<space>
 nnoremap <Space>cf :<C-u>Cfixturetab<space>
 nnoremap <Space>cs :<C-u>Cshelltab<space>
+
+
+"------------------------------------
+" for mac
+" ※この行をコピペしたらうまくできないよ。ちゃんと↓のページにある通りやって
+" http://d.hatena.ne.jp/esf/20100720/1279585601
+"------------------------------------
+noremap!  
+

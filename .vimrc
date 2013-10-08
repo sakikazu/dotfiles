@@ -14,6 +14,7 @@ NeoBundle "Shougo/neobundle.vim"
 NeoBundle 'Shougo/unite.vim'
 NeoBundle "Shougo/vimshell.vim"
 NeoBundle "Shougo/neocomplcache.vim"
+" ### vimfiler: Explorer
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc', {
   \ 'build' : {
@@ -82,6 +83,26 @@ NeoBundle "vim-scripts/ruby-matchit"
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'taka84u9/vim-ref-ri'
 
+" ### unite-outline: いろんな言語のソースのアウトラインを表示
+NeoBundle 'h1mesuke/unite-outline'
+NeoBundle 'tsukkee/unite-help'
+
+
+" ### colorschemes
+" memo とりあえずTeraTerm使ってるとこじゃ良い感じにならないので現在無効
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'baskerville/bubblegum'
+NeoBundle 'nanotech/jellybeans.vim'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'vim-scripts/twilight'
+NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'jpo/vim-railscasts-theme'
+
+" ### for gitv
+NeoBundle 'gregsexton/gitv'
+NeoBundle 'tpope/vim-fugitive'
+
+
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'
@@ -97,23 +118,16 @@ NeoBundle 'taka84u9/vim-ref-ri'
 "
 "Bundle 'vim-ruby/vim-ruby'
 "
-"Bundle 'tsukkee/unite-help'
 "
 "Bundle 'kana/vim-textobj-user'
 "Bundle 'kana/vim-textobj-fold'
 "Bundle 'kana/vim-textobj-indent'
 "Bundle 'kana/vim-textobj-lastpat'
 "
-"Bundle 'Shougo/vimfiler'
-"
 "Bundle 'h1mesuke/vim-alignta'
-"Bundle 'h1mesuke/unite-outline'
-"
-"Bundle 'thinca/vim-quickrun'
 "
 "Bundle 'tpope/vim-cucumber'
 "Bundle 'tpope/vim-surround'
-"Bundle 'tpope/vim-fugitive'
 "
 "Bundle 'kenchan/vim-ruby-refactoring'
 "Bundle 'nelstrom/vim-textobj-rubyblock'
@@ -122,13 +136,23 @@ NeoBundle 'taka84u9/vim-ref-ri'
 filetype plugin indent on
 syntax enable
 
-" set t_Co=256
-" set background=dark
-" colorscheme xoria256
-" hi Pmenu ctermbg=4
 
-" バックグラウンドカラーが黒いままだからか見づらい。
-" colorscheme railscasts
+" augroup init (from tyru's vimrc)
+augroup vimrc
+  autocmd!
+augroup END
+
+command!
+  \ -bang -nargs=*
+  \ MyAutocmd
+  \ autocmd<bang> vimrc <args>
+
+" 編集中の行に下線を引く
+MyAutocmd InsertLeave * setlocal nocursorline
+MyAutocmd InsertEnter * setlocal cursorline
+MyAutocmd InsertLeave * highlight StatusLine ctermfg=145 guifg=#c2bfa5 guibg=#000000
+MyAutocmd InsertEnter * highlight StatusLine ctermfg=12 guifg=#1E90FF
+
 
 set ambiwidth=double
 set autoread
@@ -140,8 +164,12 @@ set wildmenu
 " タイプ途中のコマンドを画面最下行に表示
 set showcmd
 
+set bs=indent,eol,start     " allow backspacing over everything in insert mode
+set ai                      " always set autoindenting on
+set history=100
 
 set number
+set ruler
 set showmatch " 入力時の括弧で対応する括弧をハイライト
 set ttymouse=xterm2
 set wildmode=longest:list
@@ -153,6 +181,7 @@ set directory-=.
 
 "backup
 set nobackup
+set noswapfile
 
 "encoding
 set enc=utf-8
@@ -231,6 +260,8 @@ nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
 nnoremap <silent> ,ut :<C-u>Unite tag<CR>
+" memo find file
+nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 
 " vim-ref
 nnoremap <Leader>a :Ref alc<space>
@@ -328,6 +359,26 @@ augroup END
 
 
 " ---------------------------------------
+" Gitv Setting
+" ---------------------------------------
+" 勝手にFoldingされてしまう問題？を防ぐ
+autocmd FileType git :setlocal foldlevel=99
+
+" t で折りたたみか詳細表示かをトグル
+autocmd FileType git setlocal nofoldenable foldlevel=0
+function! s:toggle_git_folding()
+  if &filetype ==# 'git'
+    setlocal foldenable!
+  endif
+endfunction
+
+autocmd FileType gitv call s:my_gitv_settings()
+function! s:my_gitv_settings()
+  nnoremap <silent><buffer> t :<C-u>windo call <SID>toggle_git_folding()<CR>1<C-w>w
+endfunction
+
+
+" ---------------------------------------
 " sakikazu setting
 " ---------------------------------------
 " memo set pasteがあると、NeoCompleteCacheが動作しなかった。しかも、これあると自動インデントされるようになるけど、逆にその方がいいことに気づいた…。
@@ -339,6 +390,7 @@ hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 
 " ペースト時に前行のコメントアウトが引き継がれてしまう件の対処
 autocmd FileType * set formatoptions-=ro
+
 
 
 " coniguration for vim-ruby auto ditect .rb file syntax

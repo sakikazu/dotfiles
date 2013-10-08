@@ -17,6 +17,7 @@
 !/.gitconfig
 !/.gitmodules
 !/readme.txt
+!/.ctags
 
 !/.vimperatorrc
 !/.vimperator

@@ -184,6 +184,8 @@ set nobackup
 set noswapfile
 
 "encoding
+" memo
+" これはファイル新規作成のときに有効になるんだな。既存ファイルのを変更するには、そのファイルを開いた状態で、このsetをやって保存しないといけない
 set enc=utf-8
 set fenc=utf-8
 set fencs=utf-8,iso-2022-jp,euc-jp,cp932
@@ -356,6 +358,14 @@ augroup MyAutoCmd
 
 augroup END
 
+
+" ### Grep Setting
+" 引数-rnIHは再起、行数追加、バイナリファイルは除いてファイル名を表示
+set grepprg=grep\ -rnIH\ --exclude=.svn\ --exclude=.git
+
+" grep の書式を挿入
+" nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+nnoremap <expr> <Space>G ':sil grep! --include="*.' . expand('%:e') . '" '
 
 
 " ---------------------------------------

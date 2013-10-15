@@ -18,6 +18,7 @@
 !/.gitmodules
 !/readme.txt
 !/.ctags
+!/cheatsheet
 
 !/.vimperatorrc
 !/.vimperator

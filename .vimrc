@@ -50,6 +50,10 @@ NeoBundle 'YankRing.vim'
 " --------------------------------------------------------------
 
 " ### alpaca_tags　　　ctagsの非同期生成
+" memo !!!!!!!!!!
+" TagsUpdateはgit管理されているプロジェクトに対応しているが、逆に、されてないとエライことになる
+" 単純にカレントプロジェクト対象ってできないのかな？
+" tagファイルは、.git配下に作成される
 NeoBundleLazy 'alpaca-tc/alpaca_tags', {
       \ 'depends': 'Shougo/vimproc',
       \ 'autoload' : {
@@ -65,6 +69,7 @@ NeoBundleLazy 'alpaca-tc/neorspec.vim', {
       \ 'autoload' : {
       \   'commands' : ['RSpec', 'RSpecAll', 'RSpecCurrent', 'RSpecNearest', 'RSpecRetry']
       \ }}
+
 
 " ### neosnippet　　　Rails/sinatra/rspec等の補完
 NeoBundle 'Shougo/neosnippet'
@@ -102,6 +107,8 @@ NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'tpope/vim-fugitive'
 
+" memo perl関連かわからんが、まだ成功していない
+NeoBundle 'mattn/vdbi-vim'
 
 
 " まだ使いこなせないうちはコメントアウトにしとく
@@ -254,7 +261,16 @@ let g:neocomplcache_enable_camel_case_completion = 0
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
+
+"------------------------------------
 " unite.vim
+"------------------------------------
+
+" 候補を選択して <CR> すると新しいタブページでファイルを開く
+" memo デフォルトは現在のバッファ内。これやんなくても対象ファイル選択して「t」でいけるけど
+" todo てかこれコマンド・・どうやってここで設定するの～～～
+" :Unite file -default-action=tabopen
+
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
@@ -268,9 +284,9 @@ nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 " vim-ref
 nnoremap <Leader>a :Ref alc<space>
 
-" --------------------------------------------------------------
+"------------------------------------
 " rails.vim configuration
-" --------------------------------------------------------------
+"------------------------------------
 let g:rails_level=4
 let g:rails_default_file="app/controllers/application.rb"
 let g:rails_default_database="mysql"
@@ -292,6 +308,13 @@ let NERDSpaceDelims = 1
 map <Leader>x, c<space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
+
+
+" alpaca_tags
+let g:alpaca_tags_config = {
+      \ '_' : '-R --sort=yes --languages=-js,html,css',
+      \ 'ruby': '--languages=+Ruby',
+      \ }
 
 augroup AlpacaTags
   autocmd!
@@ -443,6 +466,8 @@ map t8 :tabn 8<cr>
 map t9 :tabn 9<cr>
 map t0 :tabn 10<cr>
 
+map tc :tabnew<space>~/dotfiles/cheatsheet/
+
 
 " バッファ関係
 " --------------------------------------------------------------
@@ -455,6 +480,19 @@ nmap bn :bn<CR>
 
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
+
+" 大幅横移動
+nmap <silent> <S-l> 15<right>
+vmap <silent> <S-l> <C-o>15<right>
+nmap <silent> <S-h> 15<left>
+vmap <silent> <S-h> <C-o>15<left>
+
+" S-Tabが効かないのでTabは却下
+" nmap <silent> <S-Tab> 15<left>
+" vmap <silent> <S-Tab> <C-o>15<left>
+" nmap <silent> <tab> 15<right>
+" vmap <silent> <tab> <C-o>15<right>
+
 
 " ---------------------------------------
 " 大仲さんのを一部
@@ -499,20 +537,20 @@ autocmd BufNewFile,BufRead *.tpl set filetype=php
 "------------------------------------
 " cake.vim
 "------------------------------------
-let g:cakephp_enable_auto_mode = 1
+" let g:cakephp_enable_auto_mode = 1
 
-nnoremap <Space>cc :<C-u>Ccontrollertab<space>
-nnoremap <Space>cm :<C-u>Cmodeltab<space>
-nnoremap <Space>cv :<C-u>Cviewtab<space>
-nnoremap <Space>cl :<C-u>Clog<space>
-nnoremap <Space>ccv :<C-u>Ccontrollerviewtab<space>
-nnoremap <Space>ccm :<C-u>Ccomponenttab<space>
-nnoremap <Space>ccf :<C-u>Cconfigtab<space>
-nnoremap <Space>cb :<C-u>Cbehaviortab<space>
-nnoremap <Space>ch :<C-u>Chelpertab<space>
-nnoremap <Space>ct :<C-u>Ctesttab<space>
-nnoremap <Space>cf :<C-u>Cfixturetab<space>
-nnoremap <Space>cs :<C-u>Cshelltab<space>
+" nnoremap <Space>cc :<C-u>Ccontrollertab<space>
+" nnoremap <Space>cm :<C-u>Cmodeltab<space>
+" nnoremap <Space>cv :<C-u>Cviewtab<space>
+" nnoremap <Space>cl :<C-u>Clog<space>
+" nnoremap <Space>ccv :<C-u>Ccontrollerviewtab<space>
+" nnoremap <Space>ccm :<C-u>Ccomponenttab<space>
+" nnoremap <Space>ccf :<C-u>Cconfigtab<space>
+" nnoremap <Space>cb :<C-u>Cbehaviortab<space>
+" nnoremap <Space>ch :<C-u>Chelpertab<space>
+" nnoremap <Space>ct :<C-u>Ctesttab<space>
+" nnoremap <Space>cf :<C-u>Cfixturetab<space>
+" nnoremap <Space>cs :<C-u>Cshelltab<space>
 
 
 "------------------------------------

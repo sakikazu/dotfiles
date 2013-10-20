@@ -1,0 +1,282 @@
+
+### question
+
+* 今一番わかってないのは、push後にrebaseしてもいいのか悪いのかってこと。実質できてるし、ダメってあるサイトと普通にやってるサイトがあって混乱
+
+
+* 他リポジトリで更新されたfeatureブランチを、現在のリポジトリのmasterにmergeしたい場合、まずはfetch、そして当リポジトリのfeatureにmerge？それを今度はmasterにmerge？なんか違うよな・・
+ -> まずはgit pull origin featureでこのブランチを更新するのがいいな。その後、masterに移動してmergeか。
+
+# 多分これで合ってる
+* まず現状把握
+ git show-branch -a --more = 5
+* 他リポジトリで更新されたfeatureを、当リポジトリのfeatureにpullする。masterに切り替え、masterも最新にするためpullしとく。そして、「git log master..feature2」やdiffで確認して、mergeする。
+
+?? これだとfetchして確認してmergeという動作がないけど、、うーん、いきなりmasterに、origin/featureを入れるのか？普通にやったら入らなかったが
+ -> featureの方は更新せずとも、masterでこれやればoriginのが入るかな -> git merge feature2 FETCH_HEAD
+
+
+### Training
+
+# [situation] master->feature1->feature2ととうブランチがある。枝分かれ後、他のリポジトリでmasterが更新されている。そこで、feature2を、1を取り除いて、masterの最新に追従する
+
+!!! ここでのrebaseはちょっと待った、です（下記参照）
+
+# First, update master(or develop)
+$ git pull origin master
+# First, confirm now condition
+$ git show-branch -a --more=5
+# follow master
+$ git rebase master
+# remove feature1 from feature2
+$ git rebase --onto master feature1 feature2
+# Last, confirm again
+$ git show-branch -a --more=5
+
+# [memo] 自分のところのmaster（通常はdevelopかな）は、いつも最新にしておき、新しいブランチを切るときはそこから、って運用になるはず。pushsするのはあくまでそのブランチが対象(masterにmergeしてからそのmasterをpushとかはしない)
+
+
+### リモートのmasterでの更新をローカルのmasterが追従
+-> イコール、同じブランチなら、同様にpull --rebaseでいいってことね
+
+# 普通のpullならマージコミットができることもあるからかな。てーーかっ！何、これはrebaseアリなの？
+$ git pull --rebase
+
+### あるブランチで最新のmasterに追従
+
+* 基本は, git merge master
+* そのブランチをまだpushしてなかったら, git rebase master
+
+-> pushしてたらそもそもrebaseできなくなる
+-> Githubなどプルリクエストを送る際にはrebaseしてから送るのがマナー
+-> rebaseの方がmergeよりコミットグラフは綺麗になるが、デメリットを把握した上で行うこと
+
+!!! でも、ここのStudy環境では、push後にrebase普通にできてるんだよなぁ。その後のpushも
+
+
+
+
+### 空ディレクトリの登録
+$ mkdir emptydir
+$ touch emptydir/.gitkeep
+$ git add emptydir
+
+
+### 誤ってrmした場合
+$ git checkout HEAD text.txt
+
+
+### ファイルを作業ツリーに残したままバージョン管理から外す
+$ git rm --cached \*.class
+
+
+### リポジトリからファイルを完全削除する
+-> これってrebaseでもできなかったけ？
+
+# cdrom.isoの場合
+$ git filter-branch --tree-filter 'git rm --ignore-unmatch cdrom.iso' --prune-empty -- --all
+# *.oファイルの場合
+$ git filter-branch --tree-filter 'git rm --ignore-unmatch "*.o"' --prune-empty -- --all
+
+# 実はこれでもreflogとかで残ってる
+# 下記はreflogが削除されるタイミングを今にして、gcを実行するってことやな
+$ git reflog expire -expire=now --all
+$ git gc -prune=now
+$ git gc --aggressive -prune=now
+
+
+### clone
+
+# 下記のようにやるだけでブランチも全部入ってるので、任意のブランチをcheckout可能
+git clone ../origin_repo/project.git project2
+git checkout origin/feature2
+
+!!! 注意出てた。「You are in 'detached HEAD' state.」そんでブランチが(no branch)となっていた。
+案内に従い、「git checkout -b feature2」をやった。このワーニングってなんだったけ？ todo
+!! masterができてなかった。最初のリポジトリでmasterをpushしてなかったのが原因かな。pushしてcheckoutして大丈夫そうだった
+
+-> うーん、show-branchで見ると、「origin/feature2」とかが増えてて変な感じになった。できるだけおこらないようにしよう
+
+
+### statusでブランチ名も表示
+$ git status -b
+
+
+### git log
+$ git log --oneline --graph
+# todo グラフの見方を覚えたい -> show-branchでOKじゃない？
+
+
+### git fetch : すべてのブランチの追跡ブランチが更新される
+
+# fetchして内容確認してmergeの手順
+
+$ git fetch origin
+$ git log HEAD..FETCH_HEAD
+$ git diff HEAD..FETCH_HEAD
+$ git merge FETCH_HEAD
+
+!! ここ、HEADを指定しなけりゃ、作業ツリーとの差分になるはず
+
+
+### reset : インデックスやコミットを削除する。addと対になるもの
+
+# 直前コミットの一つ前までリポジトリ、作業ファイルを戻す
+$ git reset --hard HEAD^
+-> 直前のコミット後、作業ツリーでぐちゃぐちゃやってたとして、それをなしにしたいのなら、--hard HEADにして、直前のコミット時状態に戻すってやるけど
+
+# 直前のコミットを削除する。作業ツリーの内容は、直前のコミットの内容＋現在編集中のもの、となる。結局作業ツリーには影響しないってこと！
+$ git reset HEAD^
+
+
+### revert: コミットを取り消す内容のコミットを作成する
+
+# resetではなくrevertを使うべき状況
+* 取り消したいコミットが直前のものでない
+* 取り消したいコミットがリモートリポジトリに公開済みである
+
+
+# todo マージコミットの取り消しなど、実際にやってから追記
+
+
+### git push
+
+# 基本的に、originとブランチ名はつけた方がいいな。-uして省略してしまわずに。
+$ git push origin new-feature
+
+# todo リモートブランチを削除。なぜする必要がある？
+$ git push --delete origin new-feature
+
+
+### git remote
+
+# リモート名gitbookで登録
+$ git remote add gitbook https://----/git/gitbook
+# リモートリポジトリのブランチを取得
+$ git remote update gitbook
+# 取得してきたブランチを確認
+$ git branch -a
+
+
+# リモート名と登録リモートリポジトリの確認
+$ git remote -v
+# gitbookという名前で、fetch、pull、pushがこのURLに対して可能
+>> gitbook https://-------
+
+
+### branch
+
+# ローカルブランチとリモート追跡ブランチを表示する
+$ git branch -a
+
+# ブランチ名変更
+$ git branch -m [<oldbranch>] <newbranch>
+
+# まだmergeされていないブランチを表示
+$ git branch --no-merged
+
+# merge済みのブランチを表示
+$ git branch --merged
+
+# ブランチ削除。マージされていないものはエラーになる
+$ git branch -d topic
+-> 通常、mergeし終わったbranchはすぐ削除する
+
+# ブランチ作成してそれに切り替えるのを一発で
+$ git checkout -b topic
+
+
+### show-branch
+
+# すべてのブランチの状態を見る
+$ git show-branch -a --more=10
+
+
+### merge
+
+# マージコミットを一つにまとめる
+$ git merge --squash
+
+# マージコミットありでtopicブランチをマージする
+# --logによって、各コミットの1行目をマージコミットに含める。オススメ！
+$ git merge --no-ff --log topic
+
+# mergeをやり直す
+$ git merge --abort
+
+
+### rebase
+
+* 分岐元を変更する。分岐元の最新から分岐したように見せるために使われる
+* コミットの整理をする。共有リポジトリに公開する前に使われる
+ -> てことは逆に公開後は使っちゃダメって言ってる？
+
+!![memo] 上記2つとも、この用途に使われるな -> mergeによるコンフリクトは、トピックブランチ側で解決するということ
+
+
+# インタラクティブに履歴編集。指定したコミット以降が対象となる
+$ git rebase -i <commit>
+pick: そのままコミット残す
+reword: コミットメッセージを変更
+edit: コミットの内容変更
+squash: 直前のpickに、コミットメッセージとともに統合
+fixup: 直前のpickに統合。コミットメッセージは破棄。「タイポ」とか取るに足らんメッセージならこれで。
+
+# rebase作業中のコマンド
+$ git rebase --continue / --skip / --abort
+!! --skipしたコミットは適用されない
+
+
+# masterブランチの最新のコミットをnew-featureの分岐点とする
+$ git rebase master [new-feature]
+
+# 競合が発生！
+修正してcommitして、
+$ git rebase --continue
+
+
+# master->new-feature1->new-feature2と作成された場合、
+# new-feature2を、new-feature1をスルーして、masterから分岐したことにする
+$ git rebase --onto master new-feature1 new-feature2
+
+
+
+
+
+### reflog : リポジトリへの操作履歴。「なかったことにしたコミット」を復活させるのに使う
+
+# ここで何かしら失敗したので履歴確認
+$ git reflog
+# 履歴を元にコミットを復活
+$ git reset HEAD@{2}
+
+!!! git gcをするとこの履歴は削除される。あと30日経ったら自動で削除。
+
+
+### log
+
+# オプションがたくさんある〜〜
+$ git log
+
+
+### diff
+
+# HEADとインデックスとの差分
+$ git diff --cached
+
+# インデックスとかに関わらず、前回コミットからの差分
+$ git diff HEAD
+
+
+### 用語
+
+* HEAD: 現在作業しているブランチの最新
+* ORIGIN: clone元。リモートブランチでおｋ？
+* FETCH_HEAD: fetch後に作られる、リモート追跡ブランチってやつかな？
+* Fast-forwardマージ: マージコミットが作成されない。
+ - どっちがいいかはプロジェクトのタイプによる。個人でやるならすっきりさせたいので作らないのがいいわ
+* 機能ブランチ: 大きな機能。「feature/XXXXX」みたいな名前にする
+* トピックブランチ：小さな変更、バグ修正など。「bug/XXXX」
+
+
+

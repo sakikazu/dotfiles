@@ -1,0 +1,38 @@
+### Firewall
+
+Ubuntuではufwってコマンドを使う
+
+$ sudo apt-get install ufw
+
+$ sudo ufw status
+
+# まずすべてを拒否
+$ sudo ufw default deny
+
+# 10080を通す
+$ sudo ufw allow 10080
+
+
+
+### IME、無変換、変換キーでIMEのオンオフ
+Mozcを使用
+上バーにある、IMEの設定で、IME変換ショートカットキーに無変換、変換を設定
+Mozcのキーを、Muhenkanってやつを、「入力文字なし」と「直接入力」のものからすべて削除する感じで。じゃないと競合しているのか、無変換キーで変に変わったりした。
+
+
+### コピペ問題
+
+端末ではCapsLk+Shift+C/Vでコピペ可能！！
+それ以外では普通に可能
+
+
+# 関係ないかな）キーボードタイプ？選んで？みた？
+/etc/default/keyboard
+->関係無いようだった
+
+
+
+### application
+
+* クリップボード拡張アプリは、「Clipit」でいいかな
+

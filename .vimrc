@@ -39,7 +39,6 @@ NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
-" NeoBundle "git://github.com/jpo/vim-railscasts-theme.git"
 NeoBundle "git://github.com/scrooloose/nerdtree.git"
 NeoBundle 'YankRing.vim'
 
@@ -70,20 +69,48 @@ NeoBundleLazy 'alpaca-tc/neorspec.vim', {
       \   'commands' : ['RSpec', 'RSpecAll', 'RSpecCurrent', 'RSpecNearest', 'RSpecRetry']
       \ }}
 
+" ### unite-rails　　　　Railsプロジェクト用Unite-source
+NeoBundleLazy 'basyura/unite-rails', {
+      \ 'depends' : 'Shougo/unite.vim',
+      \ 'autoload' : {
+      \   'unite_sources' : [
+      \     'rails/bundle', 'rails/bundled_gem', 'rails/config',
+      \     'rails/controller', 'rails/db', 'rails/destroy', 'rails/features',
+      \     'rails/gem', 'rails/gemfile', 'rails/generate', 'rails/git', 'rails/helper',
+      \     'rails/heroku', 'rails/initializer', 'rails/javascript', 'rails/lib', 'rails/log',
+      \     'rails/mailer', 'rails/model', 'rails/rake', 'rails/route', 'rails/schema', 'rails/spec',
+      \     'rails/stylesheet', 'rails/view'
+      \   ]
+      \ }}
 
 " ### neosnippet　　　Rails/sinatra/rspec等の補完
-NeoBundle 'Shougo/neosnippet'
+NeoBundleLazy 'Shougo/neosnippet', {
+      \ 'autoload' : {
+      \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
+      \   'filetypes' : 'snippet',
+      \   'insert' : 1,
+      \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
+      \ }}
+
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
 NeoBundle 'AndrewRadev/switch.vim'
 " ### rubocop　　　　文法エラー、スタイルチェック
+
 " ### vim-rails　　　　Railsプロジェクト用プラグイン
-NeoBundle 'tpope/vim-rails'
-" ### unite-rails　　　　Railsプロジェクト用Unite-source
-NeoBundle 'basyura/unite-rails'
+NeoBundle 'tpope/vim-rails', { 'autoload' : {
+      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
+
 " ### vim-endwise　　　if...endなど対応するキーワードの自動補完
-NeoBundle 'tpope/vim-endwise'
+NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
+      \ 'autoload' : {
+      \   'insert' : 1,
+      \ }}
+
 " ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
-NeoBundle "vim-scripts/ruby-matchit"
+NeoBundleLazy 'edsono/vim-matchit', { 'autoload' : {
+      \ 'filetypes': 'ruby',
+      \ 'mappings' : ['nx', '%'] }}
+
 " ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'taka84u9/vim-ref-ri'
@@ -91,6 +118,9 @@ NeoBundle 'taka84u9/vim-ref-ri'
 " ### unite-outline: いろんな言語のソースのアウトラインを表示
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
+
+NeoBundleLazy 'kana/vim-smartchr', '', 'loadInsert'
+
 
 
 " ### colorschemes
@@ -102,6 +132,9 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'jpo/vim-railscasts-theme'
+" Markdown(.md/.mkd) Syntax
+NeoBundle 'joker1007/vim-markdown-quote-syntax'
+
 
 " ### for gitv
 NeoBundle 'gregsexton/gitv'
@@ -262,6 +295,15 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
 
+" Smartchr
+inoremap <expr> = smartchr#loop(' = ', ' == ', '=')
+inoremap <expr> , smartchr#one_of(', ', '->', ' => ')
+inoremap <expr> + smartchr#one_of(' + ', '++', '+')
+inoremap <expr> - smartchr#one_of(' - ', '--', '-')
+" inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
+" inoremap <expr> ! smartchr#one_of('! ', ' != ', '!')
+
+
 "------------------------------------
 " unite.vim
 "------------------------------------
@@ -277,7 +319,8 @@ nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
 nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
-nnoremap <silent> ,ut :<C-u>Unite tag<CR>
+nnoremap <silent> ,ut :<C-u>Unite tab<CR>
+nnoremap <silent> ,ug :<C-u>Unite tag<CR>
 " memo find file
 nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 

@@ -37,9 +37,11 @@ esac
 
 
 
-# auto change directory
+# cdとlsの省略
 #
+# auto change directory
 setopt auto_cd
+function chpwd() { ls }
 
 # auto directory pushd that you can get dirs list by cd -[tab]
 #

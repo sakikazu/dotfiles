@@ -32,7 +32,6 @@ NeoBundle "vim-scripts/surround.vim"
 NeoBundle "vim-scripts/grep.vim"
 "NeoBundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
 " NeoBundle "git://github.com/tpope/vim-surround.git"
-" NeoBundle "git://github.com/chrismetcalf/vim-yankring.git"
 NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
@@ -40,7 +39,7 @@ NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
 NeoBundle "git://github.com/scrooloose/nerdtree.git"
-NeoBundle 'YankRing.vim'
+NeoBundle "vim-scripts/YankRing.vim"
 
 
 " --------------------------------------------------------------
@@ -119,7 +118,7 @@ NeoBundle 'taka84u9/vim-ref-ri'
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
 
-NeoBundleLazy 'kana/vim-smartchr', '', 'loadInsert'
+" NeoBundleLazy 'kana/vim-smartchr', '', 'loadInsert'
 
 
 
@@ -140,8 +139,11 @@ NeoBundle 'joker1007/vim-markdown-quote-syntax'
 NeoBundle 'gregsexton/gitv'
 NeoBundle 'tpope/vim-fugitive'
 
-" memo perl関連かわからんが、まだ成功していない
-NeoBundle 'mattn/vdbi-vim'
+" memo 履歴は見れるがC-rで補完とかできない。使えない(2013-10-23)
+" NeoBundle 'mattn/vdbi-vim'
+"" VDBI Usage
+" :VDBI
+" dbi:mysql:dbname=(db name)
 
 
 " まだ使いこなせないうちはコメントアウトにしとく
@@ -295,11 +297,12 @@ let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
 
 
+" memo 入力の邪魔になるだけだった・・
 " Smartchr
-inoremap <expr> = smartchr#loop(' = ', ' == ', '=')
-inoremap <expr> , smartchr#one_of(', ', '->', ' => ')
-inoremap <expr> + smartchr#one_of(' + ', '++', '+')
-inoremap <expr> - smartchr#one_of(' - ', '--', '-')
+" inoremap <expr> = smartchr#loop(' = ', ' == ', '=')
+" inoremap <expr> , smartchr#one_of(', ', '->', ' => ')
+" inoremap <expr> + smartchr#one_of(' + ', '++', '+')
+" inoremap <expr> - smartchr#one_of(' - ', '--', '-')
 " inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
 " inoremap <expr> ! smartchr#one_of('! ', ' != ', '!')
 
@@ -397,6 +400,7 @@ let g:quickrun_config = {
 \    'command' : 'cucumber',
 \  }
 \}
+
 
 augroup MyAutoCmd
   autocmd!

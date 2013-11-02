@@ -25,7 +25,8 @@ NeoBundle 'Shougo/vimproc', {
 
 
 NeoBundle 'thinca/vim-quickrun'
-
+NeoBundle 'glidenote/memolist.vim'
+NeoBundle 'fuenor/qfixgrep.git'
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "vim-scripts/surround.vim"
 " NeoBundle "vim-scripts/yanktmp.vim"
@@ -131,8 +132,9 @@ NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/twilight'
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'jpo/vim-railscasts-theme'
+" note: 俺の端末が変なせいか、変な色になる
 " Markdown(.md/.mkd) Syntax
-NeoBundle 'joker1007/vim-markdown-quote-syntax'
+" NeoBundle 'joker1007/vim-markdown-quote-syntax'
 
 
 " ### for gitv
@@ -176,7 +178,11 @@ NeoBundle 'tpope/vim-fugitive'
 
 
 filetype plugin indent on
+
+" color
 syntax enable
+" set background=dark
+" colorscheme solarized
 
 
 " augroup init (from tyru's vimrc)
@@ -305,6 +311,46 @@ let g:neocomplcache_min_syntax_length = 3
 " inoremap <expr> - smartchr#one_of(' - ', '--', '-')
 " inoremap <expr> / smartchr#one_of(' / ', '// ', '/')
 " inoremap <expr> ! smartchr#one_of('! ', ' != ', '!')
+
+
+"------------------------------------
+" memolist.vim
+"------------------------------------
+let g:memolist_path = "~/dotfiles/cheatsheet"
+
+nnoremap <Leader>mn  :MemoNew<CR>
+nnoremap <Leader>ml  :MemoList<CR>
+nnoremap <Leader>mg  :MemoGrep<CR>
+
+" suffix type (default markdown)
+let g:memolist_memo_suffix = "markdown"
+
+" date format (default %Y-%m-%d %H:%M)
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+
+" tags prompt (default 0)
+let g:memolist_prompt_tags = 1
+
+" categories prompt (default 0)
+let g:memolist_prompt_categories = 1
+
+" use qfixgrep (default 0)
+let g:memolist_qfixgrep = 1
+
+" use vimfler (default 0)
+let g:memolist_vimfiler = 1
+
+" remove filename prefix (default 0)
+let g:memolist_filename_prefix_none = 1
+
+" use unite (default 0)
+let g:memolist_unite = 1
+
+" use arbitrary unite source (default is 'file')
+let g:memolist_unite_source = "file_rec"
+
+" use arbitrary unite option (default is empty)
+let g:memolist_unite_option = "-auto-preview -start-insert"
 
 
 "------------------------------------

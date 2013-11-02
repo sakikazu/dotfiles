@@ -316,7 +316,7 @@ let g:neocomplcache_min_syntax_length = 3
 "------------------------------------
 " memolist.vim
 "------------------------------------
-let g:memolist_path = "~/dotfiles/cheatsheet"
+let g:memolist_path = "~/memo"
 
 nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>

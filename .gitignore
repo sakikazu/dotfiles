@@ -18,9 +18,6 @@
 !/.gitmodules
 !/readme.txt
 !/.ctags
-!/cheatsheet
-# ここには会社メモも置いてるので、無視したいものはig_を付加しておく
-/cheatsheet/ig_*
 
 !/.vimperatorrc
 /.vimperator

@@ -1,0 +1,86 @@
+!!! 一連を記述したcap関連ファイルもcheadsheetに入れること !!!
+
+### uncheck
+
+* https://github.com/capistrano/capistrano/blob/master/README.md
+* Capistrano::CLI.password_prompt("DB password: ")
+* sudo command
+* capture: roleの最初に指定されたサーバに対してコマンドを実行してその結果を返す
+* stream : 複数のサーバに対して継続的なアウトプットを得たい時。tail -fコマンドとか
+
+### 基本の流れ
+
+# Initial
+* cd (対象のプロジェクト)
+* cap install
+* deploy.rbなどを編集
+
+# Usually
+* cap -T
+* cap staging deploy:check
+* okなら、cap staging deploy
+
+
+### options
+
+# これは実際には処理を行わないやつだよな
+$ cap production deploy --dry-run
+$ cap production deploy --prereqs
+$ cap production deploy --trace
+
+
+### Bitbucketをリポジトリとしたとき ###
+
+* 鍵のペアを作る(作るときのサーバーはどこでもOK)
+* リポジトリに公開鍵を登録
+
+!! 注意 : よって、repo_urlは上のもので設定すべし
+# OK
+$ git clone git@bitbucket.org:sakikazu15/ruby_practice.git
+# NG
+$ git clone https://sakikazu15@bitbucket.org/sakikazu15/ruby_practice.git
+
+
+=== ポートフォワーディング:デプロイ元に鍵があればいいので楽だしセキュア ===
+
+* [ssh-agent]の項を設定
+* deploy/staging.rb
+-----------------------
+set :ssh_options, {
+  forward_agent: true,
+-----------------------
+
+
+=== デプロイ先に鍵を置くパターン : めんどくさい ===
+
+* デプロイ先に秘密鍵を置く(公開鍵はなくてもOK)
+* .ssh/configを設定(上2行だけでOKだった)
+-----------------------
+Host bitbucket.org
+  Hostname bitbucket.org
+  IdentityFile ~/.ssh/id_rsa_bitbucket
+  # User sakikazu15
+  # Port 22
+  # TCPKeepAlive yes
+  # PreferredAuthentications publickey
+  # IdentitiesOnly yes
+-----------------------
+
+
+### ssh-agent
+
+!! これは実行したその端末(tty単位)でしか有効にならない。これを実行した端末から、capコマンドを実行すること
+
+$ ssh-agent zsh
+$ ssh-add ~/.ssh/id_rsa_bitbucket
+Identity added: id_rsa_bitbucket (id_rsa_bitbucket)
+$ ssh-add -l
+2048 f1:3e:de:65:10:95:fb:dc:a8:0a:0f:14:e1:a8:33:cb id_rsa_bitbucket (RSA)
+
+
+
+### 単純にSSH接続テスト: パスフレーズなしの鍵が適切に設定されていればパスワードなしで通る
+
+$ ssh -T bitbucket.org
+
+

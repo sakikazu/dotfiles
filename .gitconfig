@@ -1,5 +1,10 @@
+[http]
+  sslVerify = false
+  #NeoVundleInstall時に「error: SSL certificate problem」というエラーになったための対処
 [user]
 	name = Kazutaka Sakimura
 	email = sakikazu15@gmail.com
 [color]
 	ui = auto
+[core]
+	editor = vim -c \"set fenc=utf-8\"

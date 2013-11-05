@@ -1,8 +1,0 @@
-### vim起動時の遅い処理をあぶりだす
-$ vim --startuptime vimstartuptime_result.txt
-
-# それでもダメなとき？
-Big Sky :: vimrcのどこが重いのかを調べられるプラグイン書いた。 http://mattn.kaoriya.net/software/vim/20120315221158.htm
-
-
-

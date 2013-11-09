@@ -69,7 +69,10 @@ setopt nolistbeep
 # emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes 
 #   to end of it)
 #
-bindkey -e
+bindkey -v
+
+# bindkey -v にするとC-rの「bck-i-search」が使えなくなるのでその対処
+bindkey '^R' history-incremental-search-backward
 
 # historical backward/forward search with linehead string binded to ^P/^N
 #
@@ -121,7 +124,6 @@ zstyle ':predict' verbose true
 #
 setopt complete_aliases     # aliased ls needs if file/dir completions work
 
-alias cd_www="cd /var/www/html/"
 alias vi="vim"
 alias where="command -v"
 alias j="jobs -l"
@@ -135,10 +137,11 @@ linux*)
     ;;
 esac
 
+alias ls="ls -h"
 alias la="ls -a"
 alias lf="ls -F"
-alias ll="ls -l"
-alias lla="ls -al"
+alias ll="ls -ltr"
+alias lla="ls -altr"
 
 alias du="du -h"
 alias df="df -h"
@@ -150,6 +153,7 @@ alias mv="mv -i"
 alias cp="cp -i"
 
 alias r="rails"
+alias s='source'
 
 
 case "${OSTYPE}" in
@@ -232,44 +236,6 @@ else
 fi
 
 
-#============================================================
-# sakikazu
-#============================================================
-
-#sudo ntpdate 130.69.251.23
-
-#ssh-agent
-#eval `ssh-agent`
-#ssh-add ~/.ssh/id_rsa
-
-alias ssh_btoc='ssh -p 10022 reference2.drecom.jp -l kazutaka_sakimura'
-
-alias ssh_ad1='ssh -p 10022 192.168.112.11 -l kazutaka_sakimura'
-alias ssh_ad2='ssh -p 10022 192.168.112.12 -l kazutaka_sakimura'
-
-alias ssh_sp1='ssh -p 10022 192.168.105.11 -l kazutaka_sakimura'
-alias ssh_sp2='ssh -p 10022 192.168.105.12 -l kazutaka_sakimura'
-
-alias ssh_ads_xen='ssh drecom-adfit@192.168.10.198'
-alias s='source'
-alias adserv='ruby ~/ad4u/adfit/script/server'
-alias llr='ls -ltr'
-
-export JAVA_HOME=/usr/local/jdk1.6.0_11/
-export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
-
-export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
-export GEM_HOME=/usr/lib/ruby/gems/1.8
-# export GEM_HOME=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
-export GEM_PATH=/usr/lib/ruby/gems/1.8
-# export GEM_PATH=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
-
-export EDITOR=vi
-export SVN_EDITOR=vi
-
-export LD_LIBRARY_PATH=/usr/local/lib
-
-
 #---------------------------
 #------- for screen ---------
 #---------------------------
@@ -316,8 +282,45 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 
-#=============================================================
+
+#============================================================
+# 環境依存
+#============================================================
+
+#sudo ntpdate 130.69.251.23
+
+#ssh-agent
+#eval `ssh-agent`
+#ssh-add ~/.ssh/id_rsa
+
+alias cd_www="cd /var/www/html/"
+alias ssh_btoc='ssh -p 10022 reference2.drecom.jp -l kazutaka_sakimura'
+
+alias ssh_ad1='ssh -p 10022 192.168.112.11 -l kazutaka_sakimura'
+alias ssh_ad2='ssh -p 10022 192.168.112.12 -l kazutaka_sakimura'
+
+alias ssh_sp1='ssh -p 10022 192.168.105.11 -l kazutaka_sakimura'
+alias ssh_sp2='ssh -p 10022 192.168.105.12 -l kazutaka_sakimura'
+
+alias ssh_ads_xen='ssh drecom-adfit@192.168.10.198'
+alias adserv='ruby ~/ad4u/adfit/script/server'
+
 alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
+
+export JAVA_HOME=/usr/local/jdk1.6.0_11/
+export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
+
+export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
+export GEM_HOME=/usr/lib/ruby/gems/1.8
+# export GEM_HOME=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
+export GEM_PATH=/usr/lib/ruby/gems/1.8
+# export GEM_PATH=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
+
+export EDITOR=vi
+export SVN_EDITOR=vi
+
+export LD_LIBRARY_PATH=/usr/local/lib
+
 
 
 ### rbenv

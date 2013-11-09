@@ -147,6 +147,8 @@ NeoBundle 'tpope/vim-fugitive'
 " :VDBI
 " dbi:mysql:dbname=(db name)
 
+NeoBundle 'tpope/vim-haml'
+
 
 " まだ使いこなせないうちはコメントアウトにしとく
 "Bundle 'haml.zip'

@@ -4,6 +4,7 @@
 /.*
 
 # 無視したくないファイルを![filename]で指定
+!/setup.sh
 !/.zsh_aliases
 !/.zsh_profile
 !/.zshrc
@@ -18,6 +19,7 @@
 !/.gitmodules
 !/readme.txt
 !/.ctags
+!/.rspec
 
 !/.vimperatorrc
 /.vimperator

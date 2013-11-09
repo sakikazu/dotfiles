@@ -1,4 +1,9 @@
-とりあえずテスト用に作ったこのファイルをpushしてみる
+setup.sh
+
+### others
+* .rspec : 各railsプロジェクト配下に置く
+
+
 ---------------------------------
 1．最初の一回のみ)remote追加して
 git remote add origin git@github.com:sakikazu/dotfiles.git

@@ -3,6 +3,11 @@ setup.sh
 ### others
 * .rspec : 各railsプロジェクト配下に置く
 
+### NeoBundleのインストール方法（よく使う）
+1. /home/sakikazu mkdir -p ~/.vim/bundle
+2. /home/sakikazu git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+3. :NeoBundleInstall
+
 
 ---------------------------------
 1．最初の一回のみ)remote追加して

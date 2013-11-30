@@ -13,7 +13,7 @@ endif
 NeoBundle "Shougo/neobundle.vim"
 NeoBundle 'Shougo/unite.vim'
 NeoBundle "Shougo/vimshell.vim"
-NeoBundle "Shougo/neocomplcache.vim"
+NeoBundle "Shougo/neocomplete.vim"
 " ### vimfiler: Explorer
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -297,12 +297,12 @@ inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
 " git-commit.vim
 let git_diff_spawn_mode = 1
 
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_enable_camel_case_completion = 0
-let g:neocomplcache_enable_underbar_completion = 1
-let g:neocomplcache_min_syntax_length = 3
+" neocomplete
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_camel_case_completion = 0
+let g:neocomplete#enable_underbar_completion = 1
+let g:neocomplete#min_syntax_length = 3
 
 
 " memo 入力の邪魔になるだけだった・・
@@ -655,3 +655,10 @@ autocmd BufNewFile,BufRead *.tpl set filetype=php
 "------------------------------------
 noremap!  
 
+
+
+"------------------------------------
+" for MacVim
+"------------------------------------
+" Yankと選択時にクリップボードにコピー(Yankでもできるんかー！)
+set clipboard=unnamed,autoselect

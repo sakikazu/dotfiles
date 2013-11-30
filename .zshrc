@@ -69,10 +69,13 @@ setopt nolistbeep
 # emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes 
 #   to end of it)
 #
-bindkey -v
+bindkey -e
+
+# やっぱEmacs式に戻ります。。
+# bindkey -v
 
 # bindkey -v にするとC-rの「bck-i-search」が使えなくなるのでその対処
-bindkey '^R' history-incremental-search-backward
+# bindkey '^R' history-incremental-search-backward
 
 # historical backward/forward search with linehead string binded to ^P/^N
 #
@@ -231,8 +234,8 @@ if [ "$TERM" = "screen" ]; then
   alias fixsshenv='cat ~/.ssh/fix_ssh_env | sh'
   alias ssh='fixsshenv; ssh'
   alias svn='fixsshenv; svn'
-else
-  export | grep '^SSH_' > ~/.ssh/fix_ssh_env
+# else
+  # export | grep '^SSH_' > ~/.ssh/fix_ssh_env
 fi
 
 
@@ -308,12 +311,12 @@ alias adserv='ruby ~/ad4u/adfit/script/server'
 alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
 
 export JAVA_HOME=/usr/local/jdk1.6.0_11/
-export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
+# export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
 
-export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
-export GEM_HOME=/usr/lib/ruby/gems/1.8
+# export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
+# export GEM_HOME=/usr/lib/ruby/gems/1.8
 # export GEM_HOME=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
-export GEM_PATH=/usr/lib/ruby/gems/1.8
+# export GEM_PATH=/usr/lib/ruby/gems/1.8
 # export GEM_PATH=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
 
 export EDITOR=vi
@@ -327,7 +330,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 #export PATH="$HOME/.rbenv/bin:$PATH"
 #eval "$(rbenv init -)"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 
 ### for CakePHP

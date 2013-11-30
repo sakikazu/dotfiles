@@ -576,6 +576,10 @@ nmap bn :bn<CR>
 "ビジュアルモード時vで行末まで選択
 vnoremap v $h
 
+" paste関連（トグルできない？）
+map setp :set paste<CR>
+map setnp :set nopaste<CR>
+
 " 大幅横移動
 nmap <silent> <S-l> 15<right>
 vmap <silent> <S-l> <C-o>15<right>

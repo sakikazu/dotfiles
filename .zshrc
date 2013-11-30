@@ -310,20 +310,10 @@ alias adserv='ruby ~/ad4u/adfit/script/server'
 
 alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
 
-export JAVA_HOME=/usr/local/jdk1.6.0_11/
-# export PATH=/home/sakikazu/dev/public_html/php/matabun/cake/console:/usr/local/bin:/usr/bin:/bin:/usr/games:/usr/local/flex/bin:$JAVA_HOME/bin
-
-# export RUBYLIB=/usr/local/lib/ruby/gems/1.8/lib
-# export GEM_HOME=/usr/lib/ruby/gems/1.8
-# export GEM_HOME=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
-# export GEM_PATH=/usr/lib/ruby/gems/1.8
-# export GEM_PATH=/usr/local/lib/ruby/gems/1.8:/usr/lib/ruby/gems/1.8
-
 export EDITOR=vi
 export SVN_EDITOR=vi
 
 export LD_LIBRARY_PATH=/usr/local/lib
-
 
 
 ### rbenv
@@ -340,3 +330,4 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 ### RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+

@@ -13,7 +13,6 @@ endif
 NeoBundle "Shougo/neobundle.vim"
 NeoBundle 'Shougo/unite.vim'
 NeoBundle "Shougo/vimshell.vim"
-NeoBundle "Shougo/neocomplete.vim"
 " ### vimfiler: Explorer
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc', {
@@ -148,6 +147,12 @@ NeoBundle 'tpope/vim-fugitive'
 " dbi:mysql:dbname=(db name)
 
 NeoBundle 'tpope/vim-haml'
+
+"### Java
+NeoBundle 'vim-scripts/javacomplete'
+" これ有効にしたら「Another plugin set completefunc! Disabled neocomplete.」ってエラーが出る
+" autocmd FileType java :setlocal omnifunc=javacomplete#Complete
+" autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
 
 " まだ使いこなせないうちはコメントアウトにしとく
@@ -297,12 +302,38 @@ inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
 " git-commit.vim
 let git_diff_spawn_mode = 1
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_camel_case_completion = 0
-let g:neocomplete#enable_underbar_completion = 1
-let g:neocomplete#min_syntax_length = 3
+
+
+" neocomplete and neocomplcache
+function! s:meet_neocomplete_requirements()
+  return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+endfunction
+
+if s:meet_neocomplete_requirements()
+    NeoBundle 'Shougo/neocomplete.vim'
+    NeoBundleFetch 'Shougo/neocomplcache.vim'
+else
+    NeoBundleFetch 'Shougo/neocomplete.vim'
+    NeoBundle 'Shougo/neocomplcache.vim'
+endif
+
+
+if s:meet_neocomplete_requirements()
+  " neocomplete
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_camel_case_completion = 0
+  let g:neocomplete#enable_underbar_completion = 1
+  let g:neocomplete#min_syntax_length = 3
+else
+  " neocomplcache
+  let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_enable_smart_case = 1
+  let g:neocomplcache_enable_camel_case_completion = 0
+  let g:neocomplcache_enable_underbar_completion = 1
+  let g:neocomplcache_min_syntax_length = 3
+endif
+
 
 
 " memo 入力の邪魔になるだけだった・・

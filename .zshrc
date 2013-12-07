@@ -310,6 +310,8 @@ alias adserv='ruby ~/ad4u/adfit/script/server'
 
 alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
 
+alias javac="javac -J-Dfile.encoding=UTF8"
+
 export EDITOR=vi
 export SVN_EDITOR=vi
 
@@ -328,6 +330,10 @@ export LD_LIBRARY_PATH=/usr/local/lib
 ## ★ 見せしめに残しておくか。↑はSM以外のサーバーの設定だったが、SMでこれが効くと、ログインできなくなってしまってた。suになって、su -f sakikazuとすることでログインできた・・
 ## telnetでもConnection Refusedとかなってたしなぁ
 
-### RVM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# RVM
+[ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
+
+
+# 環境依存設定ファイル
+source $HOME/dotfiles/.zshrc.local
 

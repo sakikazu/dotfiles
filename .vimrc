@@ -334,6 +334,13 @@ else
   let g:neocomplcache_min_syntax_length = 3
 endif
 
+" 2013-12-08、やっぱ環境によって補完が使えなくなることがあるのでこれ必要
+" neocomplcacheが強制的に’completefunc’を上書きする
+" ただし、プラグインの’completefunc’は使用できなくなる。
+let g:neocomplcache_force_overwrite_completefunc = 1
+
+
+
 
 
 " memo 入力の邪魔になるだけだった・・

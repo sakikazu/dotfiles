@@ -20,6 +20,7 @@
 !/readme.txt
 !/.ctags
 !/.rspec
+!/.tmux.conf
 
 !/.vimperatorrc
 /.vimperator

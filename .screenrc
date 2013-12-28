@@ -21,7 +21,6 @@ autodetach on
 ### あたらしいwindowのlogin flagをoffにする。
 ### これが on ならば 新しい window が開かれる度 /etc/utmp に entry が追加される
 # deflogin on
-deflogin off
 
 ### 隠れているwindowでbellが鳴ったときにメッセージ。
 bell "ell in window %."
@@ -139,8 +138,8 @@ bind h
 #make them better
 bind '\\' quit
 bind 'K' kill
-bind 'I' login on
-bind 'O' login off
+# bind 'I' login on
+# bind 'O' login off
 bind '}' history
 
 # Yet another hack:

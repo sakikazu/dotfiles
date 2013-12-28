@@ -303,10 +303,14 @@ inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
 let git_diff_spawn_mode = 1
 
 
+" 2013-12-23、うーん、neocompleteにしても、Disableになる問題はなくならなかった。Railsいじってる時になるし、rails
+" vim
+" が原因だという情報も。とりあえず、neocomplcacheにして、最後の「let〜」のところのやつで対処できないか、と試し
 
 " neocomplete and neocomplcache
 function! s:meet_neocomplete_requirements()
-  return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+  " return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+  return 0
 endfunction
 
 if s:meet_neocomplete_requirements()
@@ -320,6 +324,7 @@ endif
 
 if s:meet_neocomplete_requirements()
   " neocomplete
+  " echo "neocomplete!"
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#enable_camel_case_completion = 0
@@ -327,6 +332,7 @@ if s:meet_neocomplete_requirements()
   let g:neocomplete#min_syntax_length = 3
 else
   " neocomplcache
+  " echo "neocomplcache!"
   let g:neocomplcache_enable_at_startup = 1
   let g:neocomplcache_enable_smart_case = 1
   let g:neocomplcache_enable_camel_case_completion = 0

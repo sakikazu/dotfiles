@@ -709,4 +709,12 @@ noremap!  
 " for MacVim
 "------------------------------------
 " Yankと選択時にクリップボードにコピー(Yankでもできるんかー！)
-set clipboard=unnamed,autoselect
+" set clipboard=unnamed,autoselect
+
+" 上のをやると、文字削除したりとかでもクリップボードに入っちゃうのでめんどくさいので無効にした
+set clipboard=
+
+" Macでcrontabを編集するために（vimのバックアップの問題）
+" http://weble.org/2011/06/06/mac-cron
+set backupskip=/tmp/*,/private/tmp/*
+

@@ -6,7 +6,19 @@
 # created at: 2012/11/12
 #
 
-localbackdir='/home/sakikazu/backup/'
+localbackdir='/Users/sakikazu/bak/'
+
+
+echo
+echo '#############################################'
+echo '# Sakura VPS(133.242.141.135)'
+echo '#############################################'
+sakura='133.242.141.135'
+
+echo
+echo '# mysql dump'
+rsync -av --delete -e 'ssh -p 20022' gassuser@"$sakura":/home/gassuser/db_backup $localbackdir/sakura
+
 
 echo
 echo '#############################################'

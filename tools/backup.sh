@@ -13,49 +13,47 @@ echo
 echo '#############################################'
 echo '# Sakura VPS(133.242.141.135)'
 echo '#############################################'
-sakura='133.242.141.135'
 
 echo
 echo '# mysql dump'
-rsync -av --delete -e 'ssh -p 20022' gassuser@"$sakura":/home/gassuser/db_backup $localbackdir/sakura
+rsync -av --delete -e 'ssh -p 20022' sakura:/home/gassuser/db_backup $localbackdir/sakura
 
 
 echo
 echo '#############################################'
-echo '# Serversman(182.163.58.103)'
+echo '# My Sakura(153.121.55.133)'
 echo '#############################################'
-serversman='182.163.58.103'
 
 echo
-echo '# Gitリポジトリ'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/home/sakikazu/bak_git_rep $localbackdir
+echo '# Gitリポジトリ(2014年、既にBitbucketに移行済みのため不要)'
+# rsync -av --delete -e 'ssh -p 30022' sakikazu@"$mysakura":/home/sakikazu/bak_git_rep $localbackdir
 
 echo
 echo '# mysql dump'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/home/sakikazu/bak $localbackdir
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/home/sakikazu/bak $localbackdir/_databases
 
 echo
 echo '# AdanHP (uploadディレクトリのみ)'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/usr/local/site/a-dan_v4/public/upload "$localbackdir"adanhp/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/adan/public/upload "$localbackdir"adanhp/
 
 echo
 echo '# Koisos (uploadディレクトリのみ)'
 target='koisos'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/usr/local/site/$target/public/upload "$localbackdir""$target"/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/upload "$localbackdir""$target"/
 
 echo
 echo '# HabitMachine (uploadディレクトリのみ)'
 target='habit-machine'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/usr/local/site/$target/public/upload "$localbackdir""$target"/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/upload "$localbackdir""$target"/
 
 
 echo
 echo '# Nichiko (uploadsディレクトリのみ)'
 target='nichiko'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/usr/local/site/$target/public/uploads "$localbackdir""$target"/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
 
 echo
 echo '# Matabunkai (uploadsディレクトリのみ)'
 target='matabunkai'
-rsync -av --delete -e 'ssh -p 10022' sakikazu@"$serversman":/usr/local/site/$target/public/uploads "$localbackdir""$target"/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
 

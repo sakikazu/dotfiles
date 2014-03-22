@@ -335,5 +335,5 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 # 環境依存設定ファイル
-source $HOME/dotfiles/.zshrc.local
+[ -f ${HOME}/dotfiles/.zshrc.local ] && source ${HOME}/dotfiles/.zshrc.local
 

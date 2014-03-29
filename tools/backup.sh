@@ -16,7 +16,9 @@ echo '#############################################'
 
 echo
 echo '# mysql dump'
-rsync -av --delete -e 'ssh -p 20022' sakura:/home/gassuser/db_backup $localbackdir/sakura
+# パス無しにしている理由は、gassuserなので、このMacのsakikazuにひもづいているキーチェーンが効かないためにsshエラーなると考えられるため
+# それと、このsshのUserをgassuserにしていたら、このMacのsakikazuディレクトリに書き込みできなかったので、リモートサーバー側もsakikazuにして成功した
+rsync -av --delete -e 'ssh -p 20022' sakura-without-passphrase:/home/sakikazu/db_backup $localbackdir/sakura
 
 
 echo
@@ -47,13 +49,13 @@ target='habit-machine'
 rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/upload "$localbackdir""$target"/
 
 
-echo
-echo '# Nichiko (uploadsディレクトリのみ)'
-target='nichiko'
-rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
+# echo
+# echo '# Nichiko (uploadsディレクトリのみ)'
+# target='nichiko'
+# rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
 
-echo
-echo '# Matabunkai (uploadsディレクトリのみ)'
-target='matabunkai'
-rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
+# echo
+# echo '# Matabunkai (uploadsディレクトリのみ)'
+# target='matabunkai'
+# rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/public/uploads "$localbackdir""$target"/
 

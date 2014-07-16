@@ -649,7 +649,7 @@ nnoremap } 4<C-w>>
 
 
 " --------------------------------------------------------------
-" PHP用オプション
+" for PHP
 " --------------------------------------------------------------
 let php_sql_query=1
 let php_htmlInStrings=1
@@ -659,6 +659,14 @@ autocmd BufNewFile,BufRead *.ctp set filetype=php
 autocmd BufNewFile,BufRead *.cls set filetype=php
 autocmd BufNewFile,BufRead *.tpl set filetype=php
 
+autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 noexpandtab
+
+
+" --------------------------------------------------------------
+" for java
+" --------------------------------------------------------------
+autocmd BufNewFile,BufRead *.java set nowrap ts=4 sw=4 sts=4 noexpandtab
+autocmd BufNewFile,BufRead *.xml set nowrap ts=4 sw=4 sts=4 noexpandtab
 
 "----------------------------------------------------
 "" バックアップ関係

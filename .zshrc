@@ -73,7 +73,8 @@ export LANG=ja_JP.UTF-8
 #
 
 # git branch名表示
-[ -f ${HOME}/dotfiles/zsh_tools/git_prompt.sh ] && source ${HOME}/dotfiles/zsh_tools/git_prompt.sh
+source ~/dotfiles/zsh_tools/git-prompt.sh
+PS1='[%K{red}%*%k %n@%m %F{red}%~%f%F{yellow}$(__git_ps1 " (%s)")%f]\$ '
 
 # autoload colors
 # colors

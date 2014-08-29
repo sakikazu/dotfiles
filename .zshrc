@@ -373,6 +373,8 @@ alias adserv='ruby ~/ad4u/adfit/script/server'
 alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
 
 alias javac="javac -J-Dfile.encoding=UTF8"
+# ./gradlew testとかの文字化けには、下記設定が必要だった
+export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 export EDITOR=vi
 export SVN_EDITOR=vi

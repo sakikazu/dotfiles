@@ -8,7 +8,7 @@
 	ui = auto
 [core]
 	editor = vim -c \"set fenc=utf-8\"
-	excludesfile = /Users/sakimura/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

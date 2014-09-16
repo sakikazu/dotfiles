@@ -362,7 +362,7 @@ let g:neocomplcache_force_overwrite_completefunc = 1
 "------------------------------------
 " memolist.vim
 "------------------------------------
-let g:memolist_path = "~/memo"
+let g:memolist_path = "~/GoogleDrive/myfiles/memo"
 
 nnoremap <Leader>mn  :MemoNew<CR>
 nnoremap <Leader>ml  :MemoList<CR>

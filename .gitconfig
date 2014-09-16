@@ -2,9 +2,16 @@
   sslVerify = false
   #NeoVundleInstall時に「error: SSL certificate problem」というエラーになったための対処
 [user]
-	name = Kazutaka Sakimura
+	name = sakikazu
 	email = sakikazu15@gmail.com
 [color]
 	ui = auto
 [core]
 	editor = vim -c \"set fenc=utf-8\"
+	excludesfile = /Users/sakimura/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree 2.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

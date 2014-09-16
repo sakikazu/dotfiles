@@ -659,8 +659,14 @@ autocmd BufNewFile,BufRead *.ctp set filetype=php
 autocmd BufNewFile,BufRead *.cls set filetype=php
 autocmd BufNewFile,BufRead *.tpl set filetype=php
 
-autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 noexpandtab
+" expandtabはタブをスペースに変換するので、noexpandtabでその逆
+" autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 noexpandtab
+autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 expandtab
 
+" --------------------------------------------------------------
+" for JavaScript
+" --------------------------------------------------------------
+autocmd BufNewFile,BufRead *.js set nowrap ts=4 sw=4 sts=4 noexpandtab
 
 " --------------------------------------------------------------
 " for java

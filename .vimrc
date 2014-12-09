@@ -36,6 +36,7 @@ NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
 NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
+NeoBundle 'groenewege/vim-less'
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
 NeoBundle "git://github.com/scrooloose/nerdtree.git"
@@ -208,6 +209,9 @@ MyAutocmd InsertEnter * setlocal cursorline
 MyAutocmd InsertLeave * highlight StatusLine ctermfg=145 guifg=#c2bfa5 guibg=#000000
 MyAutocmd InsertEnter * highlight StatusLine ctermfg=12 guifg=#1E90FF
 
+" Disable annoying beeping
+set noerrorbells
+set vb t_vb=
 
 set ambiwidth=double
 set autoread
@@ -429,6 +433,10 @@ let g:rails_level=4
 let g:rails_default_file="app/controllers/application.rb"
 let g:rails_default_database="mysql"
 "let g:rails_default_database="sqlite3"
+
+" rails.vim関係ないけどシンタックスハイライトの設定をここに置いといた
+autocmd BufNewFile,BufRead *.mobile.erb set filetype=html
+
 
 "------------------------------------
 " surround.vim

@@ -36,7 +36,7 @@ rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/home/sakikazu/bak $local
 
 echo
 echo '# AdanHP (uploadディレクトリのみ)'
-rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/adan/current/public/upload "$localbackdir"adanhp/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/adan/shared/public/upload "$localbackdir"adanhp/
 
 echo
 echo '# Koisos (uploadディレクトリのみ)'
@@ -46,7 +46,7 @@ rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/p
 echo
 echo '# HabitMachine (uploadディレクトリのみ)'
 target='habit-machine'
-rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/current/public/upload "$localbackdir""$target"/
+rsync -av --delete -e 'ssh -p 30022' sakikazu@mysakura:/usr/local/site/$target/shared/public/upload "$localbackdir""$target"/
 
 
 # echo

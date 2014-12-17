@@ -21,6 +21,7 @@ NeoBundle 'Shougo/vimproc', {
     \ 'unix' : 'make -f make_unix.mak',
   \ },
 \ }
+NeoBundle "vim-scripts/DirDiff.vim"
 
 
 NeoBundle 'thinca/vim-quickrun'
@@ -39,7 +40,6 @@ NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 NeoBundle 'groenewege/vim-less'
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
-NeoBundle "git://github.com/scrooloose/nerdtree.git"
 NeoBundle "vim-scripts/YankRing.vim"
 
 

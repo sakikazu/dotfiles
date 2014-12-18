@@ -480,6 +480,8 @@ let g:EasyMotion_leader_key = '<Leader>m'
 " vimfiler
 let g:vimfiler_as_default_explorer = 1
 let g:vimfiler_safe_mode_by_default = 0
+" Vimfilerで自動でカレントディレクトリを変更する
+let g:vimfiler_enable_auto_cd = 1
 
 " quickrun
 let g:quickrun_config = {}

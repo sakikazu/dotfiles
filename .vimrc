@@ -65,16 +65,6 @@ NeoBundle "vim-scripts/YankRing.vim"
 " via: http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
 " --------------------------------------------------------------
 
-" ### alpaca_tags　　　ctagsの非同期生成
-" memo !!!!!!!!!!
-" TagsUpdateはgit管理されているプロジェクトに対応しているが、逆に、されてないとエライことになる
-" 単純にカレントプロジェクト対象ってできないのかな？
-" tagファイルは、.git配下に作成される
-NeoBundleLazy 'alpaca-tc/alpaca_tags', {
-      \ 'depends': 'Shougo/vimproc',
-      \ 'autoload' : {
-      \   'commands': ['TagsUpdate', 'TagsSet', 'TagsBundle']
-      \ }}
 NeoBundleLazy 'tsukkee/unite-tag', {
       \ 'depends' : ['Shougo/unite.vim'],
       \ 'autoload' : {
@@ -225,6 +215,8 @@ set encoding=utf-8
 " 新しい行を開始したとき、新しい行のインデントを現在行と同じにする
 set autoindent
 
+" tagsジャンプの時に複数ある時は一覧表示
+nnoremap <C-]> g<C-]>
 " - end
 
 
@@ -497,22 +489,6 @@ map <Leader>x, c<space>
 "未対応ファイルタイプのエラーメッセージを表示しない
 let NERDShutUp=1
 
-
-" alpaca_tags
-let g:alpaca_tags_config = {
-      \ '_' : '-R --sort=yes --languages=-js,html,css',
-      \ 'ruby': '--languages=+Ruby',
-      \ }
-
-augroup AlpacaTags
-  autocmd!
-  if exists(':Tags')
-    autocmd BufWritePost Gemfile TagsBundle
-    autocmd BufEnter * TagsSet
-    " 毎回保存と同時更新する場合はコメントを外す
-    " autocmd BufWritePost * TagsUpdate
-  endif
-augroup END
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]

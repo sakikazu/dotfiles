@@ -8,6 +8,7 @@
 !/.zsh_aliases
 !/.zsh_profile
 !/.zshrc
+!/.zshrc.local.origin
 !/zsh_tools
 !/.vimrc
 #!/.vim

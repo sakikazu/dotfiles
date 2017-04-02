@@ -1,28 +1,43 @@
-" --------------------------------------------------------------
-" 参考）https://github.com/kenchan/dotfiles/blob/master/dot.vimrc
-" --------------------------------------------------------------
+" cf. https://github.com/Shougo/neobundle.vim
+" $ sh ./install.sh
 
-set nocompatible
-filetype off
-
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle'))
+if &compatible
+  set nocompatible
 endif
 
-NeoBundle "Shougo/neobundle.vim"
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle'))
+
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+
+" コード補完
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'marcus/rsense' " for ruby
+" 現状Installエラーになるので無効
+" NeoBundle 'supermomonga/neocomplete-rsense.vim'
+
+" 静的解析
+NeoBundle 'scrooloose/syntastic'
+
+" ドキュメント参照
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'yuku-t/vim-ref-ri'
+
+" メソッド定義元へのジャンプ
+NeoBundle 'szw/vim-tags'
+
 NeoBundle 'Shougo/unite.vim'
 NeoBundle "Shougo/vimshell.vim"
 " ### vimfiler: Explorer
 NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc', {
-  \ 'build' : {
-    \ 'mac' : 'make -f make_mac.mak',
-    \ 'unix' : 'make -f make_unix.mak',
-  \ },
-\ }
+      \ 'build' : {
+      \ 'mac' : 'make -f make_mac.mak',
+      \ 'unix' : 'make -f make_unix.mak',
+      \ },
+      \ }
 NeoBundle "vim-scripts/DirDiff.vim"
-
 
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'glidenote/memolist.vim'
@@ -33,10 +48,12 @@ NeoBundle "vim-scripts/surround.vim"
 NeoBundle "vim-scripts/grep.vim"
 "NeoBundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
 " NeoBundle "git://github.com/tpope/vim-surround.git"
-NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
+" neobundleがwarningを出すので無効に
+" NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
-NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
+" neobundleがwarningを出すので無効に
+" NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 NeoBundle 'groenewege/vim-less'
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
@@ -48,16 +65,6 @@ NeoBundle "vim-scripts/YankRing.vim"
 " via: http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
 " --------------------------------------------------------------
 
-" ### alpaca_tags　　　ctagsの非同期生成
-" memo !!!!!!!!!!
-" TagsUpdateはgit管理されているプロジェクトに対応しているが、逆に、されてないとエライことになる
-" 単純にカレントプロジェクト対象ってできないのかな？
-" tagファイルは、.git配下に作成される
-NeoBundleLazy 'alpaca-tc/alpaca_tags', {
-      \ 'depends': 'Shougo/vimproc',
-      \ 'autoload' : {
-      \   'commands': ['TagsUpdate', 'TagsSet', 'TagsBundle']
-      \ }}
 NeoBundleLazy 'tsukkee/unite-tag', {
       \ 'depends' : ['Shougo/unite.vim'],
       \ 'autoload' : {
@@ -98,7 +105,7 @@ NeoBundle 'AndrewRadev/switch.vim'
 
 " ### vim-rails　　　　Railsプロジェクト用プラグイン
 NeoBundle 'tpope/vim-rails', { 'autoload' : {
-      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
+      \ 'filetypes' : ['haml', 'ruby', 'eruby', 'slim'] }}
 
 " ### vim-endwise　　　if...endなど対応するキーワードの自動補完
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
@@ -148,44 +155,81 @@ NeoBundle 'tpope/vim-fugitive'
 " dbi:mysql:dbname=(db name)
 
 NeoBundle 'tpope/vim-haml'
+NeoBundle 'slim-template/vim-slim'
 
 "### Java
 NeoBundle 'vim-scripts/javacomplete'
+
+" if s:meet_neocomplete_requirements()
+  " NeoBundle 'Shougo/neocomplete.vim'
+  " NeoBundleFetch 'Shougo/neocomplcache.vim'
+" else
+  " NeoBundleFetch 'Shougo/neocomplete.vim'
+  " NeoBundle 'Shougo/neocomplcache.vim'
+" endif
+
+call neobundle#end()
+
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+
+" cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
+
+" -------------------------------
+" Rsense
+" -------------------------------
+" todo
+" neocompleteとneocomplcacheのどちらを使うとか、なんか不確定が多いのでまだ無効でいいや
+" let g:rsenseHome = '/usr/local/lib/rsense-0.3'
+" let g:rsenseUseOmniFunc = 1
+
+" --------------------------------
+" neocomplete.vim
+" --------------------------------
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+
+" --------------------------------
+" rubocop
+" --------------------------------
+" syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
+" active_filetypesに、保存時にsyntasticを走らせるファイルタイプを指定する
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
+
+" --------------------------------
+" 基本設定
+" --------------------------------
+" vim内部で使われる文字エンコーディングをutf-8に設定する
+set encoding=utf-8
+
+" 新しい行を開始したとき、新しい行のインデントを現在行と同じにする
+set autoindent
+
+" tagsジャンプの時に複数ある時は一覧表示
+nnoremap <C-]> g<C-]>
+" - end
+
+
+
+
+" --------------------------------------------------------------
+" 参考）https://github.com/kenchan/dotfiles/blob/master/dot.vimrc
+" --------------------------------------------------------------
+
 " これ有効にしたら「Another plugin set completefunc! Disabled neocomplete.」ってエラーが出る
 " autocmd FileType java :setlocal omnifunc=javacomplete#Complete
 " autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
 
-
-" まだ使いこなせないうちはコメントアウトにしとく
-"Bundle 'haml.zip'
-"Bundle 'git-commit'
-"Bundle 'EasyMotion'
-"Bundle 'vimwiki'
-"Bundle 'Rename'
-"Bundle 'wincent/Command-T'
-"Bundle 'jade.vim'
-"
-"Bundle 'newspaper.vim'
-"Bundle 'git://github.com/vim-scripts/xoria256.vim.git'
-"
-"Bundle 'vim-ruby/vim-ruby'
-"
-"
-"Bundle 'kana/vim-textobj-user'
-"Bundle 'kana/vim-textobj-fold'
-"Bundle 'kana/vim-textobj-indent'
-"Bundle 'kana/vim-textobj-lastpat'
-"
-"Bundle 'h1mesuke/vim-alignta'
-"
-"Bundle 'tpope/vim-cucumber'
-"Bundle 'tpope/vim-surround'
-"
-"Bundle 'kenchan/vim-ruby-refactoring'
-"Bundle 'nelstrom/vim-textobj-rubyblock'
-
-
-filetype plugin indent on
 
 " color
 syntax enable
@@ -232,7 +276,6 @@ set ruler
 set showmatch " 入力時の括弧で対応する括弧をハイライト
 set ttymouse=xterm2
 set wildmode=longest:list
-set nocompatible
 " 無効にする）マウス選択でコピーできていたのができなくなってしまったので
 "set mouse=a " 全モードでマウスを有効化
 
@@ -248,10 +291,10 @@ set noswapfile
 set enc=utf-8
 set fenc=utf-8
 set fencs=utf-8,iso-2022-jp,euc-jp,cp932
-set fileformats=unix,dos
+set fileformats=unix,dos,mac
 
 "Tab
-set expandtab
+set expandtab " 挿入モードでTABを挿入するとき、代わりに適切な数の空白を使う
 set smartindent
 set ts=2 sw=2 sts=2
 
@@ -316,15 +359,6 @@ function! s:meet_neocomplete_requirements()
   " return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
   return 0
 endfunction
-
-if s:meet_neocomplete_requirements()
-    NeoBundle 'Shougo/neocomplete.vim'
-    NeoBundleFetch 'Shougo/neocomplcache.vim'
-else
-    NeoBundleFetch 'Shougo/neocomplete.vim'
-    NeoBundle 'Shougo/neocomplcache.vim'
-endif
-
 
 if s:meet_neocomplete_requirements()
   " neocomplete
@@ -456,22 +490,6 @@ map <Leader>x, c<space>
 let NERDShutUp=1
 
 
-" alpaca_tags
-let g:alpaca_tags_config = {
-      \ '_' : '-R --sort=yes --languages=-js,html,css',
-      \ 'ruby': '--languages=+Ruby',
-      \ }
-
-augroup AlpacaTags
-  autocmd!
-  if exists(':Tags')
-    autocmd BufWritePost Gemfile TagsBundle
-    autocmd BufEnter * TagsSet
-    " 毎回保存と同時更新する場合はコメントを外す
-    " autocmd BufWritePost * TagsUpdate
-  endif
-augroup END
-
 " vimwiki
 let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 
@@ -574,19 +592,6 @@ hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 
 " ペースト時に前行のコメントアウトが引き継がれてしまう件の対処
 autocmd FileType * set formatoptions-=ro
-
-
-
-" coniguration for vim-ruby auto ditect .rb file syntax
-" --------------------------------------------------------------
-set nocompatible
-syntax on
-filetype on
-filetype indent on
-filetype plugin on
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
 
 
 

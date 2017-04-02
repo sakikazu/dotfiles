@@ -23,6 +23,7 @@
 !/.ctags
 !/.rspec
 !/.tmux.conf
+!/.oh-my-zsh
 
 !/.vimperatorrc
 /.vimperator

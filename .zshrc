@@ -383,8 +383,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 ### rbenv
-#export PATH="$HOME/.rbenv/bin:$PATH"
-#eval "$(rbenv init -)"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 

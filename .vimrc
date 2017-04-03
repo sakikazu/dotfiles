@@ -117,8 +117,6 @@ NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
 NeoBundle "vimtaku/hl_matchit.vim"
 " このプラグインも必要
 NeoBundle "matchit.zip"
-" ハイライトを有効にする
-let g:hl_matchit_enable_on_vim_startup = 1
 
 " ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
 NeoBundle 'thinca/vim-ref'

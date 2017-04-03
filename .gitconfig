@@ -2,7 +2,7 @@
   sslVerify = false
   #NeoVundleInstall時に「error: SSL certificate problem」というエラーになったための対処
 [user]
-	name = Kazutaka Sakimura
+	name = sakikazu
 	email = sakikazu15@gmail.com
 [color]
 	ui = auto

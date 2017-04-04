@@ -24,10 +24,14 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'yuku-t/vim-ref-ri'
 
-" メソッド定義元へのジャンプ
-NeoBundle 'szw/vim-tags'
-
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neoyank.vim'
+" memo
+" なぜかこれでインストールされなかった？Githubからファイルをダウンロードして.vim配下に入れたら動いた。元々unite-outlineというディレクトリがあったのでそれが怪しいが
+" NeoBundle 'Shougo/unite-outline'
+
 NeoBundle "Shougo/vimshell.vim"
 " ### vimfiler: Explorer
 NeoBundle 'Shougo/vimfiler.vim'
@@ -449,12 +453,13 @@ let g:memolist_unite_option = "-auto-preview -start-insert"
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-nnoremap <silent> ,uu :<C-u>Unite buffer file_mru<CR>
+nnoremap <silent> ,uu :<C-u>Unite file_mru buffer<CR>
 nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
 nnoremap <silent> ,ut :<C-u>Unite tab<CR>
 nnoremap <silent> ,ug :<C-u>Unite tag<CR>
-" memo find file
+nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
+" memo find file めっちゃ使う！
 nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 
 " vim-ref

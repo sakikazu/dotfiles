@@ -507,6 +507,8 @@ let g:vimfiler_safe_mode_by_default = 0
 " note:
 " なにかファイルを開くたびにカレントディレクトリが変わってしまって面倒だった
 let g:vimfiler_enable_auto_cd = 0
+" 画面分割でエクスプローラーを起動
+noremap <silent> :tree :VimFiler -split -simple -winwidth=45 -no-quit
 
 " quickrun
 let g:quickrun_config = {}

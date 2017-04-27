@@ -46,6 +46,7 @@ NeoBundle "vim-scripts/DirDiff.vim"
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'fuenor/qfixgrep.git'
+NeoBundle 'scrooloose/nerdtree'
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "vim-scripts/surround.vim"
 " NeoBundle "vim-scripts/yanktmp.vim"

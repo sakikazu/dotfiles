@@ -13,8 +13,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " コード補完
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'marcus/rsense' " for ruby
-" 現状Installエラーになるので無効
+" NeoBundle 'marcus/rsense' " for ruby
 " NeoBundle 'supermomonga/neocomplete-rsense.vim'
 
 " 静的解析
@@ -164,14 +163,6 @@ NeoBundle 'posva/vim-vue'
 "### Java
 NeoBundle 'vim-scripts/javacomplete'
 
-" if s:meet_neocomplete_requirements()
-  " NeoBundle 'Shougo/neocomplete.vim'
-  " NeoBundleFetch 'Shougo/neocomplcache.vim'
-" else
-  " NeoBundleFetch 'Shougo/neocomplete.vim'
-  " NeoBundle 'Shougo/neocomplcache.vim'
-" endif
-
 call neobundle#end()
 
 syntax enable
@@ -185,7 +176,7 @@ NeoBundleCheck
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
 
 " -------------------------------
-" Rsense
+" Rsense ※開発止まってそう(2017年)
 " -------------------------------
 " todo
 " neocompleteとneocomplcacheのどちらを使うとか、なんか不確定が多いのでまだ無効でいいや
@@ -195,13 +186,84 @@ NeoBundleCheck
 " --------------------------------
 " neocomplete.vim
 " --------------------------------
+" from https://github.com/Shougo/neocomplete.vim
+" Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
+" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
 let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+" For ruby
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
+
 
 " --------------------------------
 " rubocop
@@ -347,43 +409,6 @@ inoremap <Leader>time <C-R>=strftime('%H:%M:%S')<CR>
 
 " git-commit.vim
 let git_diff_spawn_mode = 1
-
-
-" 2013-12-23、うーん、neocompleteにしても、Disableになる問題はなくならなかった。Railsいじってる時になるし、rails
-" vim
-" が原因だという情報も。とりあえず、neocomplcacheにして、最後の「let〜」のところのやつで対処できないか、と試し
-
-" neocomplete and neocomplcache
-function! s:meet_neocomplete_requirements()
-  " return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
-  return 0
-endfunction
-
-if s:meet_neocomplete_requirements()
-  " neocomplete
-  " echo "neocomplete!"
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#enable_camel_case_completion = 0
-  let g:neocomplete#enable_underbar_completion = 1
-  let g:neocomplete#min_syntax_length = 3
-else
-  " neocomplcache
-  " echo "neocomplcache!"
-  let g:neocomplcache_enable_at_startup = 1
-  let g:neocomplcache_enable_smart_case = 1
-  let g:neocomplcache_enable_camel_case_completion = 0
-  let g:neocomplcache_enable_underbar_completion = 1
-  let g:neocomplcache_min_syntax_length = 3
-endif
-
-" 2013-12-08、やっぱ環境によって補完が使えなくなることがあるのでこれ必要
-" neocomplcacheが強制的に’completefunc’を上書きする
-" ただし、プラグインの’completefunc’は使用できなくなる。
-let g:neocomplcache_force_overwrite_completefunc = 1
-
-
-
 
 
 " memo 入力の邪魔になるだけだった・・

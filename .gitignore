@@ -17,6 +17,7 @@
 !/.rvmrc
 !/.screenrc
 !/.gitignore
+!/.gitignore_global
 !/.gitconfig
 !/.gitmodules
 !/readme.txt

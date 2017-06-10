@@ -56,8 +56,6 @@ NeoBundle "vim-scripts/grep.vim"
 " NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
 "NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
-" neobundleがwarningを出すので無効に
-" NeoBundle "git://github.com/kchmck/vim-coffee-script.git"
 NeoBundle 'groenewege/vim-less'
 
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
@@ -109,7 +107,7 @@ NeoBundle 'AndrewRadev/switch.vim'
 
 " ### vim-rails　　　　Railsプロジェクト用プラグイン
 NeoBundle 'tpope/vim-rails', { 'autoload' : {
-      \ 'filetypes' : ['haml', 'ruby', 'eruby', 'slim'] }}
+      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
 
 " ### vim-endwise　　　if...endなど対応するキーワードの自動補完
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
@@ -160,6 +158,8 @@ NeoBundle 'tpope/vim-fugitive'
 
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'slim-template/vim-slim'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'posva/vim-vue'
 
 "### Java
 NeoBundle 'vim-scripts/javacomplete'
@@ -174,6 +174,7 @@ NeoBundle 'vim-scripts/javacomplete'
 
 call neobundle#end()
 
+syntax enable
 filetype plugin indent on
 
 " If there are uninstalled bundles found on startup,
@@ -233,12 +234,6 @@ nnoremap <C-]> g<C-]>
 " これ有効にしたら「Another plugin set completefunc! Disabled neocomplete.」ってエラーが出る
 " autocmd FileType java :setlocal omnifunc=javacomplete#Complete
 " autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
-
-
-" color
-syntax enable
-" set background=dark
-" colorscheme solarized
 
 
 " augroup init (from tyru's vimrc)
@@ -475,7 +470,7 @@ let g:rails_default_database="mysql"
 
 " rails.vim関係ないけどシンタックスハイライトの設定をここに置いといた
 autocmd BufNewFile,BufRead *.mobile.erb set filetype=html
-
+autocmd BufRead,BufNewFile *.slim set filetype=slim
 
 "------------------------------------
 " surround.vim

@@ -602,6 +602,10 @@ hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 autocmd FileType * set formatoptions-=ro
 
 
+"======= commands  =======
+command! E Explore
+
+"======= maps  =======
 
 " 論理移動と物理移動を交換
 " --------------------------------------------------------------

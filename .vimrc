@@ -106,7 +106,7 @@ NeoBundle 'AndrewRadev/switch.vim'
 
 " ### vim-rails　　　　Railsプロジェクト用プラグイン
 NeoBundle 'tpope/vim-rails', { 'autoload' : {
-      \ 'filetypes' : ['haml', 'ruby', 'eruby'] }}
+      \ 'filetypes' : ['haml', 'ruby', 'eruby', 'slim'] }}
 
 " ### vim-endwise　　　if...endなど対応するキーワードの自動補完
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {

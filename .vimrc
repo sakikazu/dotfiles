@@ -60,6 +60,9 @@ NeoBundle 'groenewege/vim-less'
 " NeoBundle "git://github.com/violetyk/cake.vim.git"
 NeoBundle "vim-scripts/YankRing.vim"
 
+" TypeScript
+NeoBundle 'Quramy/tsuquyomi'
+NeoBundle 'leafgarland/typescript-vim'
 
 " --------------------------------------------------------------
 " 2013-10-07 add
@@ -715,7 +718,7 @@ autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 expandtab
 " --------------------------------------------------------------
 " for JavaScript
 " --------------------------------------------------------------
-autocmd BufNewFile,BufRead *.js set nowrap ts=4 sw=4 sts=4 noexpandtab
+autocmd BufNewFile,BufRead *.js set nowrap ts=2 sw=2 sts=2 expandtab
 
 " --------------------------------------------------------------
 " for java

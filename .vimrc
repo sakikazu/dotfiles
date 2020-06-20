@@ -1,14 +1,39 @@
-" cf. https://github.com/Shougo/neobundle.vim
-" $ sh ./install.sh
-
+"dein Scripts-----------------------------
 if &compatible
-  set nocompatible
+  set nocompatible               " Be iMproved
 endif
 
-set runtimepath+=~/.vim/bundle/neobundle.vim/
-call neobundle#begin(expand('~/.vim/bundle'))
+" Required:
+set runtimepath+=/Users/sakikazu/.cache/dein/repos/github.com/Shougo/dein.vim
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+" Required:
+if dein#load_state('/Users/sakikazu/.cache/dein')
+  call dein#begin('/Users/sakikazu/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/sakikazu/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here like this:
+  "call dein#add('Shougo/neosnippet.vim')
+  "call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('preservim/nerdtree')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
+
+" Required:
+filetype plugin indent on
+syntax enable
+
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+"End dein Scripts-------------------------
 
 
 " コード補完
@@ -32,8 +57,6 @@ NeoBundle 'Shougo/neoyank.vim'
 " NeoBundle 'Shougo/unite-outline'
 
 NeoBundle "Shougo/vimshell.vim"
-" ### vimfiler: Explorer
-NeoBundle 'Shougo/vimfiler.vim'
 NeoBundle 'Shougo/vimproc', {
       \ 'build' : {
       \ 'mac' : 'make -f make_mac.mak',
@@ -43,7 +66,6 @@ NeoBundle 'Shougo/vimproc', {
 NeoBundle "vim-scripts/DirDiff.vim"
 
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'glidenote/memolist.vim'
 NeoBundle 'fuenor/qfixgrep.git'
 NeoBundle "scrooloose/nerdcommenter"
 NeoBundle "vim-scripts/surround.vim"
@@ -425,46 +447,6 @@ let git_diff_spawn_mode = 1
 
 
 "------------------------------------
-" memolist.vim
-"------------------------------------
-let g:memolist_path = "~/GoogleDrive/myfiles/memo"
-
-nnoremap <Leader>mn  :MemoNew<CR>
-nnoremap <Leader>ml  :MemoList<CR>
-nnoremap <Leader>mg  :MemoGrep<CR>
-
-" suffix type (default markdown)
-let g:memolist_memo_suffix = "markdown"
-
-" date format (default %Y-%m-%d %H:%M)
-let g:memolist_memo_date = "%Y-%m-%d %H:%M"
-
-" tags prompt (default 0)
-let g:memolist_prompt_tags = 1
-
-" categories prompt (default 0)
-let g:memolist_prompt_categories = 1
-
-" use qfixgrep (default 0)
-let g:memolist_qfixgrep = 1
-
-" use vimfler (default 0)
-let g:memolist_vimfiler = 1
-
-" remove filename prefix (default 0)
-let g:memolist_filename_prefix_none = 1
-
-" use unite (default 0)
-let g:memolist_unite = 1
-
-" use arbitrary unite source (default is 'file')
-let g:memolist_unite_source = "file_rec"
-
-" use arbitrary unite option (default is empty)
-let g:memolist_unite_option = "-auto-preview -start-insert"
-
-
-"------------------------------------
 " unite.vim
 "------------------------------------
 
@@ -523,17 +505,6 @@ let g:vimwiki_list = [{'path': '~/Dropbox/vimwiki'}]
 
 let g:EasyMotion_leader_key = '<Leader>m'
 
-" vimfiler
-let g:vimfiler_as_default_explorer = 1
-let g:vimfiler_safe_mode_by_default = 0
-" Vimfilerで自動でカレントディレクトリを変更する
-" note:
-" なにかファイルを開くたびにカレントディレクトリが変わってしまって面倒だった
-let g:vimfiler_enable_auto_cd = 0
-" 画面分割でエクスプローラーを起動
-noremap <silent> :tree :VimFiler -split -simple -winwidth=45 -no-quit
-noremap <silent> :exp :Vexplore
-
 " quickrun
 let g:quickrun_config = {}
 let g:quickrun_config = {
@@ -553,6 +524,40 @@ let g:quickrun_config = {
 \    'command' : 'cucumber',
 \  }
 \}
+
+
+"#######################################
+" 2020/06/20追加
+"#######################################
+
+"------------------------------------
+" NERDTree
+" ファイルエクスプローラーが画面分割で開いてすごくファイルが開きやすい！
+"------------------------------------
+nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+
+" 表示幅
+let g:NERDTreeWinSize=50
+
+" ブックマークを表示
+let g:NERDTreeShowBookmarks=1
+
+" 親ディレクトリへ移動
+let g:NERDTreeMapUpdir=''
+
+" ファイルの開き方
+let g:NERDTreeMapOpenSplit='<C-j>'
+let g:NERDTreeMapOpenVSplit='<C-l>'
+
+" ファイルを開いたらNERDTreeを閉じる(0:閉じない)
+let g:NERDTreeQuitOnOpen=0
+
+" 隠しファイルを表示
+let g:NERDTreeShowHidden=1
+
+" 非表示ファイル
+let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
+" NERDTree end ----
 
 
 augroup MyAutoCmd

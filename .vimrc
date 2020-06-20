@@ -1,4 +1,8 @@
 "dein Scripts-----------------------------
+
+" deinについて
+" 手動でinstallなどを行うなら、:call dein#install()
+"
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -14,14 +18,22 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   " Required:
   call dein#add('/Users/sakikazu/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('preservim/nerdtree')
   " vim-nerdtree-tabs: NERDTreeTabsToggleすることで、すべてのタブにNERDTreeを表示してくれるけど必要か？
   call dein#add('jistr/vim-nerdtree-tabs')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-rails')
+  call dein#add('scrooloose/nerdcommenter')
+  " yank paste後に、ctrl+n/pで、yankの履歴を辿ることができる
+  call dein#add('vim-scripts/YankRing.vim')
+  " vim-endwise: if...endなど対応するキーワードの自動補完
+  call dein#add('tpope/vim-endwise')
+  " Rgrepなど。通常はvimgrepでいいかなー
+  call dein#add('vim-scripts/grep.vim')
+  " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
+  call dein#add('airblade/vim-gitgutter')
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('w0rp/ale')
 
   " シンタックスハイライト
   call dein#add('tpope/vim-haml')
@@ -30,13 +42,12 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('posva/vim-vue')
 
-  call dein#add('scrooloose/nerdcommenter')
-  " vim-endwise: if...endなど対応するキーワードの自動補完
-  call dein#add('tpope/vim-endwise')
+  " unite関連
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/neoyank.vim')
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
   " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
   " call dein#add('Shougo/denite.nvim')
@@ -62,13 +73,6 @@ endif
 "End dein Scripts-------------------------
 
 
-
-" コード補完
-" NeoBundle 'Shougo/neocomplete.vim'
-
-" 静的解析
-" NeoBundle 'scrooloose/syntastic'
-
 " ドキュメント参照
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'yuku-t/vim-ref-ri'
@@ -78,21 +82,12 @@ endif
 " NeoBundle 'Shougo/unite-outline'
 
 " NeoBundle "Shougo/vimshell.vim"
-" NeoBundle 'Shougo/vimproc', {
-      " \ 'build' : {
-      " \ 'mac' : 'make -f make_mac.mak',
-      " \ 'unix' : 'make -f make_unix.mak',
-      " \ },
-      " \ }
 " NeoBundle "vim-scripts/DirDiff.vim"
 
 " NeoBundle 'thinca/vim-quickrun'
 " NeoBundle 'fuenor/qfixgrep.git'
-" NeoBundle "vim-scripts/grep.vim"
 
 " NeoBundle 'groenewege/vim-less'
-
-" NeoBundle "vim-scripts/YankRing.vim"
 
 " TypeScript
 " NeoBundle 'Quramy/tsuquyomi'
@@ -139,8 +134,6 @@ endif
 
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
 " NeoBundle 'AndrewRadev/switch.vim'
-" ### rubocop　　　　文法エラー、スタイルチェック
-
 
 " ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
 " NeoBundle "vimtaku/hl_matchit.vim"
@@ -269,12 +262,12 @@ let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
 
 
 " --------------------------------
-" rubocop
+" w0rp/ale
+" NOTE: rubocop自動解析
 " --------------------------------
-" syntastic_mode_mapをactiveにするとバッファ保存時にsyntasticが走る
-" active_filetypesに、保存時にsyntasticを走らせるファイルタイプを指定する
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': ['ruby'] }
-let g:syntastic_ruby_checkers = ['rubocop']
+let g:ale_fixers = {
+      \ 'ruby': ['rubocop'],
+      \ }
 
 " --------------------------------
 " 基本設定
@@ -288,8 +281,6 @@ set autoindent
 " tagsジャンプの時に複数ある時は一覧表示
 nnoremap <C-]> g<C-]>
 " - end
-
-
 
 
 " --------------------------------------------------------------
@@ -441,12 +432,29 @@ nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 nnoremap <silent> ,uh :<C-u>Unite help<CR>
 nnoremap <silent> ,ut :<C-u>Unite tab<CR>
 nnoremap <silent> ,ug :<C-u>Unite tag<CR>
+" これも使えるらしいので使っていきたい
 nnoremap <silent> ,uy :<C-u>Unite history/yank<CR>
-" memo find file めっちゃ使う！
+" memo find file めっちゃ使う！required: vimproc
 nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 
 " vim-ref
 nnoremap <Leader>a :Ref alc<space>
+
+"------------------------------------
+" vimproc
+" NOTE: uniteでfile_rec/asyncを使ってファイルを一覧するときに、負荷軽減のため無視するディレクトリを指定
+"------------------------------------
+let s:unite_ignore_file_rec_patterns=
+      \ ''
+      \ .'vendor/bundle\|.bundle/\|\.sass-cache/\|'
+      \ .'public/packs\|tmp/cache\|'
+      \ .'node_modules/\|bower_components/\|'
+      \ .'\.\(bmp\|gif\|jpe\?g\|png\|webp\|ai\|psd\)"\?$'
+
+call unite#custom#source(
+      \ 'file_rec/async,file_rec/git',
+      \ 'ignore_pattern',
+      \ s:unite_ignore_file_rec_patterns)
 
 "------------------------------------
 " rails.vim configuration
@@ -567,7 +575,7 @@ augroup END
 set grepprg=grep\ -rnIH\ --exclude=.svn\ --exclude=.git
 
 " grep の書式を挿入
-" nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 nnoremap <expr> <Space>G ':sil grep! --include="*.' . expand('%:e') . '" '
 
 
@@ -672,7 +680,6 @@ vmap <silent> <S-h> <C-o>15<left>
 " ---------------------------------------
 " 大仲さんのを一部
 " ---------------------------------------
-
 " window resize
 nnoremap + 4<C-w>+
 nnoremap - 4<C-w>-
@@ -737,4 +744,13 @@ set clipboard=
 " Macでcrontabを編集するために（vimのバックアップの問題）
 " http://weble.org/2011/06/06/mac-cron
 set backupskip=/tmp/*,/private/tmp/*
+
+
+
+"------------------------------------
+" その他、vimの技メモ
+"------------------------------------
+" :vimgrep {pattern} **/*.rb
+" vimgrepを使うなら、mapが設定されているのでそちらでショートカット
+
 

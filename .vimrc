@@ -18,13 +18,32 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   "call dein#add('Shougo/neosnippet.vim')
   "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('preservim/nerdtree')
+  " vim-nerdtree-tabs: NERDTreeTabsToggleすることで、すべてのタブにNERDTreeを表示してくれるけど必要か？
+  call dein#add('jistr/vim-nerdtree-tabs')
   call dein#add('tpope/vim-surround')
   call dein#add('tpope/vim-rails')
+
+  " シンタックスハイライト
   call dein#add('tpope/vim-haml')
   call dein#add('slim-template/vim-slim')
+  call dein#add('jelera/vim-javascript-syntax')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('posva/vim-vue')
+
   call dein#add('scrooloose/nerdcommenter')
+  " vim-endwise: if...endなど対応するキーワードの自動補完
+  call dein#add('tpope/vim-endwise')
+  call dein#add('Shougo/unite.vim')
+  call dein#add('Shougo/neomru.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+  call dein#add('Shougo/neoyank.vim')
+
+  " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
+  " call dein#add('Shougo/denite.nvim')
+  " if !has('nvim')
+    " call dein#add('roxma/nvim-yarp')
+    " call dein#add('roxma/vim-hug-neovim-rpc')
+  " endif
 
   " Required:
   call dein#end()
@@ -723,32 +742,11 @@ autocmd BufNewFile,BufRead *.xml set nowrap ts=4 sw=4 sts=4 noexpandtab
 "
 
 "------------------------------------
-" cake.vim
-"------------------------------------
-" let g:cakephp_enable_auto_mode = 1
-
-" nnoremap <Space>cc :<C-u>Ccontrollertab<space>
-" nnoremap <Space>cm :<C-u>Cmodeltab<space>
-" nnoremap <Space>cv :<C-u>Cviewtab<space>
-" nnoremap <Space>cl :<C-u>Clog<space>
-" nnoremap <Space>ccv :<C-u>Ccontrollerviewtab<space>
-" nnoremap <Space>ccm :<C-u>Ccomponenttab<space>
-" nnoremap <Space>ccf :<C-u>Cconfigtab<space>
-" nnoremap <Space>cb :<C-u>Cbehaviortab<space>
-" nnoremap <Space>ch :<C-u>Chelpertab<space>
-" nnoremap <Space>ct :<C-u>Ctesttab<space>
-" nnoremap <Space>cf :<C-u>Cfixturetab<space>
-" nnoremap <Space>cs :<C-u>Cshelltab<space>
-
-
-"------------------------------------
 " for mac
 " ※この行をコピペしたらうまくできないよ。ちゃんと↓のページにある通りやって
 " http://d.hatena.ne.jp/esf/20100720/1279585601
 "------------------------------------
 noremap!  
-
-
 
 "------------------------------------
 " for MacVim

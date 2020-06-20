@@ -1,1 +1,4 @@
-tags
+/tags
+/.idea
+.byebug_history
+vendor/bundle/

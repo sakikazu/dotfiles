@@ -23,6 +23,10 @@
   find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
   show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
 
+  # 外部に見せる用
+  show-work = log --date=format:'%Y/%m/%d %H:%M' --no-merges --pretty=format:'[%ad] %s'
+  show-work2 = log --date=format:'%Y/%m/%d %H:%M' --shortstat --pretty=format:'[%ad] %s %h (@%cn)'
+
   # TODO 徐々に使って良い物なら昇格
   logg = log --graph --all --decorate
   log1 = log --pretty='format:%C(yellow)%h%Creset %C(magenta)%cd%Creset %s %Cgreen(%an)%Creset %Cred%d%Creset%C(black bold)%ar%Creset' --date=iso

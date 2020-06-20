@@ -62,125 +62,117 @@ endif
 "End dein Scripts-------------------------
 
 
+
 " コード補完
-NeoBundle 'Shougo/neocomplete.vim'
+" NeoBundle 'Shougo/neocomplete.vim'
 
 " 静的解析
-NeoBundle 'scrooloose/syntastic'
+" NeoBundle 'scrooloose/syntastic'
 
 " ドキュメント参照
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'yuku-t/vim-ref-ri'
+" NeoBundle 'thinca/vim-ref'
+" NeoBundle 'yuku-t/vim-ref-ri'
 
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neoyank.vim'
 " memo
 " なぜかこれでインストールされなかった？Githubからファイルをダウンロードして.vim配下に入れたら動いた。元々unite-outlineというディレクトリがあったのでそれが怪しいが
 " NeoBundle 'Shougo/unite-outline'
 
-NeoBundle "Shougo/vimshell.vim"
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \ 'mac' : 'make -f make_mac.mak',
-      \ 'unix' : 'make -f make_unix.mak',
-      \ },
-      \ }
-NeoBundle "vim-scripts/DirDiff.vim"
+" NeoBundle "Shougo/vimshell.vim"
+" NeoBundle 'Shougo/vimproc', {
+      " \ 'build' : {
+      " \ 'mac' : 'make -f make_mac.mak',
+      " \ 'unix' : 'make -f make_unix.mak',
+      " \ },
+      " \ }
+" NeoBundle "vim-scripts/DirDiff.vim"
 
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'fuenor/qfixgrep.git'
-NeoBundle "vim-scripts/grep.vim"
+" NeoBundle 'thinca/vim-quickrun'
+" NeoBundle 'fuenor/qfixgrep.git'
+" NeoBundle "vim-scripts/grep.vim"
 
-NeoBundle 'groenewege/vim-less'
+" NeoBundle 'groenewege/vim-less'
 
-NeoBundle "vim-scripts/YankRing.vim"
+" NeoBundle "vim-scripts/YankRing.vim"
 
 " TypeScript
-NeoBundle 'Quramy/tsuquyomi'
-NeoBundle 'leafgarland/typescript-vim'
+" NeoBundle 'Quramy/tsuquyomi'
+" NeoBundle 'leafgarland/typescript-vim'
 
 " --------------------------------------------------------------
 " 2013-10-07 add
 " via: http://qiita.com/alpaca_taichou/items/ab2ad83ddbaf2f6ce7fb
 " --------------------------------------------------------------
 
-NeoBundleLazy 'tsukkee/unite-tag', {
-      \ 'depends' : ['Shougo/unite.vim'],
-      \ 'autoload' : {
-      \   'unite_sources' : ['tag', 'tag/file', 'tag/include']
-      \ }}
-NeoBundleLazy 'alpaca-tc/neorspec.vim', {
-      \ 'depends' : ['alpaca-tc/vim-rails', 'tpope/vim-dispatch'],
-      \ 'autoload' : {
-      \   'commands' : ['RSpec', 'RSpecAll', 'RSpecCurrent', 'RSpecNearest', 'RSpecRetry']
-      \ }}
+" NeoBundleLazy 'tsukkee/unite-tag', {
+      " \ 'depends' : ['Shougo/unite.vim'],
+      " \ 'autoload' : {
+      " \   'unite_sources' : ['tag', 'tag/file', 'tag/include']
+      " \ }}
+" NeoBundleLazy 'alpaca-tc/neorspec.vim', {
+      " \ 'depends' : ['alpaca-tc/vim-rails', 'tpope/vim-dispatch'],
+      " \ 'autoload' : {
+      " \   'commands' : ['RSpec', 'RSpecAll', 'RSpecCurrent', 'RSpecNearest', 'RSpecRetry']
+      " \ }}
 
 " ### unite-rails　　　　Railsプロジェクト用Unite-source
-NeoBundleLazy 'basyura/unite-rails', {
-      \ 'depends' : 'Shougo/unite.vim',
-      \ 'autoload' : {
-      \   'unite_sources' : [
-      \     'rails/bundle', 'rails/bundled_gem', 'rails/config',
-      \     'rails/controller', 'rails/db', 'rails/destroy', 'rails/features',
-      \     'rails/gem', 'rails/gemfile', 'rails/generate', 'rails/git', 'rails/helper',
-      \     'rails/heroku', 'rails/initializer', 'rails/javascript', 'rails/lib', 'rails/log',
-      \     'rails/mailer', 'rails/model', 'rails/rake', 'rails/route', 'rails/schema', 'rails/spec',
-      \     'rails/stylesheet', 'rails/view'
-      \   ]
-      \ }}
+" NeoBundleLazy 'basyura/unite-rails', {
+      " \ 'depends' : 'Shougo/unite.vim',
+      " \ 'autoload' : {
+      " \   'unite_sources' : [
+      " \     'rails/bundle', 'rails/bundled_gem', 'rails/config',
+      " \     'rails/controller', 'rails/db', 'rails/destroy', 'rails/features',
+      " \     'rails/gem', 'rails/gemfile', 'rails/generate', 'rails/git', 'rails/helper',
+      " \     'rails/heroku', 'rails/initializer', 'rails/javascript', 'rails/lib', 'rails/log',
+      " \     'rails/mailer', 'rails/model', 'rails/rake', 'rails/route', 'rails/schema', 'rails/spec',
+      " \     'rails/stylesheet', 'rails/view'
+      " \   ]
+      " \ }}
 
 " ### neosnippet　　　Rails/sinatra/rspec等の補完
-NeoBundleLazy 'Shougo/neosnippet', {
-      \ 'autoload' : {
-      \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
-      \   'filetypes' : 'snippet',
-      \   'insert' : 1,
-      \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
-      \ }}
+" NeoBundleLazy 'Shougo/neosnippet', {
+      " \ 'autoload' : {
+      " \   'commands' : ['NeoSnippetEdit', 'NeoSnippetSource'],
+      " \   'filetypes' : 'snippet',
+      " \   'insert' : 1,
+      " \   'unite_sources' : ['snippet', 'neosnippet/user', 'neosnippet/runtime'],
+      " \ }}
 
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
-NeoBundle 'AndrewRadev/switch.vim'
+" NeoBundle 'AndrewRadev/switch.vim'
 " ### rubocop　　　　文法エラー、スタイルチェック
 
-" ### vim-endwise　　　if...endなど対応するキーワードの自動補完
-NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
-      \ 'autoload' : {
-      \   'insert' : 1,
-      \ }}
 
 " ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
-NeoBundle "vimtaku/hl_matchit.vim"
+" NeoBundle "vimtaku/hl_matchit.vim"
 " このプラグインも必要
-NeoBundle "matchit.zip"
+" NeoBundle "matchit.zip"
 
 " ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'taka84u9/vim-ref-ri'
+" NeoBundle 'thinca/vim-ref'
+" NeoBundle 'taka84u9/vim-ref-ri'
 
 " ### unite-outline: いろんな言語のソースのアウトラインを表示
-NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'tsukkee/unite-help'
+" NeoBundle 'h1mesuke/unite-outline'
+" NeoBundle 'tsukkee/unite-help'
 
 
 " ### colorschemes
 " memo とりあえずTeraTerm使ってるとこじゃ良い感じにならないので現在無効
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'baskerville/bubblegum'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'vim-scripts/twilight'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'jpo/vim-railscasts-theme'
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'baskerville/bubblegum'
+" NeoBundle 'nanotech/jellybeans.vim'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'vim-scripts/twilight'
+" NeoBundle 'jonathanfilip/vim-lucius'
+" NeoBundle 'jpo/vim-railscasts-theme'
 " note: 俺の端末が変なせいか、変な色になる
 " Markdown(.md/.mkd) Syntax
 " NeoBundle 'joker1007/vim-markdown-quote-syntax'
 
 
 " ### for gitv
-NeoBundle 'gregsexton/gitv'
-NeoBundle 'tpope/vim-fugitive'
+" NeoBundle 'gregsexton/gitv'
+" NeoBundle 'tpope/vim-fugitive'
 
 " memo 履歴は見れるがC-rで補完とかできない。使えない(2013-10-23)
 " NeoBundle 'mattn/vdbi-vim'
@@ -188,18 +180,8 @@ NeoBundle 'tpope/vim-fugitive'
 " :VDBI
 " dbi:mysql:dbname=(db name)
 
-
-"### Java
-NeoBundle 'vim-scripts/javacomplete'
-
-call neobundle#end()
-
 syntax enable
 filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
 
 
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
@@ -718,11 +700,6 @@ autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 expandtab
 " --------------------------------------------------------------
 autocmd BufNewFile,BufRead *.js set nowrap ts=2 sw=2 sts=2 expandtab
 
-" --------------------------------------------------------------
-" for java
-" --------------------------------------------------------------
-autocmd BufNewFile,BufRead *.java set nowrap ts=4 sw=4 sts=4 noexpandtab
-autocmd BufNewFile,BufRead *.xml set nowrap ts=4 sw=4 sts=4 noexpandtab
 
 "----------------------------------------------------
 "" バックアップ関係

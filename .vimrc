@@ -18,6 +18,13 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   "call dein#add('Shougo/neosnippet.vim')
   "call dein#add('Shougo/neosnippet-snippets')
   call dein#add('preservim/nerdtree')
+  call dein#add('tpope/vim-surround')
+  call dein#add('tpope/vim-rails')
+  call dein#add('tpope/vim-haml')
+  call dein#add('slim-template/vim-slim')
+  call dein#add('kchmck/vim-coffee-script')
+  call dein#add('posva/vim-vue')
+  call dein#add('scrooloose/nerdcommenter')
 
   " Required:
   call dein#end()
@@ -38,8 +45,6 @@ endif
 
 " コード補完
 NeoBundle 'Shougo/neocomplete.vim'
-" NeoBundle 'marcus/rsense' " for ruby
-" NeoBundle 'supermomonga/neocomplete-rsense.vim'
 
 " 静的解析
 NeoBundle 'scrooloose/syntastic'
@@ -67,19 +72,10 @@ NeoBundle "vim-scripts/DirDiff.vim"
 
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'fuenor/qfixgrep.git'
-NeoBundle "scrooloose/nerdcommenter"
-NeoBundle "vim-scripts/surround.vim"
-" NeoBundle "vim-scripts/yanktmp.vim"
 NeoBundle "vim-scripts/grep.vim"
-"NeoBundle "git://github.com/vim-scripts/The-NERD-Commenter.git"
-" NeoBundle "git://github.com/tpope/vim-surround.git"
-" neobundleがwarningを出すので無効に
-" NeoBundle "git://github.com/vim-scripts/matrix.vim--Yang.git"
-"NeoBundle "git://github.com/hrp/EnhancedCommentify.git"
 
 NeoBundle 'groenewege/vim-less'
 
-" NeoBundle "git://github.com/violetyk/cake.vim.git"
 NeoBundle "vim-scripts/YankRing.vim"
 
 " TypeScript
@@ -129,10 +125,6 @@ NeoBundleLazy 'Shougo/neosnippet', {
 NeoBundle 'AndrewRadev/switch.vim'
 " ### rubocop　　　　文法エラー、スタイルチェック
 
-" ### vim-rails　　　　Railsプロジェクト用プラグイン
-NeoBundle 'tpope/vim-rails', { 'autoload' : {
-      \ 'filetypes' : ['haml', 'ruby', 'eruby', 'slim'] }}
-
 " ### vim-endwise　　　if...endなど対応するキーワードの自動補完
 NeoBundleLazy 'alpaca-tc/vim-endwise.git', {
       \ 'autoload' : {
@@ -151,9 +143,6 @@ NeoBundle 'taka84u9/vim-ref-ri'
 " ### unite-outline: いろんな言語のソースのアウトラインを表示
 NeoBundle 'h1mesuke/unite-outline'
 NeoBundle 'tsukkee/unite-help'
-
-" NeoBundleLazy 'kana/vim-smartchr', '', 'loadInsert'
-
 
 
 " ### colorschemes
@@ -180,10 +169,6 @@ NeoBundle 'tpope/vim-fugitive'
 " :VDBI
 " dbi:mysql:dbname=(db name)
 
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'slim-template/vim-slim'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'posva/vim-vue'
 
 "### Java
 NeoBundle 'vim-scripts/javacomplete'
@@ -199,14 +184,6 @@ NeoBundleCheck
 
 
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
-
-" -------------------------------
-" Rsense ※開発止まってそう(2017年)
-" -------------------------------
-" todo
-" neocompleteとneocomplcacheのどちらを使うとか、なんか不確定が多いのでまだ無効でいいや
-" let g:rsenseHome = '/usr/local/lib/rsense-0.3'
-" let g:rsenseUseOmniFunc = 1
 
 " --------------------------------
 " neocomplete.vim
@@ -482,12 +459,6 @@ let g:rails_default_database="mysql"
 autocmd BufNewFile,BufRead *.mobile.erb set filetype=html
 autocmd BufRead,BufNewFile *.slim set filetype=slim
 
-"------------------------------------
-" surround.vim
-"------------------------------------
-" s, ssで選択範囲を指定文字でくくる
-nmap s <Plug>Ysurround
-nmap ss <Plug>Yssurround
 
 "------------------------------------
 " NERD_commenter.vim
@@ -532,7 +503,10 @@ let g:quickrun_config = {
 
 "------------------------------------
 " NERDTree
+"
 " ファイルエクスプローラーが画面分割で開いてすごくファイルが開きやすい！
+" エクスプローラー上でO（オー）で、ツリー配下すべて開いてくれる・・そこからファイル検索とか
+" 他にも、?で、多くの技が知れる。ブックマークとか。
 "------------------------------------
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 

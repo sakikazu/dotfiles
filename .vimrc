@@ -34,6 +34,7 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('Shougo/neocomplete.vim')
   call dein#add('w0rp/ale')
+  call dein#add('tpope/vim-markdown')
 
   " シンタックスハイライト
   call dein#add('tpope/vim-haml')

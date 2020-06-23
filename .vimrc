@@ -28,7 +28,7 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   call dein#add('vim-scripts/YankRing.vim')
   " vim-endwise: if...endなど対応するキーワードの自動補完
   call dein#add('tpope/vim-endwise')
-  " Rgrepなど。通常はvimgrepでいいかなー
+  " 外部grep（Rgrep、Regrep）
   call dein#add('vim-scripts/grep.vim')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
   call dein#add('airblade/vim-gitgutter')
@@ -518,7 +518,10 @@ let g:quickrun_config = {
 " エクスプローラー上でO（オー）で、ツリー配下すべて開いてくれる・・そこからファイル検索とか
 " 他にも、?で、多くの技が知れる。ブックマークとか。
 "------------------------------------
-nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+" TODO: NERDTreeFindだと、現在開いているファイルをツリー上で示してくれるので使いやすい
+" ベストは、Treeが開いていない時はNERDTreeFindにして、閉じる時はToggleにするのを同じキーで実現すること
+" とりあえず、現在開いているバッファという意味らしい「%」を引数にして開き、rootに戻るときはTree上で「CD」とする運用で
+nnoremap <silent> <C-e> :NERDTreeToggle %<CR>
 
 " 表示幅
 let g:NERDTreeWinSize=50
@@ -575,9 +578,9 @@ augroup END
 " 引数-rnIHは再起、行数追加、バイナリファイルは除いてファイル名を表示
 set grepprg=grep\ -rnIH\ --exclude=.svn\ --exclude=.git
 
-" grep の書式を挿入
-nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
-nnoremap <expr> <Space>G ':sil grep! --include="*.' . expand('%:e') . '" '
+nnoremap <expr> <Space>g ':Regrep '
+" nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
+" nnoremap <expr> <Space>G ':sil grep! --include="*.' . expand('%:e') . '" '
 
 
 " ---------------------------------------
@@ -751,7 +754,6 @@ set backupskip=/tmp/*,/private/tmp/*
 "------------------------------------
 " その他、vimの技メモ
 "------------------------------------
-" :vimgrep {pattern} **/*.rb
-" vimgrepを使うなら、mapが設定されているのでそちらでショートカット
+" grepは、vimgrep（内部）ではなく、外部grepのRegrep（再帰的、メタキャラクタのエスケープ不要）を使う
 
 

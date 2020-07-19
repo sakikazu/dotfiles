@@ -384,6 +384,9 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 ### rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# 2020-07-18: WindowsのWSL Ubuntuで追加
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
@@ -398,25 +401,4 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 
 # 環境依存設定ファイル
-[ -f ${HOME}/dotfiles/.zshrc.local ] && source ${HOME}/dotfiles/.zshrc.local
-
-# todo "local", "eval"とかがnot foundになってしまう？？
-# peco(コマンド履歴ユーティリティ)
-# function peco-select-history() {
-#     local tac
-#     if which tac > /dev/null; then
-#         tac="tac"
-#     else
-#         tac="tail -r"
-#     fi
-
-#     BUFFER=$(\history -n 1 | \
-#         eval $tac | \
-#         peco --query "$LBUFFER")
-#     CURSOR=$#BUFFER
-#     zle clear-screen
-# }
-# zle -N peco-select-history
-# bindkey '^r' peco-select-history
-
-
+[ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local

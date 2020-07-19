@@ -19,7 +19,7 @@ ZSH_THEME="robbyrussell"
 # CASE_SENSITIVE="true"
 
 # Uncomment this to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13
@@ -388,15 +388,13 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
-# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-
 ### for CakePHP
 #export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
 ## ★ 見せしめに残しておくか。↑はSM以外のサーバーの設定だったが、SMでこれが効くと、ログインできなくなってしまってた。suになって、su -f sakikazuとすることでログインできた・・
 ## telnetでもConnection Refusedとかなってたしなぁ
 
 # RVM
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
 
 

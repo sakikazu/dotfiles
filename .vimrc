@@ -8,15 +8,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/sakikazu/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/sakikazu/.cache/dein')
-  call dein#begin('/Users/sakikazu/.cache/dein')
+if dein#load_state('$HOME/.cache/dein')
+  call dein#begin('$HOME/.cache/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/sakikazu/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   call dein#add('preservim/nerdtree')
   " vim-nerdtree-tabs: NERDTreeTabsToggleすることで、すべてのタブにNERDTreeを表示してくれるけど必要か？
@@ -42,6 +42,8 @@ if dein#load_state('/Users/sakikazu/.cache/dein')
   call dein#add('jelera/vim-javascript-syntax')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('posva/vim-vue')
+  " htmlのpug記法
+  call dein#add('digitaltoad/vim-pug')
 
   " unite関連
   call dein#add('Shougo/unite.vim')

@@ -1,3 +1,9 @@
+" NeoVim: true color
+set termguicolors
+" 置換コマンド中にプレビューが表示される
+set inccommand=split
+
+
 "dein Scripts-----------------------------
 
 " deinについて
@@ -32,7 +38,6 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('vim-scripts/grep.vim')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('Shougo/neocomplete.vim')
   call dein#add('w0rp/ale')
   call dein#add('tpope/vim-markdown')
 
@@ -45,12 +50,14 @@ if dein#load_state('$HOME/.cache/dein')
   " htmlのpug記法
   call dein#add('digitaltoad/vim-pug')
 
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+
   " unite関連
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/neoyank.vim')
-  call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
   " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
   " call dein#add('Shougo/denite.nvim')
@@ -183,86 +190,10 @@ filetype plugin indent on
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
 
 " --------------------------------
-" neocomplete.vim
+" deoplete
 " --------------------------------
-" from https://github.com/Shougo/neocomplete.vim
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-
-" For ruby
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.ruby = '[^.*\t]\.\w*\|\h\w*::'
-
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_completion_start_length = 1
 
 " --------------------------------
 " w0rp/ale
@@ -289,11 +220,6 @@ nnoremap <C-]> g<C-]>
 " --------------------------------------------------------------
 " 参考）https://github.com/kenchan/dotfiles/blob/master/dot.vimrc
 " --------------------------------------------------------------
-
-" これ有効にしたら「Another plugin set completefunc! Disabled neocomplete.」ってエラーが出る
-" autocmd FileType java :setlocal omnifunc=javacomplete#Complete
-" autocmd FileType java :setlocal completefunc=javacomplete#CompleteParamsInfo
-
 
 " augroup init (from tyru's vimrc)
 augroup vimrc
@@ -332,7 +258,6 @@ set history=100
 set number
 set ruler
 set showmatch " 入力時の括弧で対応する括弧をハイライト
-set ttymouse=xterm2
 set wildmode=longest:list
 " 無効にする）マウス選択でコピーできていたのができなくなってしまったので
 "set mouse=a " 全モードでマウスを有効化
@@ -371,10 +296,10 @@ set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).':'.&ff.']'}%=%l,%c%v%
 nnoremap j gj
 nnoremap k gk
 
-nnoremap wh <C-w>h
-nnoremap wj <C-w>j
-nnoremap wk <C-w>k
-nnoremap wl <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 nnoremap Y y$
 
@@ -395,10 +320,6 @@ function! s:HighlightSpaces()
   match EOLSpace /\s\+$/
 endf
 
-
-
-" clipboard
-set clipboard+=unnamed
 
 " <Leader>
 inoremap <Leader>date <C-R>=strftime('%Y/%m/%d(%a)')<CR>
@@ -608,9 +529,6 @@ endfunction
 " ---------------------------------------
 " sakikazu setting
 " ---------------------------------------
-" memo set pasteがあると、NeoCompleteCacheが動作しなかった。しかも、これあると自動インデントされるようになるけど、逆にその方がいいことに気づいた…。
-" set paste
-
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
 hi TabLineSel  term=bold cterm=bold,underline ctermfg=5
 hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
@@ -745,7 +663,9 @@ noremap!  
 " set clipboard=unnamed,autoselect
 
 " 上のをやると、文字削除したりとかでもクリップボードに入っちゃうのでめんどくさいので無効にした
-set clipboard=
+" set clipboard=
+" set clipboard+=unnamed
+
 
 " Macでcrontabを編集するために（vimのバックアップの問題）
 " http://weble.org/2011/06/06/mac-cron

@@ -11,6 +11,7 @@
 !/.zshrc.local.origin
 !/zsh_tools
 !/.vimrc
+!/.nvim_init.vim
 #!/.vim
 !/.bashrc
 !/.gemrc

@@ -2,6 +2,8 @@
 set termguicolors
 " 置換コマンド中にプレビューが表示される
 set inccommand=split
+" ハイフンも含めて同じ単語として選択できるようになる
+set iskeyword+=-
 
 
 "dein Scripts-----------------------------
@@ -58,6 +60,7 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/neomru.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('Shougo/neoyank.vim')
+  call dein#add('Shougo/unite-outline')
 
   " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
   " call dein#add('Shougo/denite.nvim')
@@ -86,10 +89,6 @@ endif
 " ドキュメント参照
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'yuku-t/vim-ref-ri'
-
-" memo
-" なぜかこれでインストールされなかった？Githubからファイルをダウンロードして.vim配下に入れたら動いた。元々unite-outlineというディレクトリがあったのでそれが怪しいが
-" NeoBundle 'Shougo/unite-outline'
 
 " NeoBundle "Shougo/vimshell.vim"
 " NeoBundle "vim-scripts/DirDiff.vim"
@@ -154,8 +153,6 @@ endif
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'taka84u9/vim-ref-ri'
 
-" ### unite-outline: いろんな言語のソースのアウトラインを表示
-" NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'tsukkee/unite-help'
 
 
@@ -286,6 +283,9 @@ set hlsearch
 " 検索時に大文字・小文字を区別しない。ただし、検索語に大文字小文字が混在しているときは区別する
 set ignorecase
 set smartcase
+" TODO: WSLの環境のせいかsmartcaseが効かないので、デフォルトで大文字小文字を区別する
+" TODO:  この場合、uniteコマンドでも効いてしまって、ファイル検索がやりづらくなったので戻す
+" set noignorecase
 set incsearch
 
 "statusline
@@ -343,10 +343,11 @@ let git_diff_spawn_mode = 1
 " unite.vim
 "------------------------------------
 
-" 候補を選択して <CR> すると新しいタブページでファイルを開く
-" memo デフォルトは現在のバッファ内。これやんなくても対象ファイル選択して「t」でいけるけど
-" todo てかこれコマンド・・どうやってここで設定するの～～～
-" :Unite file -default-action=tabopen
+" 候補を選択して <CR> すると新しいタブページでファイルを開く <- 元のタブに戻るとUniteは消えているので、使い心地は悪いな
+"   :Unite file -default-action=tabopen <- Uniteのコマンドは設定ファイル内で設定できるのか？
+
+" Unite上で `t` : 新しいタブでオープン
+" Unite上で `p` : Preview
 
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
@@ -678,4 +679,16 @@ set backupskip=/tmp/*,/private/tmp/*
 "------------------------------------
 " grepは、vimgrep（内部）ではなく、外部grepのRegrep（再帰的、メタキャラクタのエスケープ不要）を使う
 
+
+"------------------------------------
+" for WSL(windows)
+"------------------------------------
+
+" WSLでyankでクリップボードにコピー
+if system('uname -a | grep microsoft') != ''
+  augroup myYank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe', @")
+  augroup END
+endif
 

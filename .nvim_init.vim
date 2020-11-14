@@ -502,9 +502,18 @@ augroup END
 " 引数-rnIHは再起、行数追加、バイナリファイルは除いてファイル名を表示
 set grepprg=grep\ -rnIH\ --exclude=.svn\ --exclude=.git
 
-nnoremap <expr> <Space>g ':Regrep '
 " nnoremap <expr> <Space>g ':vimgrep /\<' . expand('<cword>') . '\>/j **/*.' . expand('%:e')
 " nnoremap <expr> <Space>G ':sil grep! --include="*.' . expand('%:e') . '" '
+
+" ---------------------------------------
+" grep.vim Setting
+" ---------------------------------------
+
+nnoremap <expr> <Space>g ':Regrep '
+" TODO: Rails専用の設定になっているが、うまいこと汎用化できないかな
+let Grep_Skip_Dirs = '.git tmp public vendor node_modules'
+let Grep_Default_Options = '-I'   "バイナルファイルはgrepしない
+let Grep_Skip_Files = '*.log *.map *.bak *~'  "ログ、バックアップファイルを無視する
 
 
 " ---------------------------------------

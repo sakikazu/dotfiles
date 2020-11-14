@@ -4,6 +4,7 @@
 # 各管理サーバーのファイルをバックアップする
 #
 # created at: 2012/11/12
+# 2020/11/14: backup.rbを使うため、不要
 #
 
 localbackdir='/home/sakikazu/bak/'

@@ -6,7 +6,7 @@
 # created at: 2012/11/12
 #
 
-localbackdir='/Users/sakikazu/bak/'
+localbackdir='/home/sakikazu/bak/'
 
 
 echo

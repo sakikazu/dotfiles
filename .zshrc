@@ -46,7 +46,16 @@ DISABLE_AUTO_UPDATE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git ruby osx bundler brew rails emoji-clock)
 
-source $ZSH/oh-my-zsh.sh
+# zshの無名functionみたいなやつを評価する設定はこれか
+setopt prompt_subst
+
+# [slow] かなり時間かかる
+# source $ZSH/oh-my-zsh.sh
+
+# TODO: oh-my-zshからコピーしてきて自分管理にする。READMEも含め
+## [oh-my-zsh]使う分だけ
+source $ZSH/plugins/git/git.plugin.zsh  # ~/.oh-my-zsh/plugins/git/README.md
+source $ZSH/plugins/git-prompt/git-prompt.plugin.zsh # .oh-my-zsh/plugins/git-prompt/README.md
 
 # Customize to your needs...
 
@@ -75,7 +84,8 @@ export LANG=ja_JP.UTF-8
 # git branch名表示
 source ~/dotfiles/zsh_tools/git-prompt.sh
 PROMPT='[%K{red}%*%k %F{red}%~%f%F{yellow}$(__git_ps1 " %s")%f]\$ '
-RPROMPT='%F{cyan}%n@%m%f'
+# TODO: 2020-11-19、どっちのgitプロンプトが良いか試し中
+# RPROMPT='%F{cyan}%n@%m%f'
 
 # autoload colors
 # colors
@@ -383,10 +393,10 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 
 ### rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 # 2020-07-18: WindowsのWSL Ubuntuで追加
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# [slow] `rbenv init` がちょい時間かかる
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ### for CakePHP
 #export PATH=/var/www/cakephp/hoge1/app/Console:$PATH

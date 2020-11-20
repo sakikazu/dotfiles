@@ -49,13 +49,11 @@ plugins=(git ruby osx bundler brew rails emoji-clock)
 # zshの無名functionみたいなやつを評価する設定はこれか
 setopt prompt_subst
 
-# [slow] かなり時間かかる
+# [slow] かなり時間かかるので使いたいものだけコピーして使う
 # source $ZSH/oh-my-zsh.sh
 
-# TODO: oh-my-zshからコピーしてきて自分管理にする。READMEも含め
 ## [oh-my-zsh]使う分だけ
-source $ZSH/plugins/git/git.plugin.zsh  # ~/.oh-my-zsh/plugins/git/README.md
-source $ZSH/plugins/git-prompt/git-prompt.plugin.zsh # .oh-my-zsh/plugins/git-prompt/README.md
+source ~/dotfiles/zsh_plugin_copy/git/git.plugin.zsh  # git/README.md
 
 # Customize to your needs...
 
@@ -81,11 +79,12 @@ export LANG=ja_JP.UTF-8
 # set prompt
 #
 
-# git branch名表示
-source ~/dotfiles/zsh_tools/git-prompt.sh
-PROMPT='[%K{red}%*%k %F{red}%~%f%F{yellow}$(__git_ps1 " %s")%f]\$ '
-# TODO: 2020-11-19、どっちのgitプロンプトが良いか試し中
-# RPROMPT='%F{cyan}%n@%m%f'
+### git branch名表示
+# source ~/dotfiles/zsh_tools/git-prompt.sh
+# PROMPT='[%K{red}%*%k %F{red}%~%f%F{yellow}$(__git_ps1 " %s")%f]\$ '
+source ~/dotfiles/zsh_plugin_copy/git-prompt/git-prompt.plugin.zsh # git-prompt/README.md
+PROMPT='[%K{red}%*%k %F{red}%~%f %F{yellow}$(git_super_status)%f]\$ '
+RPROMPT='%F{cyan}%n@%m%f'
 
 # autoload colors
 # colors

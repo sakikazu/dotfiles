@@ -10,6 +10,7 @@
 !/.zshrc
 !/.zshrc.local.origin
 !/zsh_tools
+!/zsh_plugin_copy
 !/.vimrc
 !/.nvim_init.vim
 #!/.vim

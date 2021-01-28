@@ -372,7 +372,7 @@ nnoremap <Leader>a :Ref alc<space>
 let s:unite_ignore_file_rec_patterns=
       \ ''
       \ .'vendor/bundle\|.bundle/\|\.sass-cache/\|'
-      \ .'public/packs\|tmp/cache\|'
+      \ .'public/packs\|tmp/cache\|tmp/storage\|storage\|tmp\|log\|'
       \ .'node_modules/\|bower_components/\|'
       \ .'\.\(bmp\|gif\|jpe\?g\|png\|webp\|ai\|psd\)"\?$'
 

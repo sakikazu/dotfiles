@@ -229,6 +229,8 @@ alias cp="cp -i"
 alias r="rails"
 alias s='source'
 
+alias tmux-rails='/home/sakikazu/dotfiles/tools/tmux_for_rails.sh'
+
 
 case "${OSTYPE}" in
 darwin*)

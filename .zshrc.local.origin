@@ -1,39 +1,7 @@
-# TODO 2020/07/19
-# このファイル、使ってないよね？
+# 環境依存用の.zshrc
+# これを ~/.zshrc.local にコピーして使う
 #
 
-
-### for Mac
-# export PATH=/opt/local/bin:/opt/local/sbin:/Applications/MAMP/Library/bin:$PATH
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/homebrew/bin:$PATH
-unset LD_LIBRARY_PATH
-unset DYLD_LIBRARY_PATH
-
-# tmux
-alias tm='tmux'
-alias tma='tmux attach'
-alias tma0='tmux attach -t 0'
-alias tma1='tmux attach -t 1'
-alias tma2='tmux attach -t 2'
-alias tml='tmux list-sessions'
-
-# 2013-10-29, なんか入れろみたいに言われたから
-# rvm get stable --auto-dotfiles
-
-
-alias ssh-ec2-video='ssh 54.248.222.229 -i ~/.ssh/ami_func_movie_test.pem -l sakikazu'
-alias ssh-ec2-staging='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem -l www '
-alias ssh-ec2-staging-ec2-user='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem -l ec2-user '
-alias ssh-ws_dev='ssh 192.168.50.254'
-alias ssh-ws_batch='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem 54.248.105.61 -l ec2-user'
-alias ssh-ws_pro='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem 54.248.117.223 -l www'
-
-alias regist-aws-keys='eval ssh-agent; ssh-add ~/.ssh/ami_func_movie_test.pem; ssh-add ~/.ssh/wellstyle-yokota-ec2key.pem; ssh-add -l'
-alias ssh-ws_app1='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem 54.248.117.223 -l ec2-user'
-alias ssh-ws_app2='ssh -i ~/.ssh/wellstyle-yokota-ec2key.pem 54.248.117.225 -l ec2-user'
-
-export JAVA_HOME=`/usr/libexec/java_home -v 1.7`
-export PATH=$PATH:$JAVA_HOME/bin
-export ANDROID_HOME=/Applications/android_sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+# export PATH=/xxx/bin:$PATH
+# alias xx='xxx'
 

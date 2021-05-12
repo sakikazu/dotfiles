@@ -5,11 +5,18 @@
 #
 
 ln -s ~/dotfiles/.vimrc ~
-ln -s ~/dotfiles/.zshrc ~
 ln -s ~/dotfiles/.tmux.conf ~
 ln -s ~/dotfiles/.gemrc ~
 ln -s ~/dotfiles/.gitconfig ~
 ln -s ~/dotfiles/.gitignore_global ~
+
+# zsh
+ln -s ~/dotfiles/.zshrc ~
+cp ~/dotfiles/.zshrc.local.origin ~/.zshrc.local
+
+# neovim(nvim)
+mkdir -p ~/.config/nvim
+ln -s ~/dotfiles/.nvim_init.vim ~/.config/nvim/init.vim
 
 echo
 echo "####################"

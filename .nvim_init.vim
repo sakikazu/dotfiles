@@ -640,6 +640,8 @@ autocmd BufNewFile,BufRead *.php set nowrap ts=4 sw=4 sts=4 expandtab
 " for JavaScript
 " --------------------------------------------------------------
 autocmd BufNewFile,BufRead *.js set nowrap ts=2 sw=2 sts=2 expandtab
+" これでnerdcommenterがJS用のコメントアウトをしてくれるようになるが、vim-vueのシンタックスハイライトは効かなくなる
+autocmd BufNewFile,BufRead *.vue set filetype=javascript
 
 
 "----------------------------------------------------

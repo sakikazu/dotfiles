@@ -259,6 +259,8 @@ set wildmode=longest:list
 " 無効にする）マウス選択でコピーできていたのができなくなってしまったので
 "set mouse=a " 全モードでマウスを有効化
 
+set wrap
+
 set directory-=.
 
 "backup
@@ -703,3 +705,9 @@ if system('uname -a | grep microsoft') != ''
   augroup END
 endif
 
+"------------------------------------
+" include external setting
+"------------------------------------
+if filereadable(expand('$HOME/dotfiles/.nvim_init.local.vim'))
+  source $HOME/dotfiles/.nvim_init.local.vim
+endif

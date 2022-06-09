@@ -30,7 +30,11 @@ if dein#load_state('$HOME/.cache/dein')
   " vim-nerdtree-tabs: NERDTreeTabsToggleすることで、すべてのタブにNERDTreeを表示してくれるけど必要か？
   call dein#add('jistr/vim-nerdtree-tabs')
   call dein#add('tpope/vim-surround')
+  " ctagsでrubyのパスサポートを改善させるため
+  call dein#add('vim-ruby/vim-ruby')
   call dein#add('tpope/vim-rails')
+  " gfでgem内も飛べるようになる、 `:Bopen spree` でgemディレクトリに飛べる
+  call dein#add('tpope/vim-bundler')
   call dein#add('scrooloose/nerdcommenter')
   " yank paste後に、ctrl+n/pで、yankの履歴を辿ることができる
   call dein#add('vim-scripts/YankRing.vim')
@@ -40,6 +44,7 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('vim-scripts/grep.vim')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('hoshinotsuyoshi/vim-to-github')
   call dein#add('w0rp/ale')
   call dein#add('tpope/vim-markdown')
 

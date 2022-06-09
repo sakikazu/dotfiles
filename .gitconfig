@@ -4,11 +4,14 @@
 [user]
 	name = k.sakimura
 	email = sakikazu15@gmail.com
+	signingkey = 8C48CE01C378CB4A
+[commit]
+  gpgsign = true
 [color]
 	ui = auto
 [core]
 	editor = vim -c \"set fenc=utf-8\"
-	excludesfile = ~/.gitignore_global
+	excludesFile = ~/.gitignore_global
 	pager = LESSCHARSET=utf-8 less
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
@@ -18,7 +21,7 @@
 	trustExitCode = true
 [alias]
   graph = log --graph --date=short --pretty=\"format:%C(yellow)%h %C(cyan)%ad %C(green)%an%Creset%x09%s %C(red)%d%Creset\"
-  branch-sort = branch --sort=committerdate
+  branch-sort = branch --sort=committerdate --format="%(committerdate:relative)%09%(refname:short)"
   co = checkout
 
   find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
@@ -41,3 +44,5 @@
   sgraph = !"git log --oneline --graph"
   ancestor = !zsh -c 'diff -u <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | sed -ne \"s/^ //p\" | head -n 1' -
   unstage = reset HEAD
+[init]
+	defaultBranch = main

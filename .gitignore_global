@@ -2,3 +2,6 @@
 /.idea
 .byebug_history
 vendor/bundle/
+_refs
+.irbrc
+.irb_history

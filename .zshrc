@@ -231,6 +231,8 @@ alias s='source'
 
 alias tmux-rails='/home/sakikazu/dotfiles/tools/tmux_for_rails.sh'
 
+# oh-my-zsh で定義済みのものを上書き
+alias gb="git branch-sort"
 
 case "${OSTYPE}" in
 darwin*)

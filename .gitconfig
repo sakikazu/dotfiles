@@ -12,13 +12,24 @@
 [core]
 	editor = vim -c \"set fenc=utf-8\"
 	excludesFile = ~/.gitignore_global
-	pager = LESSCHARSET=utf-8 less
+	pager = delta
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[delta]
+  side-by-side = true
+  line-numbers = true
+  navigate = true  # use n and N to move between diff sections
+  light = false    # set to true if you're in a terminal w/ a light background color
+[merge]
+  conflictstyle = diff3
+[diff]
+  colorMoved = default
+[interactive]
+  diffFilter = delta --color-only
 [alias]
   graph = log --graph --date=short --pretty=\"format:%C(yellow)%h %C(cyan)%ad %C(green)%an%Creset%x09%s %C(red)%d%Creset\"
   branch-sort = branch --sort=committerdate --format="%(committerdate:relative)%09%(refname:short)"

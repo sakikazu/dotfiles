@@ -26,9 +26,6 @@ if dein#load_state('$HOME/.cache/dein')
   " Required:
   call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 
-  call dein#add('preservim/nerdtree')
-  " vim-nerdtree-tabs: NERDTreeTabsToggleすることで、すべてのタブにNERDTreeを表示してくれるけど必要か？
-  call dein#add('jistr/vim-nerdtree-tabs')
   call dein#add('tpope/vim-surround')
   " ctagsでrubyのパスサポートを改善させるため
   call dein#add('vim-ruby/vim-ruby')
@@ -61,6 +58,8 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
   "call dein#add('github/copilot.vim')
+
+  " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
 
   " unite関連
@@ -93,7 +92,9 @@ endif
 
 "End dein Scripts-------------------------
 
+" lua ----------------------------
 lua require('init')
+" lua end ------------------------
 
 
 " ドキュメント参照
@@ -447,42 +448,6 @@ let g:quickrun_config = {
 "#######################################
 " 2020/06/20追加
 "#######################################
-
-"------------------------------------
-" NERDTree
-"
-" ファイルエクスプローラーが画面分割で開いてすごくファイルが開きやすい！
-" エクスプローラー上でO（オー）で、ツリー配下すべて開いてくれる・・そこからファイル検索とか
-" 他にも、?で、多くの技が知れる。ブックマークとか。
-"------------------------------------
-" TODO: NERDTreeFindだと、現在開いているファイルをツリー上で示してくれるので使いやすい
-" ベストは、Treeが開いていない時はNERDTreeFindにして、閉じる時はToggleにするのを同じキーで実現すること
-" とりあえず、現在開いているバッファという意味らしい「%」を引数にして開き、rootに戻るときはTree上で「CD」とする運用で
-nnoremap <silent> <C-e> :NERDTreeToggle %<CR>
-
-" 表示幅
-let g:NERDTreeWinSize=50
-
-" ブックマークを表示
-let g:NERDTreeShowBookmarks=1
-
-" 親ディレクトリへ移動
-let g:NERDTreeMapUpdir=''
-
-" ファイルの開き方
-let g:NERDTreeMapOpenSplit='<C-j>'
-let g:NERDTreeMapOpenVSplit='<C-l>'
-
-" ファイルを開いたらNERDTreeを閉じる(0:閉じない)
-let g:NERDTreeQuitOnOpen=0
-
-" 隠しファイルを表示
-let g:NERDTreeShowHidden=1
-
-" 非表示ファイル
-let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
-" NERDTree end ----
-
 
 augroup MyAutoCmd
   autocmd!

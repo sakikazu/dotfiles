@@ -60,6 +60,9 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
+  "call dein#add('github/copilot.vim')
+  call dein#add('nvim-tree/nvim-tree.lua')
+
   " unite関連
   call dein#add('Shougo/unite.vim')
   call dein#add('Shougo/neomru.vim')
@@ -89,6 +92,8 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+
+lua require('init')
 
 
 " ドキュメント参照
@@ -243,7 +248,8 @@ MyAutocmd InsertEnter * highlight StatusLine ctermfg=12 guifg=#1E90FF
 set noerrorbells
 set vb t_vb=
 
-set ambiwidth=double
+" NOTE: nvim-tree のデザインが崩れてしまうのでコメントアウト
+" set ambiwidth=double " 米印みたいな文字が半角で表示されてしまうのを防ぐためらしいが効いてるか不明
 set autoread
 set hidden  " バッファを切替えてもundoの効力を失わない
 
@@ -713,6 +719,6 @@ endif
 "------------------------------------
 " include external setting
 "------------------------------------
-if filereadable(expand('$HOME/dotfiles/.nvim_init.local.vim'))
-  source $HOME/dotfiles/.nvim_init.local.vim
+if filereadable(expand('./.nvim_init.local.vim'))
+  source ./.nvim_init.local.vim
 endif

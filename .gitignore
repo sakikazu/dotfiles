@@ -12,7 +12,7 @@
 !/zsh_tools
 !/zsh_plugin_copy
 !/.vimrc
-!/.nvim_init.vim
+!/nvim
 #!/.vim
 !/.bashrc
 !/.gemrc

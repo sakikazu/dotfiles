@@ -530,6 +530,8 @@ command! E Explore
 
 "======= maps  =======
 
+nnoremap <silent> <C-e> :NvimTreeFindFileToggle<CR>
+
 " 論理移動と物理移動を交換
 " --------------------------------------------------------------
 noremap j gj

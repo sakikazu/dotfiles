@@ -61,6 +61,12 @@ if dein#load_state('$HOME/.cache/dein')
 
   " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
+  " NOTE: 米印などの表示幅がおかしくなる問題を解消できるかと期待したがダメだった(NeoVim 9.0)
+  " call dein#add('rbtnn/vim-ambiwidth')
+
+  " LSP
+  " ruby用に `:CocInstall coc-solargraph` を行った
+  call dein#add('neoclide/coc.nvim', {'branch': 'release'})
 
   " unite関連
   call dein#add('Shougo/unite.vim')
@@ -268,8 +274,9 @@ set number
 set ruler
 set showmatch " 入力時の括弧で対応する括弧をハイライト
 set wildmode=longest:list
-" 無効にする）マウス選択でコピーできていたのができなくなってしまったので
+" statuslineの文字列などがマウス選択でコピーできなくなったため無効。エディタ内容は選択してyankすればできるが
 "set mouse=a " 全モードでマウスを有効化
+set mouse=
 
 set wrap
 
@@ -512,6 +519,22 @@ autocmd FileType gitv call s:my_gitv_settings()
 function! s:my_gitv_settings()
   nnoremap <silent><buffer> t :<C-u>windo call <SID>toggle_git_folding()<CR>1<C-w>w
 endfunction
+
+
+" ---------------------------------------
+" coc.nvim Setting
+" ---------------------------------------
+" タブで補完候補選択
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap
+      \ pumvisible() ? "\" :
+      \ check_back_space() ? "\" :
+      \ coc#refresh()
+" gdで定義ジャンプ
+nmap gd (coc-definition)
 
 
 " ---------------------------------------

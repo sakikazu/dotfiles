@@ -65,8 +65,8 @@ if dein#load_state('$HOME/.cache/dein')
   " call dein#add('rbtnn/vim-ambiwidth')
 
   " LSP
-  " ruby用に `:CocInstall coc-solargraph` を行った
-  call dein#add('neoclide/coc.nvim', {'branch': 'release'})
+  " vimを起動する度 `:CocInstall coc-solargraph` しないと、ruby のLSPが効かないので無効にする
+  " call dein#add('neoclide/coc.nvim', {'branch': 'release'})
 
   " unite関連
   call dein#add('Shougo/unite.vim')
@@ -523,18 +523,19 @@ endfunction
 
 " ---------------------------------------
 " coc.nvim Setting
+" https://rooter.jp/programming/vim-modern-ruby/
 " ---------------------------------------
 " タブで補完候補選択
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-inoremap
-      \ pumvisible() ? "\" :
-      \ check_back_space() ? "\" :
-      \ coc#refresh()
-" gdで定義ジャンプ
-nmap gd (coc-definition)
+" function! s:check_back_space() abort
+  " let col = col('.') - 1
+  " return !col || getline('.')[col - 1]  =~ '\s'
+" endfunction
+" inoremap
+      " \ pumvisible() ? "\" :
+      " \ check_back_space() ? "\" :
+      " \ coc#refresh()
+" " gdで定義ジャンプ
+" nmap gd (coc-definition)
 
 
 " ---------------------------------------

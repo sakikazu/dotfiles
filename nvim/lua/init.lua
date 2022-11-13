@@ -33,7 +33,7 @@ vim.opt.termguicolors = true
 -- empty setup using defaults
 require("nvim-tree").setup({
   view = {
-    width = 45,
+    width = 35,
   },
   remove_keymaps = {
     "<C-e>", -- tree表示のトグルをC-eにしているため、default mappingの方はremove

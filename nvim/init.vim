@@ -362,6 +362,7 @@ let git_diff_spawn_mode = 1
 
 "------------------------------------
 " unite.vim
+" see: https://www.karakaram.com/unite/
 "------------------------------------
 
 " 候補を選択して <CR> すると新しいタブページでファイルを開く <- 元のタブに戻るとUniteは消えているので、使い心地は悪いな
@@ -369,6 +370,13 @@ let git_diff_spawn_mode = 1
 
 " Unite上で `t` : 新しいタブでオープン
 " Unite上で `p` : Preview
+
+" インサートモードで開始
+" let g:unite_enable_start_insert = 1
+" 最近開いたファイル履歴の保存数
+let g:unite_source_file_mru_limit = 300
+" file_mruの表示フォーマットを指定。空にすると表示スピードが高速化される
+let g:unite_source_file_mru_filename_format = ''
 
 nnoremap <silent> ,uf :<C-u>Unite file<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
@@ -385,6 +393,27 @@ nnoremap <silent> ,us :<C-u>Unite file_rec/async:!<CR>
 
 " vim-ref
 nnoremap <Leader>a :Ref alc<space>
+
+" uniteを開いている間のキーマッピング
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()"{{{
+  " 使うものだけ有効にしている
+	" ESCでuniteを終了
+	" nmap <buffer> <ESC> <Plug>(unite_exit)
+	" 入力モードのときjjでノーマルモードに移動
+	" imap <buffer> jj <Plug>(unite_insert_leave)
+	" 入力モードのときctrl+wでバックスラッシュも削除
+	" imap <buffer> <C-w> <Plug>(unite_delete_backward_path)
+	" ctrl+sで縦に分割して開く
+	nnoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+	inoremap <silent> <buffer> <expr> <C-s> unite#do_action('split')
+	" ctrl+vで横に分割して開く
+	nnoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+	inoremap <silent> <buffer> <expr> <C-v> unite#do_action('vsplit')
+	" ctrl+oでその場所に開く
+	nnoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+	inoremap <silent> <buffer> <expr> <C-o> unite#do_action('open')
+endfunction"}}}
 
 "------------------------------------
 " vimproc

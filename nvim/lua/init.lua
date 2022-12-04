@@ -34,6 +34,12 @@ vim.opt.termguicolors = true
 require("nvim-tree").setup({
   view = {
     width = 35,
+    mappings = {
+      list = {
+        -- uniteと合わせる。vsplitは両者 <C-v>
+        { key = "<C-s>", action = "split" },
+      },
+    },
   },
   remove_keymaps = {
     "<C-e>", -- tree表示のトグルをC-eにしているため、default mappingの方はremove

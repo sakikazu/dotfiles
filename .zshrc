@@ -84,7 +84,7 @@ export LESSCHARSET=utf-8
 ### git branch名表示
 # source ~/dotfiles/zsh_tools/git-prompt.sh
 # PROMPT='[%K{red}%*%k %F{red}%~%f%F{yellow}$(__git_ps1 " %s")%f]\$ '
-source ~/dotfiles/zsh_plugin_copy/git-prompt/git-prompt.plugin.zsh # git-prompt/README.md
+source ~/dotfiles/zsh_plugin_copy/zsh-git-prompt/zshrc.sh # see: zsh-git-prompt/README.md
 PROMPT='[%K{red}%*%k %F{red}%~%f %F{yellow}$(git_super_status)%f]\$ '
 RPROMPT='%F{cyan}%n@%m%f'
 

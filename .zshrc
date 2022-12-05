@@ -73,6 +73,8 @@ source ~/dotfiles/zsh_plugin_copy/git/git.plugin.zsh  # git/README.md
 #
 export LANG=ja_JP.UTF-8
 
+# git diffなどで日本語が文字化けする問題の対処
+export LESSCHARSET=utf-8
 
 ## Default shell configuration
 #

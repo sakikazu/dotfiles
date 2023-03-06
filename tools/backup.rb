@@ -1,17 +1,24 @@
+# frozen_string_literal: true
+
 require 'date'
 require 'active_support/all'
 
 #
-# 各管理サーバーのファイルをバックアップする
+# 各管理サーバーのDBとファイルをバックアップする
+#
+# NOTE: このスクリプトでDBバックアップ実行まで行うため、リモートサーバー側にcron設定など不要
 #
 # created at: 2020/11/13
 #
 class Backup
-  LOCAL_BAK_DIR = '~/bak'.freeze
+  LOCAL_BAK_DIR = '~/bak'
 
-  HM = 'habit-machine'.freeze
-  ADAN = 'adan'.freeze
-  GASSPRICE = 'gassprice'.freeze
+  MY_HOST_ALIAS = 'mysakura'
+  MY_REMOTE_BASE_DIR = '/home/ubuntu/web'
+
+  HM = 'habit-machine'
+  ADAN = 'adan'
+  GASSPRICE = 'gassprice'
 
   DELETE_DAY = 5 # この数分の前の日のファイルを削除する
 
@@ -29,18 +36,18 @@ class Backup
   def for_habit_machine
     output_label(HM)
     exec_cmd("mkdir -p #{LOCAL_BAK_DIR}/#{HM}")
-    backupfilepath = exec_cmd("ssh mysakura \"/usr/local/site/#{HM}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
-    exec_cmd("scp -p mysakura:#{backupfilepath} #{LOCAL_BAK_DIR}/#{HM}")
-    exec_cmd("rsync -av --delete mysakura:/usr/local/site/#{HM}/shared/public/upload #{LOCAL_BAK_DIR}/#{HM}")
+    backupfilepath = exec_cmd("ssh #{MY_HOST_ALIAS} \"#{MY_REMOTE_BASE_DIR}/#{HM}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
+    exec_cmd("scp -p #{MY_HOST_ALIAS}:#{backupfilepath} #{LOCAL_BAK_DIR}/#{HM}")
+    exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{HM}/shared/public/upload #{LOCAL_BAK_DIR}/#{HM}")
     delete_old_file("habitm_#{deleted_date}.sql.gz")
   end
 
   def for_adan
     output_label(ADAN)
     exec_cmd("mkdir -p #{LOCAL_BAK_DIR}/#{ADAN}")
-    backupfilepath = exec_cmd("ssh mysakura \"/usr/local/site/#{ADAN}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
-    exec_cmd("scp -p mysakura:#{backupfilepath} #{LOCAL_BAK_DIR}/#{ADAN}")
-    exec_cmd("rsync -av --delete mysakura:/usr/local/site/#{ADAN}/shared/public/upload #{LOCAL_BAK_DIR}/#{ADAN}")
+    backupfilepath = exec_cmd("ssh #{MY_HOST_ALIAS} \"#{MY_REMOTE_BASE_DIR}/#{ADAN}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
+    exec_cmd("scp -p #{MY_HOST_ALIAS}:#{backupfilepath} #{LOCAL_BAK_DIR}/#{ADAN}")
+    exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{ADAN}/shared/public/upload #{LOCAL_BAK_DIR}/#{ADAN}")
     delete_old_file("adan_v4_#{deleted_date}.sql.gz")
   end
 
@@ -79,6 +86,8 @@ class Backup
                `#{cmd}`
              end
     puts "... #{stdout}" unless stdout.empty?
+
+    # TODO: 現状filepathをchompして返すためのyieldよね？わかりづらすぎるのでリファクタリング
     yield stdout if block_given?
   end
 
@@ -108,8 +117,10 @@ unless ARGV.empty?
     options[:is_dry_run] = true
   end
 end
+puts "\n--- backup start! for #{Date.today}\n"
 b = Backup.new(**options)
 b.execute
+puts "\n--- backup finish! for #{Date.today}\n"
 
 
 # KNOWHOW

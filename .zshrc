@@ -232,6 +232,7 @@ alias r="rails"
 alias s='source'
 
 alias tmux-rails='/home/sakikazu/dotfiles/tools/tmux_for_rails.sh'
+alias cdl='source ~/dotfiles/tools/cdl.sh'
 
 # oh-my-zsh で定義済みのものを上書き
 alias gb="git branch-sort"

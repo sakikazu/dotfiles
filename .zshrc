@@ -412,6 +412,9 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 [ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
 
+# Deno
+export DENO_INSTALL="/home/sakikazu/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # 環境依存設定ファイル
 [ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local

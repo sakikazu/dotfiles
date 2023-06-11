@@ -37,6 +37,12 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('vim-scripts/YankRing.vim')
   " vim-endwise: if...endなど対応するキーワードの自動補完
   call dein#add('tpope/vim-endwise')
+
+  " ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
+  call dein#add("vimtaku/hl_matchit.vim")
+  " このプラグインも必要
+  call dein#add("vim-scripts/matchit.zip")
+
   " 外部grep（Rgrep、Regrep）
   call dein#add('vim-scripts/grep.vim')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
@@ -54,13 +60,29 @@ if dein#load_state('$HOME/.cache/dein')
   " htmlのpug記法
   call dein#add('digitaltoad/vim-pug')
 
-  call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/ddc.vim')
+  call dein#add('vim-denops/denops.vim')
+
+  " Install your UIs
+  call dein#add('Shougo/ddc-ui-native')
+
+  " Install your sources
+  call dein#add('Shougo/ddc-source-around')
+
+  " Install your filters
+  call dein#add('Shougo/ddc-matcher_head')
+  call dein#add('Shougo/ddc-sorter_rank')
+
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
   "call dein#add('github/copilot.vim')
 
   " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
+  " TODO: Hack Nerd Font じゃないと表示されない
+  " call dein#add('nvim-tree/nvim-web-devicons')
+
   " NOTE: 米印などの表示幅がおかしくなる問題を解消できるかと期待したがダメだった(NeoVim 9.0)
   " call dein#add('rbtnn/vim-ambiwidth')
 
@@ -161,11 +183,6 @@ lua require('init')
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
 " NeoBundle 'AndrewRadev/switch.vim'
 
-" ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
-" NeoBundle "vimtaku/hl_matchit.vim"
-" このプラグインも必要
-" NeoBundle "matchit.zip"
-
 " ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'taka84u9/vim-ref-ri'
@@ -204,10 +221,45 @@ filetype plugin indent on
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
 
 " --------------------------------
-" deoplete
+" deoplete -> ddc.vim
+" NOTE: python3 ver11 のインストールが失敗するので、Deno依存のddcに移行した
+"       deopleteでも満足していたので、dotfiles をgit push するかは特に必要性は感じていない
 " --------------------------------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 1
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_completion_start_length = 1
+
+call ddc#custom#patch_global('ui', 'native')
+call ddc#custom#patch_global('sources', ['around'])
+call ddc#custom#patch_global('sourceOptions', #{
+      \ _: #{
+      \   matchers: ['matcher_head'],
+      \   sorters: ['sorter_rank']},
+      \ })
+call ddc#custom#patch_global('sourceOptions', #{
+      \   around: #{ mark: 'A' },
+      \ })
+call ddc#custom#patch_global('sourceParams', #{
+      \   around: #{ maxSize: 500 },
+      \ })
+call ddc#custom#patch_filetype(['c', 'cpp'], 'sources',
+      \ ['around', 'clangd'])
+call ddc#custom#patch_filetype(['c', 'cpp'], 'sourceOptions', #{
+      \   clangd: #{ mark: 'C' },
+      \ })
+call ddc#custom#patch_filetype('markdown', 'sourceParams', #{
+      \   around: #{ maxSize: 100 },
+      \ })
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+
+" Use ddc.
+call ddc#enable()
 
 " --------------------------------
 " w0rp/ale
@@ -584,6 +636,7 @@ command! E Explore
 "======= maps  =======
 
 nnoremap <silent> <C-e> :NvimTreeFindFileToggle<CR>
+" nnoremap <silent> <C-e> :Ex<CR>
 
 " 論理移動と物理移動を交換
 " --------------------------------------------------------------

@@ -11,7 +11,7 @@ require 'active_support/all'
 # created at: 2020/11/13
 #
 class Backup
-  LOCAL_BAK_DIR = '~/bak'
+  LOCAL_BAK_DIR = '/home/sakikazu/bak'
 
   MY_HOST_ALIAS = 'mysakura'
   MY_REMOTE_BASE_DIR = '/home/ubuntu/web'
@@ -39,7 +39,7 @@ class Backup
     backupfilepath = exec_cmd("ssh #{MY_HOST_ALIAS} \"#{MY_REMOTE_BASE_DIR}/#{HM}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
     exec_cmd("scp -p #{MY_HOST_ALIAS}:#{backupfilepath} #{LOCAL_BAK_DIR}/#{HM}")
     exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{HM}/shared/storage #{LOCAL_BAK_DIR}/#{HM}")
-    delete_old_file("habitm_#{deleted_date}.sql.gz")
+    delete_old_file("#{LOCAL_BAK_DIR}/#{HM}/habitm_#{deleted_date}.sql.gz")
   end
 
   def for_adan
@@ -48,7 +48,7 @@ class Backup
     backupfilepath = exec_cmd("ssh #{MY_HOST_ALIAS} \"#{MY_REMOTE_BASE_DIR}/#{ADAN}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
     exec_cmd("scp -p #{MY_HOST_ALIAS}:#{backupfilepath} #{LOCAL_BAK_DIR}/#{ADAN}")
     exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{ADAN}/shared/public/upload #{LOCAL_BAK_DIR}/#{ADAN}")
-    delete_old_file("adan_v4_#{deleted_date}.sql.gz")
+    delete_old_file("#{LOCAL_BAK_DIR}/#{ADAN}/adan_v4_#{deleted_date}.sql.gz")
   end
 
   def for_gassprice
@@ -57,7 +57,7 @@ class Backup
     exec_cmd("mkdir -p #{LOCAL_BAK_DIR}/#{GASSPRICE}")
     backupfilepath = exec_cmd("ssh sakura \"/home/gassuser/gassprice/current/lib/backup4mysql.sh\"") { |result| result.chomp }
     exec_cmd("scp -p sakura:#{backupfilepath} #{LOCAL_BAK_DIR}/#{GASSPRICE}")
-    delete_old_file("gassprice_#{deleted_date}.sql.gz")
+    delete_old_file("#{LOCAL_BAK_DIR}/#{GASSPRICE}/gassprice_#{deleted_date}.sql.gz")
   end
 
   def output_label(project)

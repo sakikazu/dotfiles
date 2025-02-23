@@ -38,7 +38,7 @@ class Backup
     exec_cmd("mkdir -p #{LOCAL_BAK_DIR}/#{HM}")
     backupfilepath = exec_cmd("ssh #{MY_HOST_ALIAS} \"#{MY_REMOTE_BASE_DIR}/#{HM}/current/lib/backup4mysql.sh\"") { |result| result.chomp }
     exec_cmd("scp -p #{MY_HOST_ALIAS}:#{backupfilepath} #{LOCAL_BAK_DIR}/#{HM}")
-    exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{HM}/shared/public/upload #{LOCAL_BAK_DIR}/#{HM}")
+    exec_cmd("rsync -av --delete #{MY_HOST_ALIAS}:#{MY_REMOTE_BASE_DIR}/#{HM}/shared/storage #{LOCAL_BAK_DIR}/#{HM}")
     delete_old_file("habitm_#{deleted_date}.sql.gz")
   end
 

@@ -4,6 +4,7 @@
 
 -- 備考
 --   - 別ディレクトリのファイルを開いているときに NvimTreeFindFile しても、その場所のTreeは開かない。開くにはvimを閉じて cd が必要
+--     - nvim-tree.update_focused_file.update_root のhelpを見て設定してみたが機能せず。でもglobal rootは変更しない方が良さそうなので、別Dirのものは、別セッションで開くでいいか
 
 -- ヘルプ
 --  `:help nvim-tree<Tab>` してみると色々ある

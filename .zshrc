@@ -398,21 +398,14 @@ export SVN_EDITOR=vi
 export LD_LIBRARY_PATH=/usr/local/lib
 
 
-### rbenv
-# 2020-07-18: WindowsのWSL Ubuntuで追加
-export PATH="$HOME/.rbenv/bin:$PATH"
-# [slow] `rbenv init` がちょい時間かかる
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 ### for CakePHP
 #export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
 ## ★ 見せしめに残しておくか。↑はSM以外のサーバーの設定だったが、SMでこれが効くと、ログインできなくなってしまってた。suになって、su -f sakikazuとすることでログインできた・・
 ## telnetでもConnection Refusedとかなってたしなぁ
 
-# RVM
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-[ -s ${HOME}/.rvm/scripts/rvm ] && source ${HOME}/.rvm/scripts/rvm
-
+# Deno
+export DENO_INSTALL="/home/sakikazu/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 # 環境依存設定ファイル
 [ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local

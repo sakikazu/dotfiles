@@ -48,7 +48,8 @@ if dein#load_state('$HOME/.cache/dein')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
   call dein#add('airblade/vim-gitgutter')
   call dein#add('hoshinotsuyoshi/vim-to-github')
-  call dein#add('w0rp/ale')
+  " 統合Lintツール
+  call dein#add('dense-analysis/ale')
   call dein#add('tpope/vim-markdown')
 
   " シンタックスハイライト
@@ -76,7 +77,7 @@ if dein#load_state('$HOME/.cache/dein')
 
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
-  "call dein#add('github/copilot.vim')
+  " call dein#add('github/copilot.vim')
 
   " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
@@ -97,12 +98,19 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/neoyank.vim')
   call dein#add('Shougo/unite-outline')
 
+  " for gitv
+  call dein#add('gregsexton/gitv')
+  call dein#add('tpope/vim-fugitive')
+
   " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
   " call dein#add('Shougo/denite.nvim')
   " if !has('nvim')
     " call dein#add('roxma/nvim-yarp')
     " call dein#add('roxma/vim-hug-neovim-rpc')
   " endif
+
+  call dein#add('nvim-lua/plenary.nvim')
+  call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.8' })
 
   " Required:
   call dein#end()
@@ -204,9 +212,6 @@ lua require('init')
 " NeoBundle 'joker1007/vim-markdown-quote-syntax'
 
 
-" ### for gitv
-" NeoBundle 'gregsexton/gitv'
-" NeoBundle 'tpope/vim-fugitive'
 
 " memo 履歴は見れるがC-rで補完とかできない。使えない(2013-10-23)
 " NeoBundle 'mattn/vdbi-vim'
@@ -262,12 +267,13 @@ inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
 call ddc#enable()
 
 " --------------------------------
-" w0rp/ale
+" dense-analysis/ale
 " NOTE: rubocop自動解析
 " --------------------------------
 let g:ale_fixers = {
-      \ 'ruby': ['rubocop'],
-      \ }
+  \ 'ruby': ['rubocop'],
+  \ 'rspec': ['rubocop'],
+\ }
 
 " --------------------------------
 " 基本設定
@@ -494,6 +500,18 @@ let g:rails_default_database="mysql"
 " rails.vim関係ないけどシンタックスハイライトの設定をここに置いといた
 autocmd BufNewFile,BufRead *.mobile.erb set filetype=html
 autocmd BufRead,BufNewFile *.slim set filetype=slim
+
+" gfでジャンプできるようにpath設定。もっと良い方法があるかもだが
+set path+=core/app/services/**
+
+" Telescope設定（既存のdein設定の後に追加）
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg :lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>')})<CR>
+
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 
 "------------------------------------

@@ -1,16 +1,16 @@
-###########################################################
-# oh-my-zsh
-###########################################################
-
 ### asdf
 # asdf をzsh + git環境で使う場合の定義
 # トップ部分に置く必要があるとのこと。そうでないと「command not found: compdef」エラーがzsh立ち上げる度に出た
 . "$HOME/.asdf/asdf.sh"
+
 # append completions to fpath
 fpath=(${ASDF_DIR}/completions $fpath)
 # initialise completions with ZSH's compinit
 autoload -Uz compinit && compinit
 
+###########################################################
+# oh-my-zsh
+###########################################################
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -19,14 +19,7 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment this to disable bi-weekly auto-update checks
 DISABLE_AUTO_UPDATE="true"
@@ -54,21 +47,26 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby osx bundler brew rails emoji-clock)
+plugins=(git ruby bundler brew rails emoji-clock)
 
 # zshの無名functionみたいなやつを評価する設定はこれか
 setopt prompt_subst
 
-# [slow] かなり時間かかるので使いたいものだけコピーして使う
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
+# powerlevel10k の設定を読み込む
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+# NOTE: 2025/07/26 `source $ZSH/oh-my-zsh.sh` の読み込みが遅かったから使う分だけ読み込みしてた模様だが、現在は遅くなかったので、一括読み込みの方を有効にした
 ## [oh-my-zsh]使う分だけ
-source ~/dotfiles/zsh_plugin_copy/git/git.plugin.zsh  # git/README.md
+# source ~/dotfiles/zsh_plugin_copy/git/git.plugin.zsh  # git/README.md
 
-# Customize to your needs...
-
-
-
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 
 ###########################################################
@@ -85,40 +83,6 @@ export LANG=ja_JP.UTF-8
 
 # git diffなどで日本語が文字化けする問題の対処
 export LESSCHARSET=utf-8
-
-## Default shell configuration
-#
-# set prompt
-#
-
-### git branch名表示
-# source ~/dotfiles/zsh_tools/git-prompt.sh
-# PROMPT='[%K{red}%*%k %F{red}%~%f%F{yellow}$(__git_ps1 " %s")%f]\$ '
-source ~/dotfiles/zsh_plugin_copy/zsh-git-prompt/zshrc.sh # see: zsh-git-prompt/README.md
-PROMPT='[%K{red}%*%k %F{red}%~%f %F{yellow}$(git_super_status)%f]\$ '
-RPROMPT='%F{cyan}%n@%m%f'
-
-# autoload colors
-# colors
-# case ${UID} in
-# 0)
-#     PROMPT="%B%{${fg[red]}%}%/#%{${reset_color}%}%b "
-#     PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-#     SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-#     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-#         PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-#     ;;
-# *)
-#     PROMPT="%{${fg[red]}%}%/%{${reset_color}%} "
-#     PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-#     SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-#     [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-#         #PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-#         PROMPT=$'\n'"%{${fg[cyan]}%}${USER}@${HOST%%.*} ${PROMPT}"$'\n'"$ "
-#     ;;
-# esac
-
-
 
 # cdとlsの省略
 #

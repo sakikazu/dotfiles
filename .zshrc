@@ -339,29 +339,6 @@ fi
 # 環境依存
 #============================================================
 
-#sudo ntpdate 130.69.251.23
-
-#ssh-agent
-#eval `ssh-agent`
-#ssh-add ~/.ssh/id_rsa
-
-alias cd_www="cd /var/www/html/"
-alias ssh_btoc='ssh -p 10022 reference2.drecom.jp -l kazutaka_sakimura'
-
-alias ssh_ad1='ssh -p 10022 192.168.112.11 -l kazutaka_sakimura'
-alias ssh_ad2='ssh -p 10022 192.168.112.12 -l kazutaka_sakimura'
-
-alias ssh_sp1='ssh -p 10022 192.168.105.11 -l kazutaka_sakimura'
-alias ssh_sp2='ssh -p 10022 192.168.105.12 -l kazutaka_sakimura'
-
-alias ssh_ads_xen='ssh drecom-adfit@192.168.10.198'
-alias adserv='ruby ~/ad4u/adfit/script/server'
-
-alias backgroundrb_serv_restart='rake backgroundrb:stop;rake backgroundrb:start'
-
-alias javac="javac -J-Dfile.encoding=UTF8"
-# ./gradlew testとかの文字化けには、下記設定が必要だった
-export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8
 
 export EDITOR=vi
 export SVN_EDITOR=vi

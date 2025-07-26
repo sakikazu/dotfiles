@@ -4,11 +4,11 @@
 # this script is able to run any number of times
 #
 
-ln -s ~/dotfiles/.vimrc ~
+#ln -s ~/dotfiles/.vimrc ~
 ln -s ~/dotfiles/.tmux.conf ~
-ln -s ~/dotfiles/.gemrc ~
-ln -s ~/dotfiles/.gitconfig ~
-ln -s ~/dotfiles/.gitignore_global ~
+#ln -s ~/dotfiles/.gemrc ~
+#ln -s ~/dotfiles/.gitconfig ~
+#ln -s ~/dotfiles/.gitignore_global ~
 
 # zsh
 ln -s ~/dotfiles/.zshrc ~

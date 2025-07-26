@@ -5,3 +5,4 @@ vendor/bundle/
 _refs
 .irbrc
 .irb_history
+*.DS_Store

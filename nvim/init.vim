@@ -37,12 +37,19 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('vim-scripts/YankRing.vim')
   " vim-endwise: if...endなど対応するキーワードの自動補完
   call dein#add('tpope/vim-endwise')
+
+  " ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
+  call dein#add("vimtaku/hl_matchit.vim")
+  " このプラグインも必要
+  call dein#add("vim-scripts/matchit.zip")
+
   " 外部grep（Rgrep、Regrep）
   call dein#add('vim-scripts/grep.vim')
   " GitGutterEnableでgitの変更がわかるがちゃんと使ってない
   call dein#add('airblade/vim-gitgutter')
   call dein#add('hoshinotsuyoshi/vim-to-github')
-  call dein#add('w0rp/ale')
+  " 統合Lintツール
+  call dein#add('dense-analysis/ale')
   call dein#add('tpope/vim-markdown')
 
   " シンタックスハイライト
@@ -55,17 +62,32 @@ if dein#load_state('$HOME/.cache/dein')
   " htmlのpug記法
   call dein#add('digitaltoad/vim-pug')
 
-  call dein#add('Shougo/deoplete.nvim')
+  " call dein#add('Shougo/deoplete.nvim')
+  call dein#add('Shougo/ddc.vim')
+  call dein#add('vim-denops/denops.vim')
+
+  " Install your UIs
+  call dein#add('Shougo/ddc-ui-native')
+
+  " Install your sources
+  call dein#add('Shougo/ddc-source-around')
+
+  " Install your filters
+  call dein#add('Shougo/ddc-matcher_head')
+  call dein#add('Shougo/ddc-sorter_rank')
 
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
+
+  " call dein#add('github/copilot.vim')
 
   " Pythonのインデント整形
   call dein#add('Vimjas/vim-python-pep8-indent')
 
-  "call dein#add('github/copilot.vim')
-
   " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
+  " TODO: Hack Nerd Font じゃないと表示されない
+  " call dein#add('nvim-tree/nvim-web-devicons')
+
   " NOTE: 米印などの表示幅がおかしくなる問題を解消できるかと期待したがダメだった(NeoVim 9.0)
   " call dein#add('rbtnn/vim-ambiwidth')
 
@@ -80,12 +102,19 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/neoyank.vim')
   call dein#add('Shougo/unite-outline')
 
+  " for gitv
+  call dein#add('gregsexton/gitv')
+  call dein#add('tpope/vim-fugitive')
+
   " TODO: uniteの後継deniteは、コマンドを実行するとエラーになるので、neovimにした時にまたためす
   " call dein#add('Shougo/denite.nvim')
   " if !has('nvim')
     " call dein#add('roxma/nvim-yarp')
     " call dein#add('roxma/vim-hug-neovim-rpc')
   " endif
+
+  call dein#add('nvim-lua/plenary.nvim')
+  call dein#add('nvim-telescope/telescope.nvim', { 'rev': '0.1.8' })
 
   " Required:
   call dein#end()
@@ -166,11 +195,6 @@ lua require('init')
 " ### swtich.vim　　　　.present?:.brank?など対応するキーワードを切り替える
 " NeoBundle 'AndrewRadev/switch.vim'
 
-" ### ruby-matchit　　 %を拡張して、def...end等のキーワードを移動出来るようにする。
-" NeoBundle "vimtaku/hl_matchit.vim"
-" このプラグインも必要
-" NeoBundle "matchit.zip"
-
 " ### vim-ref　　　　　Ruby/Gemsのリファレンスを引く
 " NeoBundle 'thinca/vim-ref'
 " NeoBundle 'taka84u9/vim-ref-ri'
@@ -192,9 +216,6 @@ lua require('init')
 " NeoBundle 'joker1007/vim-markdown-quote-syntax'
 
 
-" ### for gitv
-" NeoBundle 'gregsexton/gitv'
-" NeoBundle 'tpope/vim-fugitive'
 
 " memo 履歴は見れるがC-rで補完とかできない。使えない(2013-10-23)
 " NeoBundle 'mattn/vdbi-vim'
@@ -209,18 +230,54 @@ filetype plugin indent on
 " cf. Rubyプログラミングが快適になるVim環境を0から構築する - Qiita http://qiita.com/mogulla3/items/42a7f6c73fa4a90b1df3 - start
 
 " --------------------------------
-" deoplete
+" deoplete -> ddc.vim
+" NOTE: python3 ver11 のインストールが失敗するので、Deno依存のddcに移行した
+"       deopleteでも満足していたので、dotfiles をgit push するかは特に必要性は感じていない
 " --------------------------------
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_completion_start_length = 1
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_completion_start_length = 1
+
+call ddc#custom#patch_global('ui', 'native')
+call ddc#custom#patch_global('sources', ['around'])
+call ddc#custom#patch_global('sourceOptions', #{
+      \ _: #{
+      \   matchers: ['matcher_head'],
+      \   sorters: ['sorter_rank']},
+      \ })
+call ddc#custom#patch_global('sourceOptions', #{
+      \   around: #{ mark: 'A' },
+      \ })
+call ddc#custom#patch_global('sourceParams', #{
+      \   around: #{ maxSize: 500 },
+      \ })
+call ddc#custom#patch_filetype(['c', 'cpp'], 'sources',
+      \ ['around', 'clangd'])
+call ddc#custom#patch_filetype(['c', 'cpp'], 'sourceOptions', #{
+      \   clangd: #{ mark: 'C' },
+      \ })
+call ddc#custom#patch_filetype('markdown', 'sourceParams', #{
+      \   around: #{ maxSize: 100 },
+      \ })
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? '<C-n>' :
+      \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+      \ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  pumvisible() ? '<C-p>' : '<C-h>'
+
+" Use ddc.
+call ddc#enable()
 
 " --------------------------------
-" w0rp/ale
+" dense-analysis/ale
 " NOTE: rubocop自動解析
 " --------------------------------
 let g:ale_fixers = {
-      \ 'ruby': ['rubocop'],
-      \ }
+  \ 'ruby': ['rubocop'],
+  \ 'rspec': ['rubocop'],
+\ }
 
 " --------------------------------
 " 基本設定
@@ -448,6 +505,18 @@ let g:rails_default_database="mysql"
 autocmd BufNewFile,BufRead *.mobile.erb set filetype=html
 autocmd BufRead,BufNewFile *.slim set filetype=slim
 
+" gfでジャンプできるようにpath設定。もっと良い方法があるかもだが
+set path+=core/app/services/**
+
+" Telescope設定（既存のdein設定の後に追加）
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fg :lua require('telescope.builtin').live_grep({default_text = vim.fn.expand('<cword>')})<CR>
+
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
 
 "------------------------------------
 " NERD_commenter.vim
@@ -595,6 +664,7 @@ endfunction
 "======= maps  =======
 
 nnoremap <silent> <C-e> :NvimTreeFindFileToggle<CR>
+" nnoremap <silent> <C-e> :Ex<CR>
 
 " 論理移動と物理移動を交換
 " --------------------------------------------------------------

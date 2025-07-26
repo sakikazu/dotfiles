@@ -2,6 +2,16 @@
 # oh-my-zsh
 ###########################################################
 
+### asdf
+# asdf をzsh + git環境で使う場合の定義
+# トップ部分に置く必要があるとのこと。そうでないと「command not found: compdef」エラーがzsh立ち上げる度に出た
+. "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -172,9 +182,9 @@ setopt share_history        # share command history data
 
 ## Completion configuration
 #
-fpath=(~/.zsh/functions/Completion ${fpath})
-autoload -U compinit
-compinit
+# fpath=(~/.zsh/functions/Completion ${fpath})
+# autoload -U compinit
+# compinit
 
 
 ## zsh editor
@@ -200,7 +210,7 @@ zstyle ':predict' verbose true
 #
 setopt complete_aliases     # aliased ls needs if file/dir completions work
 
-alias vi="vim"
+alias vi="nvim.appimage"
 alias where="command -v"
 alias j="jobs -l"
 
@@ -396,7 +406,6 @@ export EDITOR=vi
 export SVN_EDITOR=vi
 
 export LD_LIBRARY_PATH=/usr/local/lib
-
 
 ### for CakePHP
 #export PATH=/var/www/cakephp/hoge1/app/Console:$PATH

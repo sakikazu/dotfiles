@@ -139,14 +139,6 @@ SAVEHIST=100000
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 
-
-## Completion configuration
-#
-# fpath=(~/.zsh/functions/Completion ${fpath})
-# autoload -U compinit
-# compinit
-
-
 ## zsh editor
 #
 autoload zed
@@ -208,92 +200,10 @@ alias cdl='source ~/dotfiles/tools/cdl.sh'
 # oh-my-zsh で定義済みのものを上書き
 alias gb="git branch-sort"
 
-case "${OSTYPE}" in
-darwin*)
-    alias updateports="sudo port selfupdate; sudo port outdated"
-    alias portupgrade="sudo port upgrade installed"
-    ;;
-freebsd*)
-    case ${UID} in
-    0)
-        updateports() 
-        {
-            if [ -f /usr/ports/.portsnap.INDEX ]
-            then
-                portsnap fetch update
-            else
-                portsnap fetch extract update
-            fi
-            (cd /usr/ports/; make index)
-
-            portversion -v -l \<
-        }
-        alias appsupgrade='pkgdb -F && BATCH=YES NO_CHECKSUM=YES portupgrade -a'
-        ;;
-    esac
-    ;;
-esac
-
-
-## terminal configuration
-#
-unset LSCOLORS
-case "${TERM}" in
-xterm)
-    export TERM=xterm-color
-    ;;
-kterm)
-    export TERM=kterm-color
-    # set BackSpace control character
-    stty erase
-    ;;
-cons25)
-    unset LANG
-    export LSCOLORS=ExFxCxdxBxegedabagacad
-    export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors \
-        'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-    ;;
-esac
-
-# set terminal title including current directory
-#
-case "${TERM}" in
-kterm*|xterm*)
-    precmd() {
-        echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
-    }
-    export LSCOLORS=exfxcxdxbxegedabagacad
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors \
-        'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
-    ;;
-esac
-
-
-## load user .zshrc configuration file
-#
-[ -f ~/.zshrc.mine ] && source ~/.zshrc.mine
-
-
-#============================================================
-# 環境依存
-#============================================================
-
-
 export EDITOR=vi
 export SVN_EDITOR=vi
 
 export LD_LIBRARY_PATH=/usr/local/lib
-
-### for CakePHP
-#export PATH=/var/www/cakephp/hoge1/app/Console:$PATH
-## ★ 見せしめに残しておくか。↑はSM以外のサーバーの設定だったが、SMでこれが効くと、ログインできなくなってしまってた。suになって、su -f sakikazuとすることでログインできた・・
-## telnetでもConnection Refusedとかなってたしなぁ
-
-# Deno
-export DENO_INSTALL="/home/sakikazu/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 # 環境依存設定ファイル
 [ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local

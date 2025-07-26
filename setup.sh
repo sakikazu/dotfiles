@@ -21,4 +21,5 @@ ln -s ~/dotfiles/.nvim_init.vim ~/.config/nvim/init.vim
 echo
 echo "####################"
 echo "you need setup for oh-my-zsh cf. https://github.com/robbyrussell/oh-my-zsh if you didn't it"
+echo "既にoh-my-zshをインストール済みなら、 `ln -s ~/dotfiles/zsh_tools/.p10k.zsh ~` すること"
 echo "####################"

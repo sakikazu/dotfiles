@@ -47,7 +47,13 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+#
+## fzf: https://github.com/junegunn/fzf
+#       ctrl + r: コマンド履歴からファジー検索
+#       ctrl + t: ファイルパスをファジー検索して補完に挿入 (ex. vim <ctrl + t>)
+## z: `z foo` でよく使うディレクトリにジャンプできる（まだ便利さがわからない）
+## fzf-tabは未導入だが気になるのでメモ
+plugins=(git fzf z)
 
 # zshの無名functionみたいなやつを評価する設定はこれか
 setopt prompt_subst
@@ -56,6 +62,8 @@ source $ZSH/oh-my-zsh.sh
 
 # powerlevel10k の設定を読み込む
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]

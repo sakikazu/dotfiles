@@ -58,6 +58,7 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('jelera/vim-javascript-syntax')
   call dein#add('kchmck/vim-coffee-script')
   call dein#add('posva/vim-vue')
+  call dein#add('hashivim/vim-terraform')
   " htmlのpug記法
   call dein#add('digitaltoad/vim-pug')
 
@@ -78,6 +79,9 @@ if dein#load_state('$HOME/.cache/dein')
   call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
   " call dein#add('github/copilot.vim')
+
+  " Pythonのインデント整形
+  call dein#add('Vimjas/vim-python-pep8-indent')
 
   " エクスプローラー
   call dein#add('nvim-tree/nvim-tree.lua')
@@ -651,6 +655,12 @@ autocmd FileType * set formatoptions-=ro
 "======= commands  =======
 command! E Explore
 
+" 現在ファイルの相対パスをクリップボードにコピー
+command! FileNameRelative :call s:FileNameRelative()
+function! s:FileNameRelative()
+  let @* = expand('%:.')
+  let @" = expand('%:.')
+endfunction
 "======= maps  =======
 
 nnoremap <silent> <C-e> :NvimTreeFindFileToggle<CR>

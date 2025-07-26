@@ -47,7 +47,7 @@ DISABLE_AUTO_UPDATE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git ruby bundler brew rails emoji-clock)
+plugins=(git)
 
 # zshの無名functionみたいなやつを評価する設定はこれか
 setopt prompt_subst
@@ -56,10 +56,6 @@ source $ZSH/oh-my-zsh.sh
 
 # powerlevel10k の設定を読み込む
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
-# NOTE: 2025/07/26 `source $ZSH/oh-my-zsh.sh` の読み込みが遅かったから使う分だけ読み込みしてた模様だが、現在は遅くなかったので、一括読み込みの方を有効にした
-## [oh-my-zsh]使う分だけ
-# source ~/dotfiles/zsh_plugin_copy/git/git.plugin.zsh  # git/README.md
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -204,6 +200,7 @@ alias cp="cp -i"
 
 alias r="rails"
 alias s='source'
+alias less='less -NR'
 
 alias tmux-rails='/home/sakikazu/dotfiles/tools/tmux_for_rails.sh'
 alias cdl='source ~/dotfiles/tools/cdl.sh'

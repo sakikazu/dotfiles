@@ -39,6 +39,8 @@ require("nvim-tree").setup({
       list = {
         -- uniteと合わせる。vsplitは両者 <C-v>
         { key = "<C-s>", action = "split" },
+        -- kakaku.com mac で、tmuxのC-tとかぶったからかnvim-treeでは効かなくなってたが、C-ttにすることで機能した
+        { key = "<C-tt>", action = "Open: New Tab" },
       },
     },
   },

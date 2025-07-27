@@ -17,6 +17,10 @@ return {
     { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
     { "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Old Files" },
+    -- LSP 関連
+    { "gd", function() require("telescope.builtin").lsp_definitions() end,   desc = "定義へジャンプ" },
+    { "gr", function() require("telescope.builtin").lsp_references() end,    desc = "参照を表示" },
+    { "gi", function() require("telescope.builtin").lsp_implementations() end, desc = "実装を表示" },
   },
   config = function()
     require("telescope").setup({

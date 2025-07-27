@@ -40,7 +40,7 @@ return {
     vim.opt.termguicolors = true
 
     -- NvimTree 起動キーを設定（例：<leader>e）
-    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+    vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<CR>", { noremap = true, silent = true })
 
     -- on_attachでキー設定をカスタマイズ
     local function my_on_attach(bufnr)

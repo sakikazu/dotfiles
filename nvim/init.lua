@@ -76,7 +76,11 @@ map('n', 't8', ':tabn 8<CR>', opts)
 map('n', 't9', ':tabn 9<CR>', opts)
 map('n', 't0', ':tabn 10<CR>', opts)
 
-
+-- 大幅横移動
+vim.keymap.set('n', '<S-l>', '15<Right>', { silent = true, desc = '右に15文字移動' })
+vim.keymap.set('v', '<S-l>', '<C-o>15<Right>', { silent = true, desc = '右に15文字移動' })
+vim.keymap.set('n', '<S-h>', '15<Left>', { silent = true, desc = '左に15文字移動' })
+vim.keymap.set('v', '<S-h>', '<C-o>15<Left>', { silent = true, desc = '左に15文字移動' })
 
 -- マウス有効/無効のトグル切り替え関数
 function ToggleMouse()

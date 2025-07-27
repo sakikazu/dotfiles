@@ -1,3 +1,4 @@
+-- TODO: インスタンスメソッドの定義ジャンプができていない。これが一番やりたいのだが。CentOSを卒業すればruby-lspが動くはずなので、そこに期待
 return {
   -- ───────────────────────────
   -- ① LSP 設定
@@ -17,11 +18,6 @@ return {
       local on_attach = function(client, bufnr)
         local tbuiltin = require("telescope.builtin")
         local map_opts = { noremap = true, silent = true, buffer = bufnr, desc = "LSP" }
-
-        -- デバッグ: サーバーの機能を確認
-        print("LSP Client:", client.name)
-        print("Definition Provider:", client.server_capabilities.definitionProvider)
-        print("References Provider:", client.server_capabilities.referencesProvider)
 
         -- Telescope を使った定義 / 参照ジャンプ
         -- 機能が利用可能な場合のみキーマップを設定
@@ -51,11 +47,38 @@ return {
         cmd = { "solargraph", "stdio" },
         capabilities = capabilities,
         on_attach = on_attach,
-        root_dir = lspconfig.util.root_pattern("Gemfile", ".git"),
+        root_dir = function(fname)
+          -- モノレポ構成でのRailsプロジェクト検出
+          local util = lspconfig.util
+          return util.root_pattern("Gemfile", "config/application.rb")(fname)
+            or util.root_pattern(".git")(fname)
+        end,
+        -- 環境変数でグローバルgemパスを指定
+        env = {
+          GEM_PATH = vim.fn.system("gem environment gempath"):gsub("\n", ""),
+        },
         settings = {
           solargraph = {
             diagnostics = true,
+            completion = true,
+            hover = true,
+            symbols = true,
+            definitions = true,
+            references = true,
+            rename = true,
+            folding = true,
+            -- Rails サポートを強化
+            autoformat = false,
+            formatting = false,
+            -- インスタンスメソッドの検出を改善
+            useBundler = false,
+            logLevel = "warn",
           },
+        },
+        init_options = {
+          formatting = false,
+          -- 型推論を強化
+          enableTypeInference = true,
         },
       })
 

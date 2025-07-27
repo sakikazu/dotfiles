@@ -44,3 +44,47 @@ vim.opt.wildmode = { "longest", "list", "full" }
 -- モード表示を無効に（ステータスラインプラグインを使う場合）
 vim.opt.showmode = false
 
+-- Lazy.nvim セットアップを読み込む
+-- TODO: neovimがv0.10以降にできたら、nvim-lspconfigを使ってLSPやってみる。ただ、他のを使えばできそうだが
+require("config.lazy")
+
+
+-- キーマッピングを簡単にするための関数
+local map = vim.api.nvim_set_keymap
+local opts = { noremap = true, silent = true }
+
+-- タブ操作
+map('n', 'tn', ':tabnext<CR>', opts)
+map('n', 'tp', ':tabprev<CR>', opts)
+
+map('n', 'ts', ':tabs<CR>', opts)
+map('n', 'tt', ':tabnew ', { noremap = true })  -- <Space>を入力待ちにするのでsilentは不要
+map('n', 'tm', ':tabm', { noremap = true })     -- 最後に番号を続ける前提
+
+-- タブ番号ジャンプ
+map('n', 't1', ':tabn 1<CR>', opts)
+map('n', 't2', ':tabn 2<CR>', opts)
+map('n', 't3', ':tabn 3<CR>', opts)
+map('n', 't4', ':tabn 4<CR>', opts)
+map('n', 't5', ':tabn 5<CR>', opts)
+map('n', 't6', ':tabn 6<CR>', opts)
+map('n', 't7', ':tabn 7<CR>', opts)
+map('n', 't8', ':tabn 8<CR>', opts)
+map('n', 't9', ':tabn 9<CR>', opts)
+map('n', 't0', ':tabn 10<CR>', opts)
+
+
+
+-- マウス有効/無効のトグル切り替え関数
+function ToggleMouse()
+  if vim.o.mouse == "" then
+    vim.o.mouse = "a"
+    vim.notify("マウス有効")
+  else
+    vim.o.mouse = ""
+    vim.notify("マウス無効（選択コピーが可能）")
+  end
+end
+
+vim.api.nvim_set_keymap('n', '<Leader>m', ':lua ToggleMouse()<CR>', { noremap = true, silent = true })
+

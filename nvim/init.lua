@@ -1,8 +1,8 @@
 -- 行番号を表示
 vim.opt.number = true
 
--- 相対行番号を表示（ジャンプがしやすくなる）
-vim.opt.relativenumber = true
+-- 相対行番号を表示（30j といった相対指定のジャンプはしやすいが、絶対指定の方を多く使うので無効）
+-- vim.opt.relativenumber = true
 
 -- インデント設定（スペースを使う）
 vim.opt.expandtab = true     -- タブ入力をスペースに変換
@@ -43,6 +43,9 @@ vim.opt.wildmode = { "longest", "list", "full" }
 
 -- モード表示を無効に（ステータスラインプラグインを使う場合）
 vim.opt.showmode = false
+
+-- .swpファイルを作成しないようにする
+vim.opt.swapfile = false
 
 -- Lazy.nvim セットアップを読み込む
 -- TODO: neovimがv0.10以降にできたら、nvim-lspconfigを使ってLSPやってみる。ただ、他のを使えばできそうだが

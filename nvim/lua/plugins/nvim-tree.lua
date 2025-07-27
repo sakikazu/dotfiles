@@ -24,27 +24,57 @@
 --   <Tab>: ファイルプレビュー（開く時と違うのはカーソルはTreeのままということ）
 -- DOCUMENT end
 
--- disable netrw at the very start of your init.lua (strongly advised)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+return {
+  "nvim-tree/nvim-tree.lua",
+  version = "*",
+  lazy = false,
+  dependencies = {
+    "nvim-tree/nvim-web-devicons", -- optional, for file icons
+  },
+  config = function()
+    -- netrwを無効化（nvim-tree公式の推奨設定）
+    vim.g.loaded_netrw = 1
+    vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
+    -- カラースキーム用にtermguicolorsを有効に
+    vim.opt.termguicolors = true
 
--- empty setup using defaults
-require("nvim-tree").setup({
-  view = {
-    width = 35,
-    mappings = {
-      list = {
-        -- uniteと合わせる。vsplitは両者 <C-v>
-        { key = "<C-s>", action = "split" },
-        -- kakaku.com mac で、tmuxのC-tとかぶったからかnvim-treeでは効かなくなってたが、C-ttにすることで機能した
-        { key = "<C-tt>", action = "Open: New Tab" },
+    -- NvimTree 起動キーを設定（例：<leader>e）
+    vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>", { noremap = true, silent = true })
+
+    -- on_attachでキー設定をカスタマイズ
+    local function my_on_attach(bufnr)
+      local api = require("nvim-tree.api")
+
+      local function opts(desc)
+        return {
+          desc = "nvim-tree: " .. desc,
+          buffer = bufnr,
+          noremap = true,
+          silent = true,
+          nowait = true,
+        }
+      end
+
+      -- デフォルトマッピングを有効にする
+      api.config.mappings.default_on_attach(bufnr)
+
+      -- カスタムマッピング
+      -- uniteと合わせる。vsplitは両者 <C-v>
+      vim.keymap.set("n", "<C-s>", api.node.open.horizontal, opts("Open Horizontal Split"))
+      -- kakaku.com mac で、tmuxのC-tとかぶったからかnvim-treeでは効かなくなってたが、C-ttにすることで機能した
+      vim.keymap.set("n", "<C-tt>", api.node.open.tab, opts("Open New Tab"))
+
+      -- 不要なマッピングを解除（例: <C-e>）
+      vim.keymap.del("n", "<C-e>", { buffer = bufnr })
+    end
+
+    require("nvim-tree").setup({
+      view = {
+        width = 35,
       },
-    },
-  },
-  remove_keymaps = {
-    "<C-e>", -- tree表示のトグルをC-eにしているため、default mappingの方はremove
-  },
-})
+      on_attach = my_on_attach,
+    })
+  end,
+}
+

@@ -82,6 +82,38 @@ vim.keymap.set('v', '<S-l>', '<C-o>15<Right>', { silent = true, desc = '右に15
 vim.keymap.set('n', '<S-h>', '15<Left>', { silent = true, desc = '左に15文字移動' })
 vim.keymap.set('v', '<S-h>', '<C-o>15<Left>', { silent = true, desc = '左に15文字移動' })
 
+-- ░░ ペイン移動（Ctrl + hjkl でウィンドウ移動）░░
+map('n', '<C-h>', '<C-w>h', opts)
+map('n', '<C-j>', '<C-w>j', opts)
+map('n', '<C-k>', '<C-w>k', opts)
+map('n', '<C-l>', '<C-w>l', opts)
+
+-- ░░ 行を表示上の折り返し単位で移動
+map('n', 'j', 'gj', opts)
+map('n', 'k', 'gk', opts)
+
+-- ░░ バッファ操作関連 ░░
+map('n', [[\b]], ':ls<CR>:buffer ', opts) -- バッファ一覧から選択
+map('n', [[\v]], ':vsplit<CR><C-w><C-w>:ls<CR>:buffer ', opts) -- 垂直分割してバッファ一覧から選択
+map('n', 'bp', ':bp<CR>', opts)          -- 前のバッファへ
+map('n', 'bn', ':bn<CR>', opts)          -- 次のバッファへ
+
+-- ░░ ビジュアルモードで行末まで選択 ░░
+-- 通常の v はトグルだが、再度 v を押しても選択を継続するよう変更
+map('v', 'v', '$h', opts)
+
+-- ░░ 貼り付けモード切替（paste mode）░░
+map('', 'setp', ':set paste<CR>', opts)
+map('', 'setnp', ':set nopaste<CR>', opts)
+
+-- ░░ ウィンドウサイズ変更（+/-/{}で拡大・縮小）░░
+map('n', '+', '4<C-w>+', opts) -- 高さを増やす
+map('n', '-', '4<C-w>-', opts) -- 高さを減らす
+map('n', '{', '4<C-w><', opts) -- 幅を狭める
+map('n', '}', '4<C-w>>', opts) -- 幅を広げる
+
+
+-- TODO: option + 選択すれば、マウス有効でもコピーできるなら、下記は不要になる
 -- マウス有効/無効のトグル切り替え関数
 function ToggleMouse()
   if vim.o.mouse == "" then

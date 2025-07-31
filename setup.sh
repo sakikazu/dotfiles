@@ -15,11 +15,11 @@ ln -s ~/dotfiles/.zshrc ~
 cp ~/dotfiles/.zshrc.local.origin ~/.zshrc.local
 
 # neovim(nvim)
-mkdir -p ~/.config/nvim
-ln -s ~/dotfiles/.nvim_init.vim ~/.config/nvim/init.vim
+mkdir -p ~/.config
+ln -s ~/dotfiles/nvim ~/.config/nvim
 
 echo
 echo "####################"
 echo "you need setup for oh-my-zsh cf. https://github.com/robbyrussell/oh-my-zsh if you didn't it"
-echo "既にoh-my-zshをインストール済みなら、 `ln -s ~/dotfiles/zsh_tools/.p10k.zsh ~` すること"
+echo "既にoh-my-zshをインストール済みなら、 `ln -s ~/dotfiles/zsh_tools/.p10k.zsh ~` と `ln -s ~/dotfiles/zsh_tools/.fzf.zsh ~` すること"
 echo "####################"

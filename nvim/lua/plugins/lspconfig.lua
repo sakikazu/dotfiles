@@ -134,7 +134,18 @@ return {
           ["<C-n>"]     = cmp.mapping.select_next_item(),
           ["<C-p>"]     = cmp.mapping.select_prev_item(),
           ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"]      = cmp.mapping.confirm({ select = true }),
+
+          -- Tabで補完を確定（選択していれば）
+          ["<Tab>"] = cmp.mapping.confirm({ select = false }),
+
+          -- Enterでは補完を確定せず、通常の動作（改行など）を維持
+          ["<CR>"] = function(fallback)
+            if cmp.visible() then
+              fallback()
+            else
+              fallback()
+            end
+          end,
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp" },

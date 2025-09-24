@@ -1,5 +1,6 @@
 return {
-  -- :G blame だけ使っている
+  -- :G blame
+  -- :G log を使う場合は、ファイルを指定すること。特に-pを使うときはファイル未指定だとOut of memoryになる
   {
     "tpope/vim-fugitive",
     cmd = { "G" }

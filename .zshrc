@@ -200,7 +200,7 @@ alias cp="cp -i"
 
 alias r="rails"
 alias s='source'
-alias less='less -NR'
+alias less='less -NR' # 非zsh環境で直接NR使っても日本語が文字化けすることがあるので、export LESSCHARSET=utf-8 すればOK
 
 alias tmux-rails='/home/sakikazu/dotfiles/tools/tmux_for_rails.sh'
 alias cdl='source ~/dotfiles/tools/cdl.sh'

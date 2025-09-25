@@ -61,9 +61,10 @@ setopt prompt_subst
 source $ZSH/oh-my-zsh.sh
 
 # powerlevel10k の設定を読み込む
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/dotfiles/zsh_tools/.p10k.zsh.
+[[ ! -f ~/dotfiles/zsh_tools/.p10k.zsh ]] || source ~/dotfiles/zsh_tools/.p10k.zsh
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/dotfiles/zsh_tools/.fzf.zsh ] && source ~/dotfiles/zsh_tools/.fzf.zsh
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -170,7 +171,7 @@ zstyle ':predict' verbose true
 #
 setopt complete_aliases     # aliased ls needs if file/dir completions work
 
-alias vi="nvim.appimage"
+alias vi="/usr/local/bin/nvim"
 alias where="command -v"
 alias j="jobs -l"
 
@@ -215,3 +216,4 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 # 環境依存設定ファイル
 [ -f ${HOME}/.zshrc.local ] && source ${HOME}/.zshrc.local
+

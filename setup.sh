@@ -6,6 +6,8 @@
 
 # コメントアウトしているものは、既存ファイルがあるかもなので、それを確認のうえ、lnにするか、内容コピーにするかを判断する
 ln -s ~/dotfiles/.tmux.conf ~
+# tmux のプラグインディレクトリ
+cp -p ~/dotfiles/.tmux ~
 #ln -s ~/dotfiles/.gemrc ~
 #ln -s ~/dotfiles/.gitconfig ~
 #ln -s ~/dotfiles/.gitignore_global ~

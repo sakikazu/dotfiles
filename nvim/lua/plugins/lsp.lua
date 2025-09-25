@@ -1,4 +1,12 @@
--- ruby-lsp が良いとのことだが、NeoVim v0.10 以降からなので、バージョンアップが可能になったら
+-- TODO: まだ、admin内から、Coreのメソッド定義へジャンプ、はできていない
+-- TODO: まだ理解していないショートカットキーがあるので、試す
+
+-- #### よく使う
+-- gd: メソッド定義ジャンプ
+-- gr: メソッド参照リスト
+
+-- #### 設定
+-- 対象のrailsアプリケーション（gem含む）のGemfile.lockにruby-lspが存在する必要がある。このruby環境はdockerではなくローカルのruby
 return {
   {
     'VonHeikemen/lsp-zero.nvim',

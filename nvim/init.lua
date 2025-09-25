@@ -127,3 +127,6 @@ end
 
 vim.api.nvim_set_keymap('n', '<Leader>m', ':lua ToggleMouse()<CR>', { noremap = true, silent = true })
 
+-- v0.11からはカラースキームの設定が必要になったっぽい
+vim.cmd.colorscheme("evening")
+

@@ -47,6 +47,9 @@ vim.opt.showmode = false
 -- .swpファイルを作成しないようにする
 vim.opt.swapfile = false
 
+-- Telescope oldfilesでもっと多くのファイル履歴を出したかったので、デフォルト100 -> 1000に増やした。反映には :wshada が必要？
+vim.opt.shada = "!,'1000,<50,s10,h"
+
 -- Lazy.nvim セットアップを読み込む
 -- TODO: neovimがv0.10以降にできたら、nvim-lspconfigを使ってLSPやってみる。ただ、他のを使えばできそうだが
 require("config.lazy")

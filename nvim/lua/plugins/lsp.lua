@@ -38,6 +38,8 @@ return {
           ['<C-n>']     = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
           ['<C-y>']     = cmp.mapping.confirm({ select = true }),
           ['<C-Space>'] = cmp.mapping.complete(),
+          -- Enterは改行のみ（補完を確定しない）
+          ["<CR>"] = cmp.mapping.confirm({ select = false }),
           -- Tabで補完を確定（選択していれば）
           ["<Tab>"] = cmp.mapping.confirm({ select = false }),
         },

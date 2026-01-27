@@ -1,11 +1,21 @@
 -- telescopeの結果は、<C-q>でquickfixに送ると検索結果を残すことができる。<C-q>後は自動でquickfixが開く（copen）
+-- fdやrg(ripgrep?)がインストールされていなければ、findコマンドが使われるため遅くなる。ffは最速のgit_filesにしたので、もうこれだけでいいかも
 return {
   "nvim-telescope/telescope.nvim",
   tag = "0.1.6",
   dependencies = { "nvim-lua/plenary.nvim" },
   cmd = "Telescope",
   keys = {
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+    -- git grep と同等の検索でいいので、git_filesを使うのが最速そうだった
+    {
+      "<leader>ff",
+      function()
+        require("telescope.builtin").git_files({
+          show_untracked = true, -- 必要なければ false でもOK
+        })
+      end,
+      desc = "Find Files (git)"
+    },
     { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Live Grep" },
     -- カーソル下ワードをgrep。結果ファイルリストからインクリメンタルサーチでファイルを絞り込める
     { "<leader>fw", function() require("telescope.builtin").grep_string() end, desc = "Grep String" },
@@ -36,7 +46,7 @@ return {
         prompt_prefix = "🔍 ",
         selection_caret = " ",
         path_display = { "smart" },
-        file_ignore_patterns = { "node_modules/", "log/", "tmp/" }, -- プロジェクト向け
+        file_ignore_patterns = { "core/dbdoc/", "node_modules/", "log/", "tmp/" }, -- プロジェクト向け
       },
     })
   end,

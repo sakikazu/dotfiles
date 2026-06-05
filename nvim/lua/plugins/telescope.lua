@@ -45,7 +45,7 @@ return {
         },
         prompt_prefix = "🔍 ",
         selection_caret = " ",
-        path_display = { "smart" },
+        path_display = { "absolute" }, -- defaultの`smart` だと先頭パスが`..`になってしまうのが嫌
         file_ignore_patterns = { "core/dbdoc/", "node_modules/", "log/", "tmp/" }, -- プロジェクト向け
       },
     })
